@@ -1,0 +1,7 @@
+{
+	"name": "Salle de test",
+	"cameras": [
+		"http://testroom-camera1/",
+		"http://testroom-camera2/"
+   ]
+} 
