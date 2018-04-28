@@ -2,7 +2,7 @@
 import sys
 import os
 
-from flask import Flask, request, Response, render_template, url_for
+from flask import Flask, request, Response, render_template, jsonify, url_for
 from .room import Room
 
 # ----- App initialization -----
@@ -20,9 +20,13 @@ room = Room(app.config['ROOM_NAME'])
 
 @app.route('/', methods=['GET'])
 def home():
-    return render_template('index.html', room=room)
+    return render_template('control.html', room=room)
 
-@app.route('/test', methods=['POST'])
+@app.route('/api/cameras', methods=['GET'])
+def cameras():
+	return jsonify(room.cameras)
+
+@app.route('/api/test', methods=['POST'])
 def test():
 	data = request.get_json()
 	return Response('', 204)

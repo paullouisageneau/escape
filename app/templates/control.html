@@ -2,8 +2,13 @@
 {% block title %}{{ room.name }}{% endblock %}
 {% block head %}
   {{ super() }}
+  <script src="{{ config['VUE_URL'] }}"></script>
 {% endblock %}
 {% block content %}
   {{ super() }}
+  <div id="console">
   <div>Salle: {{ room.name }}</div>
+  {% include 'cameras.html' %}
+  </div>
+  <script src="{{ url_for('static', filename='control.js') }}"></script>
 {% endblock %}

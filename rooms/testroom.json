@@ -3,5 +3,11 @@
 	"cameras": [
 		"http://testroom-camera1/",
 		"http://testroom-camera2/"
-   ]
+    ],
+    "toggles": [
+		{
+			"name": "Test",
+			"default": false
+		}
+    ]
 } 
