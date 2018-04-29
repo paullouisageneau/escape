@@ -2,6 +2,7 @@
 {% block title %}{{ room.name }}{% endblock %}
 {% block head %}
   {{ super() }}
+  <link rel="stylesheet" href="{{ url_for('static', filename='control.css') }}">
   <script src="{{ config['VUE_URL'] }}"></script>
 {% endblock %}
 {% block content %}

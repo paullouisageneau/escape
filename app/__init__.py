@@ -22,6 +22,10 @@ room = Room(app.config['ROOM_NAME'])
 def home():
     return render_template('control.html', room=room)
 
+@app.route('/display', methods=['GET'])
+def display():
+    return render_template('display.html', room=room)
+
 @app.route('/api/cameras', methods=['GET'])
 def cameras():
 	return jsonify(room.cameras)
