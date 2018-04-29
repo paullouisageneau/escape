@@ -2,19 +2,16 @@
 import os
 import json
 
-ROOMS_DIRECTORY = "rooms"
+from .toggle import Toggle
 
-class Toggle:
-	def __init__(self, name, value):
-		self.name = name
-		self.value = value
+ROOMS_DIRECTORY = "rooms"
 
 class Room:
 	def __init__(self, name):
 		filename = os.path.join(ROOMS_DIRECTORY, name + ".json")
 		with open(filename) as conf_file:
 			self.__conf = json.load(conf_file)
-			self.__toggles = list(map(lambda t: Toggle(t['name'], t['default']), self.__conf['toggles']))
+			self.__toggles = [Toggle(t['name'], t['pin'], t['default']) for t in self.__conf['toggles']]
 
 	@property
 	def name(self):
@@ -27,3 +24,4 @@ class Room:
 	@property
 	def toggles(self):
 		return self.__toggles
+

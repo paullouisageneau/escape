@@ -7,8 +7,9 @@
 {% block content %}
   {{ super() }}
   <div id="console">
-  <div>Salle: {{ room.name }}</div>
+  <h1>{{ room.name }}</h1>
   {% include 'cameras.html' %}
+  {% include 'toggles.html' %}
   </div>
   <script src="{{ url_for('static', filename='control.js') }}"></script>
 {% endblock %}

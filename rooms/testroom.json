@@ -6,8 +6,14 @@
     ],
     "toggles": [
 		{
-			"name": "Test",
+			"name": "Machin",
+			"pin": 18,
 			"default": false
+		},
+		{
+			"name": "Truc",
+			"pin": 19,
+			"default": true
 		}
     ]
 } 

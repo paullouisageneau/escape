@@ -1,0 +1,14 @@
+<section id="toggles">
+  <h2>Interrupteurs</h2>
+  <ol>
+      <li v-for="(toggle, index) in toggles">
+        <label class="switch_wrapper">
+        <span>${toggle.name}</span>
+        <span class="switch">
+        <input type="checkbox" v-bind:value="index" v-model="enabled">
+        <span class="slider"></span>
+        </span>
+        </label>
+      </li>
+  </ol>
+</section>

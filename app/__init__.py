@@ -2,7 +2,7 @@
 import sys
 import os
 
-from flask import Flask, request, Response, render_template, jsonify, url_for
+from flask import Flask, request, Response, abort, render_template, jsonify, url_for
 from .room import Room
 
 # ----- App initialization -----
@@ -26,7 +26,23 @@ def home():
 def cameras():
 	return jsonify(room.cameras)
 
-@app.route('/api/test', methods=['POST'])
-def test():
-	data = request.get_json()
-	return Response('', 204)
+@app.route('/api/cameras/<int:index>', methods=['GET'])
+def camera(index):
+	if index >= len(room.cameras):
+		abort(404)
+	return jsonify(room.cameras[index])
+
+@app.route('/api/toggles', methods=['GET'])
+def toggles():
+	return jsonify([t.to_dict() for t in room.toggles])
+
+@app.route('/api/toggles/<int:index>', methods=['GET', 'POST'])
+def toggle(index):
+	if index >= len(room.toggles):
+		abort(404)
+	toggle = room.toggles[index];
+	if request.method == 'POST':
+		data = request.get_json()
+		toggle.value = bool(data['value'])
+	return jsonify(toggle.to_dict())
+
