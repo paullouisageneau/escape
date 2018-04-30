@@ -1,0 +1,20 @@
+<section id="interactions">
+  <h2>Interactions</h2>
+  <ol>
+      <li>
+        <form action="/api/indice" method="post">
+        <label for="POST-indice">Envoyer un indice :</label>
+        <input id="POST-indice" type="text" name="indice">
+        <input type="submit" value="Envoyer l'indice">
+        </form>
+	<span> Dernier indice : {{indice}} </span>
+      </li>
+      <li>
+        <span> Chronomètre : 60:00 </span>
+
+	<input type="button" value="Démarrer chronomètre">
+        <input type="button" value="Ajouter 1 minute">
+	<input type="button" value="Retirer 1 minute">
+      </li>
+  </ol>
+</section>

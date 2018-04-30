@@ -1,0 +1,39 @@
+{
+	"name": "Supérette",
+	"cameras": [
+		"http://testroom-camera1/",
+		"http://testroom-camera2/"
+    ],
+    "toggles": [
+		{
+			"name": "Tension porte 1",
+			"pin": 18,
+			"default": true
+		},
+		{
+			"name": "Tension porte 2",
+			"pin": 19,
+			"default": true
+		},
+		{
+			"name": "Tension tiroir balance",
+			"pin": 20,
+			"default": true
+		},
+		{
+			"name": "Ouverture store",
+			"pin": 21,
+			"default": false
+		},
+		{
+			"name": "Message audio",
+			"pin": 22,
+			"default": false
+		},
+		{
+			"name": "Message audio",
+			"pin": 23,
+			"default": false
+		}
+    ]
+} 
