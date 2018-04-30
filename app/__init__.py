@@ -58,13 +58,13 @@ def api_triggers():
 @app.route('/api/triggers/<int:index>', methods=['GET', 'POST'])
 def api_trigger(index):
 	if index >= len(room.triggers):
-			abort(404)
+		abort(404)
 	trigger = room.triggers[index]
 	response = trigger.to_dict()
 	response['triggered'] = False
 	if request.method == 'POST':
-			triggered = display_stream.publish(trigger.event()) > 0
-			response['triggered'] = triggered
+		triggered = display_stream.publish(trigger.event()) > 0
+		response['triggered'] = triggered
 	return jsonify(response)
 
 @app.route('/display', methods=['GET'])
