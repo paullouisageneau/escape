@@ -1,14 +1,16 @@
 <section id="toggles">
   <h2>Interrupteurs</h2>
   <ol>
-      <li v-for="(toggle, index) in toggles">
+      {% for toggle in room.toggles %}
+      <li>
         <label class="switch_wrapper">
-        <span>${toggle.name}</span>
+        <span>{{ toggle.name }}</span>
         <span class="switch">
-        <input type="checkbox" v-bind:value="index" v-model="enabled">
-        <span class="slider"></span>
+	  <input type="checkbox" value="{{ loop.index0 }}" v-model="enabled">
+          <span class="slider"></span>
         </span>
         </label>
       </li>
+      {% endfor %}
   </ol>
 </section>

@@ -1,3 +1,8 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
 body, html {
 	height: 100%;
 	overflow-y: hidden;
@@ -9,4 +14,8 @@ body {
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
+}
+
+video {
+	height: 100%;
 }

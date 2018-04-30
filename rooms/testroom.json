@@ -15,5 +15,18 @@
 			"pin": 19,
 			"default": true
 		}
+    ],
+    "triggers": [
+	{
+		"name": "Jouer la vidéo",
+		"action": "play",
+		"target": "/static/video.mp4"
+	},
+	{
+		"name": "Ajouter 10 min au temps",
+		"action": "time_inc",
+		"target": "600"
+	}
     ]
-} 
+}
+
