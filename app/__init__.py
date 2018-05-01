@@ -68,5 +68,5 @@ def display():
 
 @app.route('/events', methods=['GET'])
 def display_events():
-	return Response(room.event_stream.subscribe(), mimetype="text/event-stream")
+	return Response(room.events.subscribe(), mimetype="text/event-stream")
 

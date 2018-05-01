@@ -14,9 +14,9 @@ class Room:
 		with open(filename) as conf_file:
 			self._conf = json.load(conf_file)
 
-		self.event_stream = EventStream()
+		self.events = EventStream()
 		self.toggles = [Toggle(c) for c in self._conf['toggles']]
-		self.triggers = [Trigger(c, self.event_stream) for c in self._conf['triggers']]
+		self.triggers = [Trigger(c, self.events) for c in self._conf['triggers']]
 
 	@property
 	def name(self):

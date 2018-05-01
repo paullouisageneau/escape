@@ -19,3 +19,7 @@ body {
 video {
 	height: 100%;
 }
+
+audio { 
+	display: none;
+}

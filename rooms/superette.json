@@ -1,8 +1,8 @@
 {
 	"name": "Supérette",
 	"cameras": [
-		"http://testroom-camera1/",
-		"http://testroom-camera2/"
+		"http://superette-camera1/",
+		"http://superette-camera2/"
     ],
     "toggles": [
 		{
@@ -25,15 +25,17 @@
 			"pin": 21,
 			"default": false
 		},
+	],
+	 "triggers": [
 		{
-			"name": "Message audio",
-			"pin": 22,
-			"default": false
+			"name": "Message audio 1",
+			"type": "audio",
+			"data": "/media/superette/audio1.mp4"
 		},
 		{
-			"name": "Message audio",
-			"pin": 23,
-			"default": false
-		}
+			"name": "Message audio 2",
+			"type": "audio",
+			"data": "/media/superette/audio2.mp4"
+		},
     ]
 } 

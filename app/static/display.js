@@ -4,11 +4,15 @@ const vm = new Vue({
 	el: '#display',			// the vue instance controls the element whose id is "display"
 	data: {
 		video: null,
+		audio: null,
 	},
 	mounted: function() {
 		const events = new EventSource('/events');
-		events.addEventListener('play', (event) => {
+		events.addEventListener('video', (event) => {
 			this.video = event.data;
+		});
+		events.addEventListener('audio', (event) => {
+			this.audio = event.data;
 		});
 	}
 });
