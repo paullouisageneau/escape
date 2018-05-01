@@ -3,11 +3,11 @@ const vm = new Vue({
 	delimiters:['${', '}'],	// by default, it's {{ }}, which would conflicts with Flask Jinja templates
 	el: '#console',			// the vue instance controls the element whose id is "control"
 	data: {
-		enabled: [],		// will contain the indexes of enabled toggles
 		startTime: 0,		// timestamp at which the chrono was started
 		chrono: '',			// the chrono as displayed (HH:MM:SS)
 		inputClue: '',		// the clue input from the user
-		clues: []			// all the sent clues
+		clues: [],			// the sent clues
+		enabled: []			// the indexes of enabled toggles
 	},
 	mounted: function() {
 		// Initialize chrono
@@ -67,11 +67,8 @@ const vm = new Vue({
 		update: function() {
 			// The chrono must be updated each second
 			if(this.startTime > 0) {
-				const t = Math.max(time() - this.startTime, 0);
-				const h = Math.floor(t/3600);
-				const m = Math.floor(t/60)%60;
-				const s = Math.floor(t%60);
-				this.chrono = `${("0"+h).slice(-2)}:${("0"+m).slice(-2)}:${("0"+s).slice(-2)}`;
+				const secs = Math.max(time() - this.startTime, 0);
+				this.chrono = formatTime(secs);
 			}
 		},
 		sendClue: function() {

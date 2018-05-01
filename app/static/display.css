@@ -23,3 +23,15 @@ video {
 audio { 
 	display: none;
 }
+
+#chrono {
+	margin: 2em;
+	font-size: 300%;
+	text-align: center;
+}
+
+#clue {
+	margin: 2em;
+	font-size: 300%;
+	text-align: center;
+}
