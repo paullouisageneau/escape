@@ -11,8 +11,8 @@
   <h1>{{ room.name }}</h1>
   {% include 'cameras.html' %}
   {% include 'interactions.html' %}
-  {% include 'toggles.html' %}
   {% include 'triggers.html' %}
+  {% include 'toggles.html' %}
   <section id="reset">
     <input type="button" class="button button_danger" value="Réinitialiser" v-on:click="reset">
   </section>
