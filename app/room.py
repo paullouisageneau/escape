@@ -2,6 +2,7 @@
 import os
 import json
 
+from .event import EventStream
 from .toggle import Toggle
 from .trigger import Trigger
 
@@ -11,9 +12,11 @@ class Room:
 	def __init__(self, name):
 		filename = os.path.join(ROOMS_DIRECTORY, name + ".json")
 		with open(filename) as conf_file:
-                        self._conf = json.load(conf_file)
-                        self._toggles = [Toggle(t['name'], t['pin'], t['default']) for t in self._conf['toggles']]
-                        self._triggers = [Trigger(t['name'], t['action'], t['target']) for t in self._conf['triggers']]
+			self._conf = json.load(conf_file)
+
+		self.event_stream = EventStream()
+		self.toggles = [Toggle(c) for c in self._conf['toggles']]
+		self.triggers = [Trigger(c, self.event_stream) for c in self._conf['triggers']]
 
 	@property
 	def name(self):
@@ -22,12 +25,5 @@ class Room:
 	@property
 	def cameras(self):
 		return self._conf['cameras']
-	
-	@property
-	def toggles(self):
-		return self._toggles
 
-	@property
-	def triggers(self):
-		return self._triggers
 

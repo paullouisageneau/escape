@@ -6,15 +6,10 @@ const vm = new Vue({
 		video: null,
 	},
 	mounted: function() {
-		const events = new EventSource('/display/events');
-		events.onmessage = (message) => {
-			const event = JSON.parse(message.data);
-			switch(event.action) {
-				case 'play':
-					this.video = event.target;
-					break;
-			}
-		};
+		const events = new EventSource('/events');
+		events.addEventListener('play', (event) => {
+			this.video = event.data;
+		});
 	}
 });
 

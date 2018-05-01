@@ -5,7 +5,6 @@ import os
 from flask import Flask, request, Response, abort, render_template, jsonify, url_for
 
 from .room import Room
-from .event import EventStream
 
 # ----- App initialization -----
 
@@ -17,9 +16,6 @@ app.config.from_object('config')
 
 # Import room configuration
 room = Room(app.config['ROOM_NAME'])
-
-# Event stream for the display page
-display_stream = EventStream()
 
 # ----- Routes definition -----
 
@@ -63,15 +59,14 @@ def api_trigger(index):
 	response = trigger.to_dict()
 	response['triggered'] = False
 	if request.method == 'POST':
-		triggered = display_stream.publish(trigger.event()) > 0
-		response['triggered'] = triggered
+		response['triggered'] = trigger.pull()
 	return jsonify(response)
 
 @app.route('/display', methods=['GET'])
 def display():
 	return render_template('display.html', room=room)
 
-@app.route('/display/events', methods=['GET'])
+@app.route('/events', methods=['GET'])
 def display_events():
-	return Response(display_stream.subscribe(), mimetype="text/event-stream")
+	return Response(room.event_stream.subscribe(), mimetype="text/event-stream")
 

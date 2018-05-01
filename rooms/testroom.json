@@ -19,13 +19,13 @@
     "triggers": [
 	{
 		"name": "Jouer la vidéo",
-		"action": "play",
-		"target": "/static/video.mp4"
+		"event": "play",
+		"data": "/static/video.mp4"
 	},
 	{
 		"name": "Ajouter 10 min au temps",
-		"action": "time_inc",
-		"target": "600"
+		"event": "time",
+		"data": "600"
 	}
     ]
 }

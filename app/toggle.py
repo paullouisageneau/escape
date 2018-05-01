@@ -1,9 +1,9 @@
 
 class Toggle:
-	def __init__(self, name, pin, value):
-		self._name = name
-		self._pin = int(pin)
-		self._value = bool(value)
+	def __init__(self, conf):
+		self._name = conf['name']
+		self._pin = int(conf['pin'])
+		self._value = bool(conf['default'])
 		self.update()
 
 	@property
@@ -16,8 +16,9 @@ class Toggle:
 
 	@value.setter
 	def value(self, newValue):
-		self._value = newValue
-		self.update()
+		if self._value != newValue:
+			self._value = newValue
+			self.update()
 
 	def update(self):
 		# TODO: Here, set the pin to high or low on RPi
