@@ -1,8 +1,11 @@
 <section id="cameras">
   <h2>Caméras</h2>
   <ol>
-      <li v-for="url in cameras">
-        <a v-bind:href="url">${ url }</a>
+      {% for url in room.cameras %}
+      <li>
+        <a href="{{ url }}">{{ url }}</a>
       </li>
+      {% endfor %}
   </ol>
 </section>
+

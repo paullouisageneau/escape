@@ -2,6 +2,7 @@
 {% block title %}{{ room.name }}{% endblock %}
 {% block head %}
   {{ super() }}
+  <link rel="stylesheet" href="{{ url_for('static', filename='control.css') }}">
   <script src="{{ config['VUE_URL'] }}"></script>
 {% endblock %}
 {% block content %}
@@ -10,6 +11,7 @@
   <h1>{{ room.name }}</h1>
   {% include 'cameras.html' %}
   {% include 'toggles.html' %}
+  {% include 'triggers.html' %}
   </div>
   <script src="{{ url_for('static', filename='control.js') }}"></script>
 {% endblock %}

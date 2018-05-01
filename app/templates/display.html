@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}{{ room.name }}{% endblock %}
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ url_for('static', filename='display.css') }}">
+  <script src="{{ config['VUE_URL'] }}"></script>
+{% endblock %}
+{% block content %}
+  {{ super() }}
+  <div id="display">
+    <video v-if="video" v-on:ended="video = null" autoplay>
+      <source v-bind:src="video" type="video/mp4">
+    </video>
+  </div>
+  <script src="{{ url_for('static', filename='display.js') }}"></script>
+{% endblock %}
