@@ -71,3 +71,15 @@ input:checked + .slider:before {
   transform: translateY(0.25em);
 }
 
+.button:disabled {
+  background-color: #808080;
+  cursor: auto;
+}
+
+.button_danger {
+	background-color: #990000;
+}
+
+.button_danger:hover {
+	background-color: #800000;
+}

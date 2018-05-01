@@ -10,8 +10,12 @@
   <div id="console">
   <h1>{{ room.name }}</h1>
   {% include 'cameras.html' %}
+  {% include 'interactions.html' %}
   {% include 'toggles.html' %}
   {% include 'triggers.html' %}
+  <section id="reset">
+    <input type="button" class="button button_danger" value="Réinitialiser" v-on:click="reset">
+  </section>
   </div>
   <script src="{{ url_for('static', filename='control.js') }}"></script>
 {% endblock %}

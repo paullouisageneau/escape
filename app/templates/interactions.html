@@ -1,20 +1,17 @@
 <section id="interactions">
   <h2>Interactions</h2>
-  <ol>
-      <li>
-        <form action="/api/indice" method="post">
-        <label for="POST-indice">Envoyer un indice :</label>
-        <input id="POST-indice" type="text" name="indice">
-        <input type="submit" value="Envoyer l'indice">
-        </form>
-	<span> Dernier indice : {{indice}} </span>
-      </li>
-      <li>
-        <span> Chronomètre : 60:00 </span>
-
-	<input type="button" value="Démarrer chronomètre">
-        <input type="button" value="Ajouter 1 minute">
-	<input type="button" value="Retirer 1 minute">
-      </li>
+  <input type="button" class="button" value="Démarrer chronomètre" v-bind:disabled="startTime > 0" v-on:click="start()">
+  <input type="button" class="button" value="Ajouter 1 minute" v-bind:disabled="!startTime" v-on:click="startTime-=60">
+  <input type="button" class="button" value="Retirer 1 minute" v-bind:disabled="!startTime" v-on:click="startTime+=60">
+  <span v-if="chrono">Chronomètre: ${ chrono }</span><br>
+  <input type="text" name="clue" v-model="inputClue">
+  <input type="button" class="button" value="Envoyer l'indice" v-on:click="sendClue()">
+  <br>
+  <h3>Indices envoyés</h3>
+  <span v-if="!clues.length">Aucun</span>
+  <ol v-if="clues.length">
+    <li v-for="clue in clues">
+      <span>${ clue }</span>
+    </li>
   </ol>
 </section>

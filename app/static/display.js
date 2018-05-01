@@ -7,7 +7,7 @@ const vm = new Vue({
 		audio: null,
 	},
 	mounted: function() {
-		const events = new EventSource('/events');
+		const events = new EventSource('/api/events');
 		events.addEventListener('video', (event) => {
 			this.video = event.data;
 		});
