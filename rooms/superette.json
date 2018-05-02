@@ -24,7 +24,7 @@
 			"name": "Ouverture store",
 			"pin": 21,
 			"default": false
-		},
+		}
 	],
 	 "triggers": [
 		{
@@ -36,6 +36,6 @@
 			"name": "Message audio 2",
 			"type": "audio",
 			"data": "/media/superette/audio2.mp4"
-		},
+		}
     ]
 } 
