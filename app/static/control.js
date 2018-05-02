@@ -101,7 +101,7 @@ const vm = new Vue({
 					location.reload();
 				});
 			}
-		},
+		}
 	},
 	watch: {
 		startTime: function(value, oldValue) {
