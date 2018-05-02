@@ -4,6 +4,7 @@ const vm = new Vue({
 	el: '#console',			// the vue instance controls the element whose id is "control"
 	data: {
 		startTime: 0,		// timestamp at which the chrono was started
+		elapsed: 0,			// seconds elapsed since startTime
 		chrono: '',			// the chrono as displayed (HH:MM:SS)
 		inputClue: '',		// the clue input from the user
 		clues: [],			// the sent clues
@@ -67,8 +68,8 @@ const vm = new Vue({
 		update: function() {
 			// The chrono must be updated each second
 			if(this.startTime > 0) {
-				const secs = Math.max(time() - this.startTime, 0);
-				this.chrono = formatTime(secs);
+				this.elapsed = Math.max(time() - this.startTime, 0);
+				this.chrono = formatTime(this.elapsed);
 			}
 		},
 		sendClue: function() {

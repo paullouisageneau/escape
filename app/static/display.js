@@ -4,6 +4,7 @@ const vm = new Vue({
 	el: '#display',			// the vue instance controls the element whose id is "display"
 	data: {
 		startTime: 0,		// timestamp at which the chrono was started
+		elapsed: 0,			// seconds elapsed since startTime
 		chrono: '',			// the chrono as displayed
 		clue: '',			// the currently displayed clue
 		clueTimeout: null,	// timeout for the displayed clue
@@ -52,11 +53,12 @@ const vm = new Vue({
 	methods: {
 		update: function() {
 			if(this.startTime > 0) {
-				const secs = Math.max(time() - this.startTime, 0);
+				this.elapsed = Math.max(time() - this.startTime, 0);
 				// TODO: actual format depends on the room
-				this.chrono = formatTime(secs);
+				this.chrono = formatTime(this.elapsed);
 			}
 			else {
+				this.elapsed = 0;
 				this.chrono = '';
 			}
 		},
