@@ -13,9 +13,7 @@
   {% include 'interactions.html' %}
   {% include 'triggers.html' %}
   {% include 'toggles.html' %}
-  <section id="reset">
-    <input type="button" class="button button_danger" value="Réinitialiser" v-on:click="reset">
-  </section>
+  {% include 'admin.html' %}
   </div>
   <script src="{{ url_for('static', filename='control.js') }}"></script>
 {% endblock %}

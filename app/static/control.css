@@ -76,10 +76,10 @@ input:checked + .slider:before {
   cursor: auto;
 }
 
-.button_danger {
+#admin .button {
 	background-color: #990000;
 }
 
-.button_danger:hover {
+#admin .button:hover {
 	background-color: #800000;
 }
