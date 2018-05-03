@@ -17,7 +17,8 @@ body {
 }
 
 video {
-	height: 100%;
+	display: block;
+	width: 100%;
 }
 
 audio { 
@@ -25,13 +26,16 @@ audio {
 }
 
 #chrono {
-	margin: 2em;
-	font-size: 300%;
+	font-size: 96pt;
+	margin: 1em;
 	text-align: center;
+	color: #FFFFFF;
+	font-family: monospace;
 }
 
 #clue {
-	margin: 2em;
-	font-size: 300%;
+	font-size: 72pt;
+	margin: 1em;
 	text-align: center;
+	color: #FFFFFF;
 }
