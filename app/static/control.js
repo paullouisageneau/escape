@@ -95,6 +95,11 @@ const vm = new Vue({
 			});
 			this.inputClue = '';
 		},
+		hideClue: function() {
+			fetch('/api/clues/hide', {
+				method: 'POST',
+			});
+		},
 		reset: function() {
 			if(confirm("Voulez-vous vraiment réinitialiser la salle ?")) {
 				fetch('/api/reset', {

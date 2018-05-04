@@ -24,6 +24,9 @@ startTime = 0
 # List of the sent clues
 clues = []
 
+# Last clue not visible
+hideClue = True
+
 # ----- Routes definition -----
 
 @app.route('/', methods=['GET'])
@@ -38,8 +41,10 @@ def display():
 def api_reset():
 	global startTime
 	global clues
+	global hideClue
 	startTime = 0
 	clues = []
+	hideClue = True
 	for toggle in room.toggles:
 		toggle.reset()
 	room.events.publish('reset', {})
@@ -58,13 +63,27 @@ def api_chrono():
 @app.route('/api/clues', methods=['GET', 'POST'])
 def api_clues():
 	global clues
+	global hideClue
 	if request.method == 'POST':
 		data = request.get_json()
 		clue = data['text']
 		clues.append(clue)
+		hideClue = False
 		room.events.publish('clue', { 'text': clue })
-		return jsonify({ 'text': clue, 'index': len(clues)-1 })
+		return jsonify({ 'text': clue, 'index': len(clues)-1 })	
 	return jsonify([{ 'text': c } for c in clues])
+
+@app.route('/api/clues/hide', methods=['GET', 'POST'])
+def api_hide_clue():
+	global clues
+	global hideClue
+	last_clue = ''
+	if len(clues)>0: last_clue = clues[-1] 
+	if request.method == 'POST':
+		hideClue = True
+		room.events.publish('hide clue', { 'hide': hideClue, 'text':last_clue })	
+		return jsonify({ 'hide': hideClue })
+	return jsonify({ 'hide': hideClue, 'text':last_clue })
 
 @app.route('/api/clues/<int:index>', methods=['GET'])
 def api_clue(index):

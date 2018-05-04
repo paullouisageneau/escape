@@ -5,7 +5,8 @@
   <input type="button" class="button" value="Retirer 1 minute" v-bind:disabled="!startTime" v-on:click="startTime+=60">
   <span v-if="chrono">Chronomètre: ${ chrono }</span><br>
   <input type="text" name="clue" v-model="inputClue">
-  <input type="button" class="button" value="Envoyer l'indice" v-on:click="sendClue()">
+  <input type="button" class="button" value="Afficher l'indice" v-on:click="sendClue()">
+  <input type="button" class="button" value="Masquer l'indice" v-on:click="hideClue()">
   <br>
   <h3>Indices envoyés</h3>
   <span v-if="!clues.length">Aucun</span>

@@ -23,3 +23,27 @@ video {
 audio { 
 	display: none;
 }
+
+#chrono {
+	color: red;
+	background-color: black;
+	text-align: center;
+	width: 50%;
+	position: relative;
+	top: 60px;
+	left: 25%;
+	font-size: 10vw;
+	border: 5px solid red;
+}
+
+#clues  {
+	color: red;
+	background-color: black;
+	text-align: center;
+	width: 80%;
+	position: relative;
+	top: 100px;
+	left: 10%;
+	font-size: 5vw;
+	border: 5px solid red;
+}

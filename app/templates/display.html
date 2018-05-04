@@ -14,6 +14,16 @@
     <audio v-if="audio" v-on:ended="audio = null" autoplay hidden>
       <source v-bind:src="audio" type="audio/mpeg">
     </video>
-  </div>
+</div>
+
+<p id="chrono"> 
+  ${chrono}
+</p>
+
+<p id="clues" v-if="show">
+Nouvel indice : <br />
+${clue}
+</p>
+
   <script src="{{ url_for('static', filename='display.js') }}"></script>
 {% endblock %}

@@ -24,18 +24,13 @@
 			"name": "Ouverture store",
 			"pin": 21,
 			"default": false
-		},
+		}
 	],
-	 "triggers": [
+    "triggers": [
 		{
-			"name": "Message audio 1",
-			"type": "audio",
-			"data": "/media/superette/audio1.mp4"
-		},
-		{
-			"name": "Message audio 2",
-			"type": "audio",
-			"data": "/media/superette/audio2.mp4"
-		},
+			"name": "Jouer la vidéo",
+			"type": "video",
+			"data": "/static/video.mp4"
+		}
     ]
 } 
