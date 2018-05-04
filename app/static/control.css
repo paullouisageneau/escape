@@ -83,3 +83,15 @@ input:checked + .slider:before {
 .button_danger:hover {
 	background-color: #800000;
 }
+
+table, th, td {
+	border: 3px solid black;
+	text-align: center;
+	border-collapse: collapse;
+}
+
+th {
+	font-size: 30px;
+}
+
+

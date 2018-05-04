@@ -70,7 +70,7 @@ def api_clues():
 		clues.append(clue)
 		hideClue = False
 		room.events.publish('clue', { 'text': clue })
-		return jsonify({ 'text': clue, 'index': len(clues)-1 })	
+		return jsonify({ 'text': clue, 'index': len(clues)-1, 'hide':hideClue })	
 	return jsonify([{ 'text': c } for c in clues])
 
 @app.route('/api/clues/hide', methods=['GET', 'POST'])

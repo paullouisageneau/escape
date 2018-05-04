@@ -1,18 +1,49 @@
-<section id="interactions">
-  <h2>Interactions</h2>
-  <input type="button" class="button" value="Démarrer chronomètre" v-bind:disabled="startTime > 0" v-on:click="start()">
-  <input type="button" class="button" value="Ajouter 1 minute" v-bind:disabled="!startTime" v-on:click="startTime-=60">
-  <input type="button" class="button" value="Retirer 1 minute" v-bind:disabled="!startTime" v-on:click="startTime+=60">
-  <span v-if="chrono">Chronomètre: ${ chrono }</span><br>
-  <input type="text" name="clue" v-model="inputClue">
-  <input type="button" class="button" value="Afficher l'indice" v-on:click="sendClue()">
-  <input type="button" class="button" value="Masquer l'indice" v-on:click="hideClue()">
-  <br>
-  <h3>Indices envoyés</h3>
-  <span v-if="!clues.length">Aucun</span>
-  <ol v-if="clues.length">
-    <li v-for="clue in clues">
-      <span>${ clue }</span>
-    </li>
-  </ol>
-</section>
+<table>
+  <tr>
+    <th colspan=2> Interactions </th> </tr>
+  <tr>
+    <td rowspan=3 style="font-size:100px;"> <span v-if="chrono">${ chrono }</span> </td>
+    <td style="border-bottom:none;">
+      <input type="button" class="button" value="Démarrer chronomètre" v-bind:disabled="startTime > 0" v-on:click="start()">
+    </td>
+  </tr>
+  <tr>
+    <td style="border-top:none;border-bottom:none;">
+      <input type="button" class="button" value="Ajouter 1 minute" v-bind:disabled="!startTime" v-on:click="startTime-=60">
+    </td>
+  </tr>
+  <tr>
+    <td style="border-top:none;">
+      <input type="button" class="button" value="Retirer 1 minute" v-bind:disabled="!startTime" v-on:click="startTime+=60">
+    </td>
+  </tr> 
+</table>
+
+<br />
+
+<table>
+  <tr>
+    <td>
+      Nouvel indice indice :
+      <input type="text" name="clue" v-model="inputClue">
+      <input type="button" class="button" value="Afficher" v-on:click="sendClue()">
+      <input type="button" class="button" value="Masquer" v-on:click="hideClue()">
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align:left;">
+       Indices envoyés:
+       <span v-if="!clues.length">Aucun</span>
+        <ol v-if="clues.length">
+          <li v-for="clue in clues.slice(0,clues.length-1)">
+          <span>${ clue }</span>
+          </li>
+          <li>            
+            <span v-if="show" style='color:red;'>${ clues[clues.length-1] } (visible)</span>
+            <span v-if="!show">${ clues[clues.length-1] }</span>
+          </li>
+        </ol>
+    </td>
+  </tr>
+</table>
+

@@ -5,9 +5,10 @@ const vm = new Vue({
 	data: {
 		enabled: [],		// will contain the indexes of enabled toggles
 		startTime: 0,		// timestamp at which the chrono was started
-		chrono: '',			// the chrono as displayed (HH:MM:SS)
+		chrono: '00:00:00',			// the chrono as displayed (HH:MM:SS)
 		inputClue: '',		// the clue input from the user
-		clues: []			// all the sent clues
+		clues: [],			// all the sent clues
+		show: false		// last clue is visible
 	},
 	mounted: function() {
 		// Initialize chrono
@@ -26,6 +27,13 @@ const vm = new Vue({
 			this.clues = array.map(c => c.text);
 		});
 		
+		// Check if last clue is visible
+		fetch('/api/clues/hide').then((response) => {
+			return response.json();
+		}).then((clueMsg) => {
+			this.show = !clueMsg.hide;
+		});
+
 		// Initialize toggles
 		fetch('/api/toggles').then((response) => {
 			return response.json();
@@ -91,13 +99,17 @@ const vm = new Vue({
 			}).then((response) => {
 				return response.json();
 			}).then((clue) => {
-				this.clues.push(clue.text);
+				this.clues.push(clue.text); this.show = !clue.hide;
 			});
 			this.inputClue = '';
 		},
 		hideClue: function() {
 			fetch('/api/clues/hide', {
 				method: 'POST',
+			}).then((response) => {
+			return response.json();
+			}).then((clueMsg) => {
+			this.show = !clueMsg.hide;
 			});
 		},
 		reset: function() {
