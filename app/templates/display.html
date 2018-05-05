@@ -20,9 +20,9 @@
   ${chrono}
 </p>
 
-<p id="clues" v-if="show">
-Nouvel indice : <br />
-${clue}
+<p id="clues" v-if="show" class=pblink>
+  <span class=blink> Nouvel indice :  </span> <br />
+<span class=blink> ${clue} </span>
 </p>
 
   <script src="{{ url_for('static', filename='display.js') }}"></script>

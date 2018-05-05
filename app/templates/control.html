@@ -7,15 +7,15 @@
 {% endblock %}
 {% block content %}
   {{ super() }}
-  <div id="console">
-  <h1>{{ room.name }}</h1>
-  {% include 'cameras.html' %}
-  {% include 'interactions.html' %}
-  {% include 'triggers.html' %}
-  {% include 'toggles.html' %}
-  <section id="reset">
+  <h1> {{ room.name }} </h1>
+  <span id="reset">
     <input type="button" class="button button_danger" value="Réinitialiser" v-on:click="reset">
-  </section>
+  </span>
+  </div>
+  <br />
+  <div id="console">
+  {% include 'interactions.html' %}
+  {% include 'cameras.html' %}
   </div>
   <script src="{{ url_for('static', filename='control.js') }}"></script>
 {% endblock %}

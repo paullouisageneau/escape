@@ -5,9 +5,10 @@ const vm = new Vue({
 	data: {
 		enabled: [],		// will contain the indexes of enabled toggles
 		startTime: 0,		// timestamp at which the chrono was started
-		chrono: '00:00:00',			// the chrono as displayed (HH:MM:SS)
+		stopTime: 0,		// timestamp at which the chrono was stopped
+		chrono: '00:00:00',	// the chrono as displayed (HH:MM:SS)
 		inputClue: '',		// the clue input from the user
-		clues: [],			// all the sent clues
+		clues: [],		// all the sent clues
 		show: false		// last clue is visible
 	},
 	mounted: function() {
@@ -18,8 +19,11 @@ const vm = new Vue({
 			if(chrono.start) {
 				this.startTime = chrono.start;
 			}
-		});
-		
+			if(chrono.stop) {
+				this.stopTime = chrono.stop;
+			}
+		});		
+
 		// Initialize clues
 		fetch('/api/clues').then((response) => {
 			return response.json();
@@ -65,7 +69,13 @@ const vm = new Vue({
 	},
 	methods: {
 		start: function() {
-			this.startTime = time();
+		// stopTime set to zero means the cronometer is running
+			this.startTime = this.startTime + ( time() - this.stopTime );
+			this.stopTime = 0;
+		},
+		stop: function() {
+		// stopTime set to nonzero value means the cronometer is stopped at stopTime
+			this.stopTime = time();
 		},
 		trigger: function(i) {
 			fetch(`/api/triggers/${i}`, {
@@ -73,9 +83,16 @@ const vm = new Vue({
 			});
 		},
 		update: function() {
+			// timeRef is the last time before the chrono was stopped, used as reference to compute the elapsed time 
+			timeRef = 0;			
+			if (this.stopTime > 0) {
+				timeRef = this.stopTime;
+			} else {
+				timeRef = time();
+ 			}
 			// The chrono must be updated each second
 			if(this.startTime > 0) {
-				const t = Math.max(time() - this.startTime, 0);
+				const t = Math.max(timeRef - this.startTime, 0);
 				const h = Math.floor(t/3600);
 				const m = Math.floor(t/60)%60;
 				const s = Math.floor(t%60);
@@ -130,6 +147,27 @@ const vm = new Vue({
 			}
 			const data = {
 				start: this.startTime,
+				stop: this.stopTime
+			};
+			fetch('/api/chrono', {
+				method: 'POST',
+				body: JSON.stringify(data),
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			});
+			this.update();
+		},
+		stopTime: function(value, oldValue) {
+		// Là j'ai juste recopié la fonction appliquée si startTime change : il doit y avoir mieux à faire.
+		// En particulier, ça fait envoyer deux requêtes au lieu d'une quand la fonction start est appelée.
+			if (value > time()) {
+				this.stopTime = time();
+				return;
+			}
+			const data = {
+				start: this.startTime,
+				stop: this.stopTime
 			};
 			fetch('/api/chrono', {
 				method: 'POST',

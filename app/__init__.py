@@ -21,6 +21,9 @@ room = Room(app.config['ROOM_NAME'])
 # If chrono was started, startTime contains the corresponding timestamp
 startTime = 0
 
+# If chrono was stopped, stopTime contains the corresponding timestamp
+stopTime = 0
+
 # List of the sent clues
 clues = []
 
@@ -40,9 +43,11 @@ def display():
 @app.route('/api/reset', methods=['POST'])
 def api_reset():
 	global startTime
+	global stopTime
 	global clues
 	global hideClue
 	startTime = 0
+	stopTime = 0
 	clues = []
 	hideClue = True
 	for toggle in room.toggles:
@@ -53,12 +58,14 @@ def api_reset():
 @app.route('/api/chrono', methods=['GET', 'POST'])
 def api_chrono():
 	global startTime
+	global stopTime
 	if request.method == 'POST':
 		data = request.get_json()
 		startTime = data['start']
+		stopTime = data['stop']
 		clue = ''
-		room.events.publish('chrono', { 'start': startTime })
-	return jsonify({ 'start': startTime })
+		room.events.publish('chrono', { 'start': startTime, 'stop': stopTime })	
+	return jsonify({ 'start': startTime, 'stop': stopTime })
 
 @app.route('/api/clues', methods=['GET', 'POST'])
 def api_clues():

@@ -1,11 +1,8 @@
-<section id="cameras">
-  <h2>Caméras</h2>
-  <ol>
-      {% for url in room.cameras %}
-      <li>
-        <a href="{{ url }}">{{ url }}</a>
-      </li>
-      {% endfor %}
-  </ol>
-</section>
+
+<table class="cam">
+  {% for url in room.cameras %}
+  <tr class="cam"> <td class="cam"> <a href="{{ url }}">{{ url }}</a> </td> </tr>
+  {% endfor %}
+</table>
+
 

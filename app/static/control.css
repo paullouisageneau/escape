@@ -94,4 +94,29 @@ th {
 	font-size: 30px;
 }
 
+table.cam {
+	color: white;
+	background-color: black;
+	text-align: center;
+	width: 45%;
+	position: absolute;
+	top: 1%;
+	right: 1%;
+	font-size: 1vw;
+	border: 5px solid blue;
+	border-collapse: collapse;
+}
 
+th.cam, td.cam {
+	border: 5px solid blue;
+	text-align: center;
+	color: white;
+	padding-top: 40%;
+	padding-bottom: 40%;
+}
+
+#reset{
+	position: absolute;
+	right: 50%;
+	top:2%;
+}

@@ -24,6 +24,8 @@ const chr = new Vue({
 	el: '#chrono',			// the vue instance controls the element whose id is "chrono"
 	data: {
 		startTime: 0,
+		stopTime: 0,
+		lastTime: 0,
 		chrono: '05:00:00'
 	},
 	mounted: function() {
@@ -33,13 +35,10 @@ const chr = new Vue({
 		}).then((chrono) => {
 			if(chrono.start) {
 				this.startTime = chrono.start;
-				const t = Math.max(time() - this.startTime, 0);
-				const h = 5+Math.floor(t/3600);
-				const m = Math.floor(t/60)%60;
-				const s = Math.floor(t%60);
-				this.chrono = `${("0"+h).slice(-2)}:${("0"+m).slice(-2)}:${("0"+s).slice(-2)}`;
 			}
+			this.stopTime = chrono.stop;
 		});
+
 		// Check if chrono is started every second
 		setInterval(this.checkChrono, 1000);
 		// Setup update callback every second
@@ -50,19 +49,34 @@ const chr = new Vue({
 			fetch('/api/chrono').then(
 				(response) => {return response.json();}
 				).then(
-				(chrono) => {if(chrono.start) { this.startTime = chrono.start; } else {this.startTime=0;}}
-				);
+				(chrono) => {
+						if(chrono.start) {
+							this.startTime = chrono.start;
+						} else {this.startTime=0;}
+						this.stopTime = chrono.stop;
+					     });
 		},
 		update: function() {
+			// timeRef is the last time before the chrono was stopped, used as reference to compute the elapsed time 
+			timeRef = 0;			
+			if (this.stopTime > 0) {
+				timeRef = this.stopTime;
+			} else {
+				timeRef = time();
+ 			}
+			// lastTime is the last time used by the chronometer. This variable avoids seeing the chronometer lose 1 sec
+			// when we have stopTime < time()
+			this.lastTime = Math.max(this.lastTime,timeRef);
 			// The chrono must be updated each second
 			if(this.startTime > 0) {
-				const t = Math.max(time() - this.startTime, 0);
+				const t = Math.max(this.lastTime - this.startTime, 0);
 				const h = 5+Math.floor(t/3600);
 				const m = Math.floor(t/60)%60;
 				const s = Math.floor(t%60);
 				this.chrono = `${("0"+h).slice(-2)}:${("0"+m).slice(-2)}:${("0"+s).slice(-2)}`;
 			} else { this.chrono = '05:00:00';}
 		}
+
 	}
 });
 

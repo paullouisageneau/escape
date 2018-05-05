@@ -40,10 +40,36 @@ audio {
 	color: red;
 	background-color: black;
 	text-align: center;
-	width: 80%;
 	position: relative;
 	top: 100px;
-	left: 10%;
+	left: 2%;
+	width: 96%;
 	font-size: 5vw;
 	border: 5px solid red;
+	-webkit-animation: pblink 1s  infinite;
+ 	-moz-animation: pblink 1s  infinite;
+  	animation: pblink 1s  infinite;
 }
+
+@keyframes pblink {  
+  0% { border: 5px solid red; }
+  100% { border: 5px solid transparent; }
+}
+@-webkit-keyframes pblink {
+  0% { border: 5px solid red; }
+  100% { border: 5px solid transparent; }
+}
+
+@keyframes blink {  
+  0% { color: red; }
+  100% { color: rgba(255,0,0,0.1); }
+}
+@-webkit-keyframes blink {
+  0% { color: red; }
+  100% { color: rgba(255,0,0,0.1); }
+}
+span.blink {
+  -webkit-animation: blink 1s  infinite;
+  -moz-animation: blink 1s  infinite;
+  animation: blink 1s  infinite;
+} 
