@@ -7,9 +7,9 @@
 {% endblock %}
 {% block content %}
   {{ super() }}
-  <h1> {{ room.name }} </h1>
+  <span style="font-size:3vw;"> {{ room.name }} </span>
   <span id="reset">
-    <input type="button" class="button button_danger" value="Réinitialiser" v-on:click="reset">
+    <input style="font-size:2vw;height:3vw;" type="button" class="button button_danger" value="Réinitialiser" v-on:click="reset">
   </span>
   </div>
   <br />
@@ -17,5 +17,11 @@
   {% include 'interactions.html' %}
   {% include 'cameras.html' %}
   </div>
+
+<table style="position:absolute;top:9vw;left:65%;"  text-align=left>
+<tr> <th> <span style="padding-left:1vw;padding-right:1vw;"> Déroulement </span> </th> </tr>
+<tr> <td> {% include 'puzzles.html' %} </td> </tr>
+</table>
+
   <script src="{{ url_for('static', filename='control.js') }}"></script>
 {% endblock %}

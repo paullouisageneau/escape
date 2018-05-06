@@ -1,4 +1,5 @@
-<table width=50%>
+<br>
+<table width=60% style="position:relative;top:1vw;">
   <tr>
     <th colspan=2> Interactions </th>
   </tr>
@@ -8,7 +9,9 @@
       <input type="button" class="button" value="Démarrer chronomètre" v-if="startTime == 0" v-on:click="start()">
       <input v-if="stopTime == 0 & startTime>0" type="button" class="button" value="Arrêter chronomètre" v-bind:disabled=false v-on:click="stop()">
       <input v-if="stopTime > 0" type="button" class="button" value="Reprendre" v-bind:disabled=false v-on:click="start()">
+ <br>
       <input type="button" class="button" value="Ajouter 1 minute" v-bind:disabled="!startTime" v-on:click="startTime-=60">
+<br>
       <input type="button" class="button" value="Retirer 1 minute" v-bind:disabled="!startTime" v-on:click="startTime+=60">
     </td>
   </tr>
@@ -16,27 +19,24 @@
 
 <br />
 
-<table width=50% style="font-size:1vw;">
+<table width=60% style="font-size:1vw;position:relative;top:1vw;">
   <tr>
-    <th> Indices </th> <th> Animations </th> <th> Deroulement </th>
+    <th> Indices </th> <th> Animations </th>
   </tr>
   <tr>
-    <td style="vertical-align:top;">
-      Nouvel indice indice : <br />
-      <input type="text" size="20" maxlength=100 name="clue" v-model="inputClue"> <br />
+    <td style="vertical-align:top;font-size:1.5vw;">
+      Nouvel indice : <br />
+      <input type="text" size="20" maxlength=120 name="clue" v-model="inputClue"> <br />
       <input type="button" class="button" value="Afficher" v-on:click="sendClue()">
       <input type="button" class="button" value="Masquer" v-on:click="hideClue()">
     </td>
-      <td rowspan=2 style="text-align:left;vertical-align:top;">
+      <td rowspan=2 style="text-align:left;vertical-align:top;font-size:1.5vw;">
         {% include 'triggers.html' %}
         {% include 'toggles.html' %}
       </td>
-    <td rowspan= 2 style="text-align:left;vertical-align:top;">
-      {% include 'puzzles.html' %}
-    </td>
   </tr>
   <tr>
-    <td style="text-align:left;">
+    <td style="text-align:left;font-size:1.5vw;">
        Indices envoyés:
        <span v-if="!clues.length">Aucun</span>
         <ol v-if="clues.length">

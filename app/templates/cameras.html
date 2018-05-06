@@ -1,8 +1,8 @@
 
-<table class="cam">
+<div class="cam">
   {% for url in room.cameras %}
-  <tr class="cam"> <td class="cam"> <a href="{{ url }}">{{ url }}</a> </td> </tr>
+  <a href="{{ url }}">{{ url }}</a> <br>
   {% endfor %}
-</table>
+</div>
 
 

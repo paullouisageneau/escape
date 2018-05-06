@@ -94,29 +94,33 @@ th {
 	font-size: 30px;
 }
 
-table.cam {
+div.cam {
 	color: white;
-	background-color: black;
+	background-color: white;
 	text-align: center;
-	width: 45%;
 	position: absolute;
 	top: 1%;
-	right: 1%;
-	font-size: 1vw;
-	border: 5px solid blue;
+	left: 65%;
+	font-size: 2vw;
 	border-collapse: collapse;
-}
-
-th.cam, td.cam {
-	border: 5px solid blue;
-	text-align: center;
-	color: white;
-	padding-top: 40%;
-	padding-bottom: 40%;
+	display: block;
 }
 
 #reset{
 	position: absolute;
-	right: 50%;
+	left: 40%;
 	top:2%;
+}
+
+#puzzles{
+	position: relative;
+	left: 5px;
+	top:5px;
+}
+
+.chrono{
+	display: inline-block;
+	background-color:rgba(50,255,50,1);
+	color:black;
+	border: 2px solid white;
 }

@@ -14,9 +14,7 @@ class Room:
 		filename = os.path.join(ROOMS_DIRECTORY, name + ".json")
 		with open(filename) as conf_file:
 			print(conf_file)
-			print('ok')
 			self._conf = json.load(conf_file)
-		print('ok')
 		self.events = EventStream()
 		self.toggles = [Toggle(c) for c in self._conf['toggles']]
 		self.triggers = [Trigger(c, self.events) for c in self._conf['triggers']]

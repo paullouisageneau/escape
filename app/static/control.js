@@ -9,7 +9,7 @@ const vm = new Vue({
 		chrono: '00:00:00',	// the chrono as displayed (HH:MM:SS)
 		inputClue: '',		// the clue input from the user
 		clues: [],		// all the sent clues
-		show: false		// last clue is visible
+		show: false,	// last clue is visible
 		enabled: []		// the indexes of enabled toggles
 	},
 	mounted: function() {
@@ -93,7 +93,7 @@ const vm = new Vue({
  			}
 			// The chrono must be updated each second
 			if(this.startTime > 0) {
-				this.elapsed = Math.max(time() - this.startTime, 0);
+				this.elapsed = Math.max(timeRef - this.startTime, 0);
 				this.chrono = formatTime(this.elapsed);
 			}
 		},

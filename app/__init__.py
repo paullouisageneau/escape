@@ -65,7 +65,7 @@ def api_chrono():
 		startTime = data['start']
 		stopTime = data['stop']
 		clue = ''
-		room.events.publish('chrono', { 'start': startTime, 'stop': stopTime })	
+		room.events.publish('chrono', { 'start': startTime, 'stop': stopTime })
 	return jsonify({ 'start': startTime, 'stop': stopTime })
 
 @app.route('/api/clues', methods=['GET', 'POST'])
@@ -131,8 +131,8 @@ def api_trigger(index):
 @app.route('/api/events', methods=['GET'])
 def api_events():
 	global startTime
+	global stopTime
 	event_stream = room.events.subscribe()
-	print(startTime)
-	room.events.publish('chrono', json.dumps({ 'start': startTime }))
+	room.events.publish('chrono', json.dumps({ 'start': startTime, 'stop': stopTime }))
 	return Response(event_stream, mimetype="text/event-stream")
 

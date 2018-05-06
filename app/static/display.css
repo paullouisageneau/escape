@@ -25,17 +25,16 @@ audio {
 }
 
 #chrono {
-	margin: 2em;
-	font-size: 300%;
+
+	font-size: 20vh;
 	text-align: center;
 	color: red;
 	background-color: black;
 	text-align: center;
-	width: 50%;
-	position: relative;
-	top: 60px;
-	left: 25%;
-	font-size: 10vw;
+	position: absolute;
+	left: calc(50vw - 50vh);
+	width: 100vh;
+	top: 15%;
 	border: 5px solid red;
 }
 
@@ -44,10 +43,10 @@ audio {
 	background-color: black;
 	text-align: center;
 	position: relative;
-	top: 100px;
+	top: 50%;
 	left: 2%;
 	width: 96%;
-	font-size: 5vw;
+	font-size: 8vh;
 	border: 5px solid red;
 	-webkit-animation: pblink 1s  infinite;
  	-moz-animation: pblink 1s  infinite;
@@ -65,11 +64,11 @@ audio {
 
 @keyframes blink {  
   0% { color: red; }
-  100% { color: rgba(255,0,0,0.1); }
+  100% { color: rgba(255,0,0,0.8); }
 }
 @-webkit-keyframes blink {
   0% { color: red; }
-  100% { color: rgba(255,0,0,0.1); }
+  100% { color: rgba(255,0,0,0.8); }
 }
 span.blink {
   -webkit-animation: blink 1s  infinite;
