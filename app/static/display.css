@@ -25,6 +25,9 @@ audio {
 }
 
 #chrono {
+	margin: 2em;
+	font-size: 300%;
+	text-align: center;
 	color: red;
 	background-color: black;
 	text-align: center;
@@ -73,3 +76,10 @@ span.blink {
   -moz-animation: blink 1s  infinite;
   animation: blink 1s  infinite;
 } 
+
+#clue {
+	margin: 2em;
+	font-size: 300%;
+	text-align: center;
+}
+

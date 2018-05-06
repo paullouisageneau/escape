@@ -2,6 +2,7 @@
 import sys
 import os
 import time
+import json
 
 from flask import Flask, request, Response, abort, render_template, jsonify, url_for
 
@@ -52,7 +53,7 @@ def api_reset():
 	hideClue = True
 	for toggle in room.toggles:
 		toggle.reset()
-	room.events.publish('reset', {})
+	room.events.publish('reset', json.dumps({}))
 	return Response('', 204)
 
 @app.route('/api/chrono', methods=['GET', 'POST'])
@@ -76,8 +77,8 @@ def api_clues():
 		clue = data['text']
 		clues.append(clue)
 		hideClue = False
-		room.events.publish('clue', { 'text': clue })
-		return jsonify({ 'text': clue, 'index': len(clues)-1, 'hide':hideClue })	
+		room.events.publish('clue', json.dumps({ 'text': clue }))
+		return jsonify({ 'text': clue, 'index': len(clues)-1, 'hide':hideClue })
 	return jsonify([{ 'text': c } for c in clues])
 
 @app.route('/api/clues/hide', methods=['GET', 'POST'])
@@ -129,7 +130,9 @@ def api_trigger(index):
 
 @app.route('/api/events', methods=['GET'])
 def api_events():
+	global startTime
 	event_stream = room.events.subscribe()
-	room.events.publish('chrono', { 'start': startTime })
+	print(startTime)
+	room.events.publish('chrono', json.dumps({ 'start': startTime }))
 	return Response(event_stream, mimetype="text/event-stream")
 
