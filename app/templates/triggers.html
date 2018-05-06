@@ -1,11 +1,11 @@
 <section id="triggers">
   <h2>Actions</h2>
-  <ol>
+  <ul style='list-style-type:none;'>
       {% for trigger in room.triggers %}
       <li>
         <input type="button" class="button" value="{{ trigger.name }}" v-on:click="trigger({{ loop.index0 }})">
       </li>
       {% endfor %}
-  </ol>
+  </ul>
 </section>
 

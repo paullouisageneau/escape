@@ -22,6 +22,18 @@
 			"type": "video",
 			"data": "/static/video.mp4"
 		}
+    ],
+    "puzzles": [
+		{
+			"id": 1,
+			"name": "Cadenas tiroir",
+			"next": 2
+		},
+		{
+			"id": 2,
+			"name": "Clef coffre",
+			"next": "-1"
+		}
     ]
 }
 

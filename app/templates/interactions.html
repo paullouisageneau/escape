@@ -6,7 +6,7 @@
     <td style="font-size:8vw;"> <span v-if="chrono">${ chrono }</span> </td>
     <td style="border-bottom:none;">
       <input type="button" class="button" value="Démarrer chronomètre" v-if="startTime == 0" v-on:click="start()">
-      <input v-if="stopTime == 0" type="button" class="button" value="Arrêter chronomètre" v-bind:disabled=false v-on:click="stop()">
+      <input v-if="stopTime == 0 & startTime>0" type="button" class="button" value="Arrêter chronomètre" v-bind:disabled=false v-on:click="stop()">
       <input v-if="stopTime > 0" type="button" class="button" value="Reprendre" v-bind:disabled=false v-on:click="start()">
       <input type="button" class="button" value="Ajouter 1 minute" v-bind:disabled="!startTime" v-on:click="startTime-=60">
       <input type="button" class="button" value="Retirer 1 minute" v-bind:disabled="!startTime" v-on:click="startTime+=60">
@@ -31,11 +31,8 @@
         {% include 'triggers.html' %}
         {% include 'toggles.html' %}
       </td>
-    <td rowspan= 2 style="text-align:left;vertical-align:top;"> 
-      <ol>
-        <li> énigme 1 </li>
-        <li> énigme 2 </li>
-      </ol>
+    <td rowspan= 2 style="text-align:left;vertical-align:top;">
+      {% include 'puzzles.html' %}
     </td>
   </tr>
   <tr>
