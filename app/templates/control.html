@@ -7,13 +7,14 @@
 {% endblock %}
 {% block content %}
   {{ super() }}
+
   <span style="font-size:3vw;"> {{ room.name }} </span>
   <span id="reset">
     <input style="font-size:2vw;height:3vw;" type="button" class="button button_danger" value="Réinitialiser" v-on:click="reset">
   </span>
   </div>
   <br />
-  <div id="console">
+  <div id="control">
   {% include 'interactions.html' %}
   {% include 'cameras.html' %}
   </div>

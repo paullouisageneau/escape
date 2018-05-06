@@ -1,7 +1,7 @@
 
 const vm = new Vue({
 	delimiters:['${', '}'],	// by default, it's {{ }}, which would conflicts with Flask Jinja templates
-	el: '#console',			// the vue instance controls the element whose id is "control"
+	el: '#control',			// the vue instance controls the element whose id is "control"
 	data: {
 		startTime: 0,		// timestamp at which the chrono was started
 		elapsed: 0,		// seconds elapsed since startTime
@@ -135,7 +135,7 @@ const vm = new Vue({
 					location.reload();
 				});
 			}
-		},
+		}
 	},
 	watch: {
 		startTime: function(value, oldValue) {

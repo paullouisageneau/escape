@@ -17,7 +17,8 @@ body {
 }
 
 video {
-	height: 100%;
+	display: block;
+	width: 100%;
 }
 
 audio { 
@@ -25,21 +26,22 @@ audio {
 }
 
 #chrono {
-
 	font-size: 20vh;
 	text-align: center;
-	color: red;
 	background-color: black;
 	text-align: center;
 	position: absolute;
 	left: calc(50vw - 50vh);
 	width: 100vh;
 	top: 15%;
-	border: 5px solid red;
+	border: 5px solid #FFFFFF;
+	color: #FFFFFF;
+	font-family: monospace;
 }
 
 #clues  {
-	color: red;
+	color: #FFFFFF;
+	font-family: monospace;
 	background-color: black;
 	text-align: center;
 	position: relative;
@@ -47,7 +49,7 @@ audio {
 	left: 2%;
 	width: 96%;
 	font-size: 8vh;
-	border: 5px solid red;
+	border: 5px solid white;
 	-webkit-animation: pblink 1s  infinite;
  	-moz-animation: pblink 1s  infinite;
   	animation: pblink 1s  infinite;
@@ -55,20 +57,20 @@ audio {
 
 @keyframes pblink {  
   0% { border: 5px solid red; }
-  100% { border: 5px solid transparent; }
+  100% { border: 5px solid white; }
 }
 @-webkit-keyframes pblink {
   0% { border: 5px solid red; }
-  100% { border: 5px solid transparent; }
+  100% { border: 5px solid white; }
 }
 
 @keyframes blink {  
   0% { color: red; }
-  100% { color: rgba(255,0,0,0.8); }
+  100% { color: white; }
 }
 @-webkit-keyframes blink {
   0% { color: red; }
-  100% { color: rgba(255,0,0,0.8); }
+  100% { color: white; }
 }
 span.blink {
   -webkit-animation: blink 1s  infinite;
@@ -77,8 +79,9 @@ span.blink {
 } 
 
 #clue {
-	margin: 2em;
-	font-size: 300%;
+	font-size: 72pt;
+	margin: 1em;
 	text-align: center;
+	color: #FFFFFF;
 }
-
+white

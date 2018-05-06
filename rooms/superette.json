@@ -31,6 +31,11 @@
 			"name": "Jouer la vidéo",
 			"type": "video",
 			"data": "/static/video.mp4"
+		},
+		{
+			"name": "Message audio 2",
+			"type": "audio",
+			"data": "/media/superette/audio2.mp4"
 		}
     ],
     "puzzles": [
@@ -69,6 +74,5 @@
 			"name": "Etape 7",
 			"next": "-1"
 		}
-
     ]
 } 
