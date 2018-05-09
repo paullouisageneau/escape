@@ -9,12 +9,12 @@
   {{ super() }}
 
   <span style="font-size:3vw;"> {{ room.name }} </span>
-  <span id="reset">
-    <input style="font-size:2vw;height:3vw;" type="button" class="button button_danger" value="Réinitialiser" v-on:click="reset">
-  </span>
   </div>
   <br />
   <div id="control">
+  <div id="admin">
+    <input type="button" class="button" value="Réinitialiser" v-on:click="reset">
+  </div>
   {% include 'interactions.html' %}
   {% include 'cameras.html' %}
   </div>

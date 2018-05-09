@@ -76,6 +76,12 @@ input:checked + .slider:before {
   cursor: auto;
 }
 
+#admin {
+	position: absolute;
+	right: 40%;
+	top:2%;
+}
+
 #admin .button {
 	background-color: #990000;
 }
@@ -106,21 +112,15 @@ div.cam {
 	display: block;
 }
 
-#reset{
-	position: absolute;
-	left: 40%;
-	top:2%;
-}
-
-#puzzles{
+#puzzles {
 	position: relative;
 	left: 5px;
 	top:5px;
 }
 
-.chrono{
+.chrono {
 	display: inline-block;
-	background-color:rgba(50,255,50,1);
-	color:black;
-	border: 2px solid white;
+	background-color: #32FF32;
+	color: #000000;
+	border: 1px solid #FFFFFF;
 }
