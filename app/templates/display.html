@@ -13,18 +13,12 @@
     </video>
     <audio v-if="audio" v-on:ended="audio = null" autoplay hidden>
       <source v-bind:src="audio" type="audio/mpeg">
-
-    </video>
-</div>
-
-<p id="chrono"> 
-  ${chrono}
-</p>
-
-<p id="clues" v-if="show" class=pblink>
-  <span class=blink> Nouvel indice :  </span> <br />
-<span class=blink> ${clue} </span>
-</p>
-
+    </audio>
+    <div id="chrono">${chrono}</div>
+    <div id="clues" v-if="clue" class="blink">
+        Nouvel indice:<br>
+        ${clue}
+    </div>
+  </div>  
   <script src="{{ url_for('static', filename='display.js') }}"></script>
 {% endblock %}

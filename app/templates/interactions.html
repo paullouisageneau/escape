@@ -37,17 +37,14 @@
   </tr>
   <tr>
     <td style="text-align:left;font-size:1.5vw;">
-       Indices envoyés:
-       <span v-if="!clues.length">Aucun</span>
-        <ol v-if="clues.length">
-          <li v-for="clue in clues.slice(0,clues.length-1)">
-          <span>${ clue }</span>
-          </li>
-          <li>            
-            <span v-if="show" style='color:red;'>${ clues[clues.length-1] } (visible)</span>
-            <span v-if="!show">${ clues[clues.length-1] }</span>
-          </li>
-        </ol>
+      Indices envoyés:
+      <span v-if="!clues.length">Aucun</span>
+      <ol v-if="clues.length">
+        <li v-for="(clue, index) in clues">
+          <span v-if="index == currentClueIndex" style="color: red">${clue} (visible)</span>
+          <span v-if="index != currentClueIndex">${clue}</span>
+        </li>
+      </ol>
     </td>
   </tr>
 </table>

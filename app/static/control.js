@@ -3,12 +3,13 @@ const vm = new Vue({
 	delimiters:['${', '}'],	// by default, it's {{ }}, which would conflicts with Flask Jinja templates
 	el: '#control',			// the vue instance controls the element whose id is "control"
 	data: {
-		startTime: 0,		// timestamp at which the chrono was started
+		startTime: 0,	// timestamp at which the chrono was started
+		stopTime: 0,	// timestamp at which the chrono was stopped
 		elapsed: 0,		// seconds elapsed since startTime
-		stopTime: 0,		// timestamp at which the chrono was stopped
 		chrono: '00:00:00',	// the chrono as displayed (HH:MM:SS)
 		inputClue: '',		// the clue input from the user
-		clues: [],		// all the sent clues
+		clues: [],			// all the sent clues
+		currentClueIndex: -1,	// index of the current clue
 		show: false,	// last clue is visible
 		enabled: []		// the indexes of enabled toggles
 	},
@@ -17,26 +18,22 @@ const vm = new Vue({
 		fetch('/api/chrono').then((response) => {
 			return response.json();
 		}).then((chrono) => {
-			if(chrono.start) {
-				this.startTime = chrono.start;
-			}
-			if(chrono.stop) {
-				this.stopTime = chrono.stop;
-			}
+			this.startTime = chrono.start;
+			this.stopTime = chrono.stop;
 		});		
 
-		// Initialize clues
+		// Initialize clues history
 		fetch('/api/clues').then((response) => {
 			return response.json();
 		}).then((array) => {
 			this.clues = array.map(c => c.text);
 		});
 		
-		// Check if last clue is visible
-		fetch('/api/clues/hide').then((response) => {
+		// Initialize current clue index
+		fetch('/api/clues/current').then((response) => {
 			return response.json();
-		}).then((clueMsg) => {
-			this.show = !clueMsg.hide;
+		}).then((clue) => {
+			this.currentClueIndex = clue.index;
 		});
 
 		// Initialize toggles
@@ -70,12 +67,12 @@ const vm = new Vue({
 	},
 	methods: {
 		start: function() {
-		// stopTime set to zero means the cronometer is running
-			this.startTime = this.startTime + ( time() - this.stopTime );
+			// stopTime set to zero means the chronometer is running
+			this.startTime = this.startTime + (time() - this.stopTime);
 			this.stopTime = 0;
 		},
 		stop: function() {
-		// stopTime set to nonzero value means the cronometer is stopped at stopTime
+			// stopTime set to nonzero value means the chronometer is stopped at stopTime
 			this.stopTime = time();
 		},
 		trigger: function(i) {
@@ -84,18 +81,32 @@ const vm = new Vue({
 			});
 		},
 		update: function() {
-			// timeRef is the last time before the chrono was stopped, used as reference to compute the elapsed time 
-			timeRef = 0;			
-			if (this.stopTime > 0) {
-				timeRef = this.stopTime;
-			} else {
-				timeRef = time();
- 			}
 			// The chrono must be updated each second
 			if(this.startTime > 0) {
-				this.elapsed = Math.max(timeRef - this.startTime, 0);
-				this.chrono = formatTime(this.elapsed);
+				// refTime is the reference to compute elapsed time
+				const refTime = this.stopTime > 0 ? this.stopTime : time();
+				
+				// elapsed is the time since refTime
+				this.elapsed = Math.max(refTime - this.startTime, this.elapsed);
 			}
+			else {
+				this.elapsed = 0;
+			}
+			
+			this.chrono = formatTime(this.elapsed);
+		},
+		syncTime: function() {
+			const data = {
+				start: this.startTime,
+				stop: this.stopTime
+			};
+			fetch('/api/chrono', {
+				method: 'POST',
+				body: JSON.stringify(data),
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			});
 		},
 		sendClue: function() {
 			if(!this.inputClue) {
@@ -114,17 +125,26 @@ const vm = new Vue({
 			}).then((response) => {
 				return response.json();
 			}).then((clue) => {
-				this.clues.push(clue.text); this.show = !clue.hide;
+				this.clues.push(clue.text);
+				this.currentClueIndex = this.clues.length-1;
 			});
 			this.inputClue = '';
 		},
 		hideClue: function() {
-			fetch('/api/clues/hide', {
+			this.currentClueIndex = -1;
+			const data = {
+				text: ''
+			};
+			fetch('/api/clues', {
 				method: 'POST',
+				body: JSON.stringify(data),
+				headers: {
+					'Content-Type': 'application/json'
+				}
 			}).then((response) => {
-			return response.json();
+				return response.json();
 			}).then((clueMsg) => {
-			this.show = !clueMsg.hide;
+				this.show = !clueMsg.hide;
 			});
 		},
 		reset: function() {
@@ -139,41 +159,17 @@ const vm = new Vue({
 	},
 	watch: {
 		startTime: function(value, oldValue) {
-			if (value > time()) {
+			if(value > time()) {
 				this.startTime = time();
 				return;
 			}
-			const data = {
-				start: this.startTime,
-				stop: this.stopTime
-			};
-			fetch('/api/chrono', {
-				method: 'POST',
-				body: JSON.stringify(data),
-				headers: {
-					'Content-Type': 'application/json'
-				}
-			});
+			this.elapsed = 0;	// Allow the chrono to decrease
+			this.syncTime();
 			this.update();
 		},
 		stopTime: function(value, oldValue) {
-		// Là j'ai juste recopié la fonction appliquée si startTime change : il doit y avoir mieux à faire.
-		// En particulier, ça fait envoyer deux requêtes au lieu d'une quand la fonction start est appelée.
-			if (value > time()) {
-				this.stopTime = time();
-				return;
-			}
-			const data = {
-				start: this.startTime,
-				stop: this.stopTime
-			};
-			fetch('/api/chrono', {
-				method: 'POST',
-				body: JSON.stringify(data),
-				headers: {
-					'Content-Type': 'application/json'
-				}
-			});
+			if(!value) return;
+			this.syncTime();
 			this.update();
 		}
 	}
