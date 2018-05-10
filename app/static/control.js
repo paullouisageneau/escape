@@ -127,6 +127,10 @@ const vm = new Vue({
 			}).then((clue) => {
 				this.clues.push(clue.text);
 				this.currentClueIndex = this.clues.length-1;
+				setTimeout(() => {
+					const scroll = this.$el.querySelector("#clues .scroll");
+					scroll.scrollTop = scroll.scrollHeight;
+				}, 0);
 			});
 			this.inputClue = '';
 		},

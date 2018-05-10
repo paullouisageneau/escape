@@ -47,8 +47,8 @@ input:checked + .slider:before {
 
 .button {
 	display: inline-block;
-	padding: 0.5em 1em;
-	margin: 0.5em 0.5em;
+	padding: 0.3em 1em 0.3em 1em;
+	margin: 0.2em 0.25em 0.5em 0.25em;
 	border: none;
 	border-radius: 0.75em;
 	background-color: #009900;
@@ -57,7 +57,7 @@ input:checked + .slider:before {
 	text-decoration: none;
 	outline: none;
 	font-size: 100%;
-	box-shadow: 0 0.5em #B0B0B0;
+	box-shadow: 0 0.4em #B0B0B0;
 	cursor: pointer;
 }
 
@@ -67,8 +67,8 @@ input:checked + .slider:before {
 
 .button:active {
   background-color: #008000;
-  box-shadow: 0 0.25em #B0B0B0;
-  transform: translateY(0.25em);
+  box-shadow: 0 0.2em #B0B0B0;
+  transform: translateY(0.2em);
 }
 
 .button:disabled {
@@ -76,51 +76,128 @@ input:checked + .slider:before {
   cursor: auto;
 }
 
-#admin {
-	position: absolute;
-	right: 40%;
-	top:2%;
-}
-
-#admin .button {
+header .button {
+	float: right;
 	background-color: #990000;
 }
 
-#admin .button:hover {
+header .button:hover {
 	background-color: #800000;
 }
 
-table, th, td {
-	border: 3px solid black;
-	text-align: center;
-	border-collapse: collapse;
+section {
+	margin: 0.25em 0.25em;
+	padding: 0.5em 0.5em;
+	border: 1px solid #808080;
+	border-radius: 3px;
+	overflow: hidden;
 }
 
-th {
-	font-size: 30px;
-}
-
-div.cam {
-	color: white;
-	background-color: white;
-	text-align: center;
-	position: absolute;
-	top: 1%;
-	left: 65%;
-	font-size: 2vw;
-	border-collapse: collapse;
+#columns {
 	display: block;
+	clear: both;
 }
 
-#puzzles {
-	position: relative;
-	left: 5px;
-	top:5px;
+#chrono {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
 }
 
-.chrono {
-	display: inline-block;
-	background-color: #32FF32;
-	color: #000000;
-	border: 1px solid #FFFFFF;
+#chrono .chronometer {
+	flex-grow: 1;
+	color: #202020;
+	font-family: monospace;
+	font-size: 3em;
+	padding: 0.2em;
+}
+
+#chrono .button {
+	min-width: 10em;
+}
+
+#interactions {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+#clues {
+	flex-grow: 4;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	list-style-type: disc;
+}
+
+#clues > div {
+	margin-bottom: 0.5em;
+}
+
+#clues input[type=text] {
+	width: 98%;
+}
+
+#clues .button {
+	width: 11em;
+}
+
+#clues .clue {
+	font-family: monospace;
+}
+
+#clues .visible {
+	color: #FF0000;
+}
+
+#clues .history {
+	flex-grow: 1;
+	min-width: 20em;
+	margin-left: 1em;
+}
+
+#clues ol {
+	list-style-type: disc;
+	padding-left: 1em;
+}
+
+#clues .scroll {
+	height: 8em;
+	overflow-y: scroll;
+}
+
+#triggers {
+	flex-grow: 1;
+}
+
+#triggers li {
+	min-width: 10em;
+}
+
+#triggers .button {
+	width: 11em;
+}
+
+#toggles {
+	flex-grow: 1;
+}
+
+#toggles li {
+	min-width: 10em;
+}
+
+/* For desktop, two-columns display */
+@media only screen and (min-width: 768px) {
+	#columns {
+		display: flex;
+	}
+
+	#right {
+		flex-grow: 1;
+	}
+
+	#left {
+		width: 20em;
+	}
 }

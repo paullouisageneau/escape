@@ -1,28 +1,31 @@
 {% extends "base.html" %}
 {% block title %}{{ room.name }}{% endblock %}
 {% block head %}
-  {{ super() }}
-  <link rel="stylesheet" href="{{ url_for('static', filename='control.css') }}">
-  <script src="{{ config['VUE_URL'] }}"></script>
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='control.css') }}">
+<script src="{{ config['VUE_URL'] }}"></script>
 {% endblock %}
 {% block content %}
-  {{ super() }}
-
-  <span style="font-size:3vw;"> {{ room.name }} </span>
-  </div>
-  <br />
-  <div id="control">
-  <div id="admin">
-    <input type="button" class="button" value="Réinitialiser" v-on:click="reset">
-  </div>
-  {% include 'interactions.html' %}
-  {% include 'cameras.html' %}
-  </div>
-
-<table style="position:absolute;top:9vw;left:65%;"  text-align=left>
-<tr> <th> <span style="padding-left:1vw;padding-right:1vw;"> Déroulement </span> </th> </tr>
-<tr> <td> {% include 'puzzles.html' %} </td> </tr>
-</table>
-
-  <script src="{{ url_for('static', filename='control.js') }}"></script>
+{{ super() }}
+<div id="control">
+	<header>
+		<input type="button" class="button" value="Réinitialiser" v-on:click="reset">
+		<h1>{{ room.name }}</h1>
+	</header>
+	<div id="columns">
+		<div id="right">
+			{% include 'chrono.html' %}
+			<div id="interactions">
+				{% include 'clues.html' %}
+				{% include 'triggers.html' %}
+				{% include 'toggles.html' %}
+			</div>
+			{% include 'cameras.html' %}
+		</div>
+		<div id="left">
+			{% include 'puzzles.html' %}
+		</div>
+	</div>
+</div>
+<script src="{{ url_for('static', filename='control.js') }}"></script>
 {% endblock %}

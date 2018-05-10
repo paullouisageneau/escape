@@ -1,5 +1,7 @@
 * {
 	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
 }
 
 html {
@@ -14,4 +16,28 @@ body {
 
 img {
 	border: none;
+}
+
+ul, ol {
+	list-style-type: none;
+}
+
+h1 {
+	margin: 0.25em;
+	font-size: 150%;
+	font-weight: bold;
+}
+
+h2, h3, h4, h4, h6 {
+	margin-bottom: 0.25em;
+	font-size: 125%;
+	font-weight: bold;
+}
+
+input {
+	margin: 0.25em;
+}
+
+header, section {
+	display: block;
 }

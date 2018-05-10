@@ -1,24 +1,24 @@
 {% extends "base.html" %}
 {% block title %}{{ room.name }}{% endblock %}
 {% block head %}
-  {{ super() }}
-  <link rel="stylesheet" href="{{ url_for('static', filename='display.css') }}">
-  <script src="{{ config['VUE_URL'] }}"></script>
+	{{ super() }}
+	<link rel="stylesheet" href="{{ url_for('static', filename='display.css') }}">
+	<script src="{{ config['VUE_URL'] }}"></script>
 {% endblock %}
 {% block content %}
-  {{ super() }}
-  <div id="display">
-    <video v-if="video" v-on:ended="video = null" autoplay>
-      <source v-bind:src="video" type="video/mp4">
-    </video>
-    <audio v-if="audio" v-on:ended="audio = null" autoplay hidden>
-      <source v-bind:src="audio" type="audio/mpeg">
-    </audio>
-    <div id="chrono">${chrono}</div>
-    <div id="clue" v-if="clue">
-        Nouvel indice:<br>
-        ${clue}
-    </div>
-  </div>  
-  <script src="{{ url_for('static', filename='display.js') }}"></script>
+	{{ super() }}
+	<div id="display">
+		<video v-if="video" v-on:ended="video = null" autoplay>
+			<source v-bind:src="video" type="video/mp4">
+		</video>
+		<audio v-if="audio" v-on:ended="audio = null" autoplay hidden>
+			<source v-bind:src="audio" type="audio/mpeg">
+		</audio>
+		<div id="chrono">${chrono}</div>
+		<div id="clue" v-if="clue">
+			Nouvel indice:<br>
+			${clue}
+		</div>
+	</div>  
+	<script src="{{ url_for('static', filename='display.js') }}"></script>
 {% endblock %}

@@ -1,15 +1,16 @@
 <section id="puzzles">
-  <ul style='list-style-type:none;text-align:left;'>
-      {% for puzzle in room.puzzles %}
-      <li>
-        <label class="switch_wrapper">
-        <span style="font-size:1.5vw;">{{ puzzle.name }}</span>
-        <span class="switch">
-          <input type="checkbox" value=false >
-          <span class="slider"></span>
-        </span>
-        </label>
-      </li>
-      {% endfor %}
-  </ul>
+	<h2>Déroulement</h2>
+	<ul>
+		{% for puzzle in room.puzzles %}
+		<li>
+			<label class="switch_wrapper">
+				<span class="switch">
+				<input type="checkbox" value="false">
+				<span class="slider"></span>
+				</span>
+				<span>{{ puzzle.name }}</span>
+			</label>
+		</li>
+		{% endfor %}
+	</ul>
 </section>

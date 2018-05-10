@@ -1,0 +1,24 @@
+<section id="clues">
+	<div class="form">
+		<div>
+			<p>Nouvel indice&nbsp;:</p>
+			<input type="text" name="clue" class="clue" v-model="inputClue">
+		</div>
+		<div>
+			<input type="button" class="button" value="Afficher" v-on:click="sendClue()">
+			<input type="button" class="button" value="Masquer" v-on:click="hideClue()">
+		</div>
+	</div>
+	<div class="history">
+		<p>Indices envoyés&nbsp;:</p>
+		<div class="scroll">
+			<p v-if="!clues.length">Aucun</p>
+			<ol v-if="clues.length">
+				<li v-for="(clue, index) in clues">
+					<p v-if="index == currentClueIndex" class="visible"><span class="clue">${clue}</span> (visible)</p>
+					<p v-if="index != currentClueIndex"><span class="clue">${clue}</span></p>
+				</li>
+			</ol>
+		<div>
+	</div>
+</section>
