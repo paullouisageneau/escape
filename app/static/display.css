@@ -30,7 +30,7 @@ audio {
 	margin: 10% auto 0 auto;
 	padding: 0em;
 	font-family: monospace;
-	font-size: 20vh;
+	font-size: 8vw;
 	color: #FFFFFF;
 	background-color: #000000;
 	text-align: center;
@@ -43,7 +43,7 @@ audio {
 	margin: 5% auto 0 auto;
 	padding: 0.2em;
 	font-family: monospace;
-	font-size: 8vh;
+	font-size: 4vw;
 	color: #FFFFFF;
 	background-color: black;
 	text-align: center;
