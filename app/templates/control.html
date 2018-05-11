@@ -13,7 +13,7 @@
 		<h1>{{ room.name }}</h1>
 	</header>
 	<div id="columns">
-		<div id="right">
+		<div id="primary">
 			{% include 'chrono.html' %}
 			<div id="interactions">
 				{% include 'clues.html' %}
@@ -22,7 +22,7 @@
 			</div>
 			{% include 'cameras.html' %}
 		</div>
-		<div id="left">
+		<div id="secondary">
 			{% include 'puzzles.html' %}
 		</div>
 	</div>

@@ -22,43 +22,37 @@ audio {
 }
 
 #display {
-	position: relative;
 	height: 100%;
 }
 
 #chrono {
-	font-size: 20vh;
-	text-align: center;
-	background-color: black;
-	text-align: center;
-	position: absolute;
-	left: calc(50vw - 50vh);
-	width: 100vh;
-	top: 15%;
-	border: 5px solid #FFFFFF;
-	color: #FFFFFF;
+	width: 80%;
+	margin: 10% auto 0 auto;
+	padding: 0em;
 	font-family: monospace;
+	font-size: 20vh;
+	color: #FFFFFF;
+	background-color: #000000;
+	text-align: center;
+	border: 5px solid #FFFFFF;
 	z-index: -1;
 }
 
 #clue  {
-	color: #FFFFFF;
+	width: 80%;
+	margin: 5% auto 0 auto;
+	padding: 0.2em;
 	font-family: monospace;
+	font-size: 8vh;
+	color: #FFFFFF;
 	background-color: black;
 	text-align: center;
-	position: absolute;
-	top: 50%;
-	left: 2%;
-	width: 96%;
-	font-size: 8vh;
 	border: 5px solid white;
 	z-index: -1;
 	animation: blink 1s infinite;
 }
 
-@keyframes blink {  
-  0% { border: 5px solid red; color: red; }
-  100% { border: 5px solid white; color: white; }
+@keyframes blink {
+	0% { border: 5px solid red; color: red; }
+	100% { border: 5px solid white; color: white; }
 }
-
-

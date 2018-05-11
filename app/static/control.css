@@ -124,7 +124,7 @@ section {
 }
 
 #clues {
-	flex-grow: 4;
+	flex-grow: 2;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
@@ -153,7 +153,7 @@ section {
 
 #clues .history {
 	flex-grow: 1;
-	min-width: 20em;
+	min-width: 16em;
 	margin-left: 1em;
 }
 
@@ -193,11 +193,11 @@ section {
 		display: flex;
 	}
 
-	#right {
+	#primary {
 		flex-grow: 1;
 	}
 
-	#left {
-		width: 20em;
+	#secondary {
+		min-width: 24em;
 	}
 }

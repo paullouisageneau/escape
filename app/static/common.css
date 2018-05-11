@@ -38,6 +38,6 @@ input {
 	margin: 0.25em;
 }
 
-header, section {
+header, footer, section, div {
 	display: block;
 }
