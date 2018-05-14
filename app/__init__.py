@@ -11,7 +11,7 @@ from .room import Room
 # ----- App initialization -----
 
 # Create the Flask app
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 
 # Import config from config.py file
 app.config.from_object('config')

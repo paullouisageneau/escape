@@ -1,4 +1,7 @@
 
+let chronoOffset = 0;
+let chronoReversed = false;
+
 const vm = new Vue({
 	delimiters:['${', '}'],	// by default, it's {{ }}, which would conflicts with Flask Jinja templates
 	el: '#display',			// the vue instance controls the element whose id is "display"
@@ -67,8 +70,8 @@ const vm = new Vue({
 				this.elapsed = 0;
 			}
 			
-			// TODO: actual format depends on the room
-			this.chrono = formatTime(this.elapsed + 5*60*60);
+			const t = Math.max(chronoOffset + this.elapsed * (chronoReversed ? -1 : 1), 0);
+			this.chrono = formatTime(t);
 		},
 		reset: function() {
 			this.startTime = 0;

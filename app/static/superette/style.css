@@ -1,0 +1,27 @@
+body {
+	background-image: url("/static/superette/background.jpg");
+}
+
+#display {
+	position: relative;
+}
+
+#chrono {
+	position: absolute;
+	width: 45%;
+	padding: 0.1em;
+	font-family: monospace;
+	font-size: 3.5vw;
+	font-weight: bold;
+	color: #FFFF00;
+	background-color: #000000;
+	text-align: left;
+	border: 0px;
+	z-index: -1;
+	bottom: 1%;
+	left: 52.5%;
+}
+
+#chrono::before {
+	content: "18/05/2018 ";
+}

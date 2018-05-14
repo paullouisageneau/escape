@@ -27,4 +27,14 @@ class Room:
 	def cameras(self):
 		return self._conf['cameras']
 
+	@property
+	def css_url(self):
+		return self._conf.get('css_url', '')
 
+	@property
+	def chrono_offset(self):
+		return int(self._conf.get('chrono_offset', 0))
+
+	@property
+	def chrono_reversed(self):
+		return bool(self._conf.get('chrono_reversed', False))

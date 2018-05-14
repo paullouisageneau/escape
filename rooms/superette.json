@@ -1,5 +1,8 @@
 {
 	"name": "Supérette",
+	"css_url": "/static/superette/style.css",
+	"chrono_offset": 18000,
+	"chrono_reversed": false,
 	"cameras": [
 		"http://superette-camera1/",
 		"http://superette-camera2/"
@@ -31,11 +34,6 @@
 			"name": "Jouer la vidéo",
 			"type": "video",
 			"data": "/static/video.mp4"
-		},
-		{
-			"name": "Message audio 2",
-			"type": "audio",
-			"data": "/media/superette/audio2.mp4"
 		}
     ],
     "puzzles": [
