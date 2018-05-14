@@ -43,12 +43,11 @@ def display():
 
 @app.route('/api/reset', methods=['POST'])
 def api_reset():
-	global startTime
-	global stopTime
-	global clues
+	global startTime, stopTime, clues, currentClue
 	startTime = 0
 	stopTime = 0
 	clues = []
+	currentClue = ''
 	for toggle in room.toggles:
 		toggle.reset()
 	room.events.publish('reset', json.dumps({}))
@@ -56,8 +55,7 @@ def api_reset():
 
 @app.route('/api/chrono', methods=['GET', 'POST'])
 def api_chrono():
-	global startTime
-	global stopTime
+	global startTime, stopTime
 	if request.method == 'POST':
 		data = request.get_json()
 		startTime = data['start']
@@ -68,8 +66,7 @@ def api_chrono():
 
 @app.route('/api/clues', methods=['GET', 'POST'])
 def api_clues():
-	global clues
-	global currentClue
+	global clues, currentClue
 	if request.method == 'POST':
 		data = request.get_json()
 		clue = data['text']
@@ -87,8 +84,7 @@ def api_clues():
 
 @app.route('/api/clues/current', methods=['GET'])
 def api_last_clue():
-	global clues
-	global currentClue
+	global clues, currentClue
 	if currentClue:
 		return jsonify({ 'text': currentClue, 'index': len(clues)-1 })
 	else:
@@ -131,8 +127,7 @@ def api_trigger(index):
 
 @app.route('/api/events', methods=['GET'])
 def api_events():
-	global startTime
-	global stopTime
+	global startTime, stopTime
 	event_stream = room.events.subscribe()
 	room.events.publish('chrono', json.dumps({ 'start': startTime, 'stop': stopTime }))
 	room.events.publish('clue', json.dumps({ 'text': currentClue }))
