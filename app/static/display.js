@@ -18,9 +18,7 @@ const vm = new Vue({
 		const events = new EventSource('/api/events');
 		
 		// Initialize chrono
-		fetch('/api/chrono').then((response) => {
-			return response.json();
-		}).then((chrono) => {
+		getJson('/api/chrono', (chrono) => {
 			this.startTime = chrono.start;
 			this.stopTime = chrono.stop;
 		});

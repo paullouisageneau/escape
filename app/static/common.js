@@ -11,3 +11,35 @@ function formatTime(secs) {
 	const s = Math.floor(secs%60);
 	return `${("0"+h).slice(-2)}:${("0"+m).slice(-2)}:${("0"+s).slice(-2)}`;
 }
+
+function getJson(url, callback = () => {}) {
+	fetch(url).then((response) => {
+		if(!response.ok) throw Error(`${response.status} ${response.statusText}`);
+		if(response.status == 204) callback();
+		else return response.json();
+	}).then((responseData) => {
+		callback(responseData);
+	}).catch((error) => {
+		console.error(error);
+		alert('La requête au serveur a échoué.');
+	});
+}
+
+function postJson(url, data = {}, callback = () => {}) {
+	fetch(url, {
+		method: 'POST',
+		body: JSON.stringify(data),
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	}).then((response) => {
+		if(!response.ok) throw Error(`${response.status} ${response.statusText}`);
+		if(response.status == 204) callback();
+		else return response.json();
+	}).then((responseData) => {
+		callback(responseData);
+	}).catch((error) => {
+		console.error(error);
+		alert('La requête au serveur a échoué.');
+	});
+}

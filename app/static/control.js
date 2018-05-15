@@ -15,46 +15,31 @@ const vm = new Vue({
 	},
 	mounted: function() {
 		// Initialize chrono
-		fetch('/api/chrono').then((response) => {
-			return response.json();
-		}).then((chrono) => {
+		getJson('/api/chrono', (chrono) => {
 			this.startTime = chrono.start;
 			this.stopTime = chrono.stop;
-		});		
+		});
 
 		// Initialize clues history
-		fetch('/api/clues').then((response) => {
-			return response.json();
-		}).then((array) => {
+		getJson('/api/clues', (array) => {
 			this.clues = array.map(c => c.text);
 		});
 		
 		// Initialize current clue index
-		fetch('/api/clues/current').then((response) => {
-			return response.json();
-		}).then((clue) => {
+		getJson('/api/clues/current', (clue) => {
 			this.currentClueIndex = clue.index;
 		});
 
 		// Initialize toggles
-		fetch('/api/toggles').then((response) => {
-			return response.json();
-		}).then((array) => {
+		getJson('/api/toggles', (array) => {
 			// Initialize enabled with the indexes of the enabled toggles
 			this.enabled = array.map((t, i) => t.value ? i.toString() : null).filter(i => i)
 			
 			// Now watch enabled for changes and post them
 			this.$watch('enabled', function(array, oldArray) {
 				function doPost(i, value) {
-					const data = {
-						value,
-					}
-					fetch(`/api/toggles/${i}`, {
-						method: 'POST',
-						body: JSON.stringify(data),
-						headers: {
-							'Content-Type': 'application/json'
-						}
+					postJson(`/api/toggles/${i}`, {
+						value
 					});
 				};
 				array.filter(i => !oldArray.includes(i)).forEach(i => doPost(i, true));
@@ -76,9 +61,7 @@ const vm = new Vue({
 			this.stopTime = time();
 		},
 		trigger: function(i) {
-			fetch(`/api/triggers/${i}`, {
-				method: 'POST',
-			});
+			postJson(`/api/triggers/${i}`, {});
 		},
 		update: function() {
 			// The chrono must be updated each second
@@ -96,16 +79,9 @@ const vm = new Vue({
 			this.chrono = formatTime(this.elapsed);
 		},
 		syncTime: function() {
-			const data = {
+			postJson('/api/chrono', {
 				start: this.startTime,
 				stop: this.stopTime
-			};
-			fetch('/api/chrono', {
-				method: 'POST',
-				body: JSON.stringify(data),
-				headers: {
-					'Content-Type': 'application/json'
-				}
 			});
 		},
 		sendClue: function() {
@@ -113,18 +89,9 @@ const vm = new Vue({
 				alert("Entrez d'abord un indice.");
 				return;
 			}
-			const data = {
+			postJson('/api/clues', {
 				text: this.inputClue
-			};
-			fetch('/api/clues', {
-				method: 'POST',
-				body: JSON.stringify(data),
-				headers: {
-					'Content-Type': 'application/json'
-				}
-			}).then((response) => {
-				return response.json();
-			}).then((clue) => {
+			}, (clue) => {
 				this.clues.push(clue.text);
 				this.currentClueIndex = this.clues.length-1;
 				setTimeout(() => {
@@ -136,26 +103,15 @@ const vm = new Vue({
 		},
 		hideClue: function() {
 			this.currentClueIndex = -1;
-			const data = {
+			postJson('/api/clues', {
 				text: ''
-			};
-			fetch('/api/clues', {
-				method: 'POST',
-				body: JSON.stringify(data),
-				headers: {
-					'Content-Type': 'application/json'
-				}
-			}).then((response) => {
-				return response.json();
-			}).then((clueMsg) => {
-				this.show = !clueMsg.hide;
+			}, (clue) => {
+				this.show = false;
 			});
 		},
 		reset: function() {
 			if(confirm("Voulez-vous vraiment réinitialiser la salle ?")) {
-				fetch('/api/reset', {
-					method: 'POST',
-				}).then(() => {
+				postJson('/api/reset', {}, () => {
 					location.reload();
 				});
 			}
