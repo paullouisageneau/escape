@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}{{ room.name }}{% endblock %}
+{% block head %}
+	{{ super() }}
+<script src="{{ config['VUE_URL'] }}"></script>
+<ul id="evac">
+  <li v-for="item in items">
+	${item}
+    <input type="button" value=${item} v-on:click="reset">
+  </li>
+</ul>
+{% if room.css_url %}
+
+{% endif %}
+
+{% endblock %}
+{% block content %}
+	{{ super() }}
+	<div> Coucou </div>  
+{% if room.chrono_offset %}
+	<script>chronoOffset = {{ room.chrono_offset }};</script>
+{% endif %}
+{% if room.chrono_reversed %}
+	<script>chronoReversed = true;</script>
+{% endif %}
+<script src="{{ url_for('static', filename='evacuation.js') }}"></script>
+{% endblock %}

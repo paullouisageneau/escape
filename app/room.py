@@ -6,6 +6,7 @@ from .event import EventStream
 from .toggle import Toggle
 from .trigger import Trigger
 from .puzzle import Puzzle
+from .game import Game
 
 ROOMS_DIRECTORY = "rooms"
 
@@ -18,6 +19,8 @@ class Room:
 		self.toggles = [Toggle(c) for c in self._conf['toggles']]
 		self.triggers = [Trigger(c, self.events) for c in self._conf['triggers']]
 		self.puzzles = [Puzzle(c) for c in self._conf['puzzles']]
+		if 'game' in self._conf.keys():		
+			self.game = Game(self._conf['game'])
 
 	@property
 	def name(self):

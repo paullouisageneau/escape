@@ -41,6 +41,17 @@ def home():
 def display():
 	return render_template('display.html', room=room)
 
+# Mini-game
+if hasattr(room,'game'):
+	@app.route('/game', methods=['GET','POST'])
+	def minigame():
+		count = room.game.initial[0]
+		end_value = room.game.final
+		if request.method == 'POST':
+			data = request.get_json()
+			room.game.execute(data['action'])
+		return render_template(room.game.name+'.html', room=room)
+
 @app.route('/api/reset', methods=['POST'])
 def api_reset():
 	global startTime, stopTime, clues, currentClue

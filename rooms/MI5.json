@@ -1,0 +1,84 @@
+{
+	"name": "Supérette",
+	"css_url": "/static/superette/style.css",
+	"chrono_offset": 18000,
+	"chrono_reversed": false,
+	"cameras": [
+		"http://superette-camera1/",
+		"http://superette-camera2/"
+    ],
+    "toggles": [
+		{
+			"name": "Tension porte 1",
+			"pin": 18,
+			"default": true
+		},
+		{
+			"name": "Tension porte 2",
+			"pin": 19,
+			"default": true
+		},
+		{
+			"name": "Tension tiroir balance",
+			"pin": 20,
+			"default": true
+		},
+		{
+			"name": "Ouverture store",
+			"pin": 21,
+			"default": false
+		}
+	],
+    "triggers": [
+		{
+			"name": "Jouer la vidéo",
+			"type": "video",
+			"data": "/static/video.mp4"
+		}
+    ],
+    "puzzles": [
+		{
+			"id": 1,
+			"name": "Etape 1",
+			"next": 2
+		},
+		{
+			"id": 2,
+			"name": "Etape 2",
+			"next": "-1"
+		},
+		{
+			"id": 3,
+			"name": "Etape 3",
+			"next": "-1"
+		},
+		{
+			"id": 4,
+			"name": "Etape 4",
+			"next": "-1"
+		},
+		{
+			"id": 5,
+			"name": "Etape 5",
+			"next": "-1"
+		},
+		{
+			"id": 6,
+			"name": "Etape 6",
+			"next": "-1"
+		},
+		{
+			"id": 7,
+			"name": "Etape 7",
+			"next": "-1"
+		}
+    ],
+    "game": 	{
+			"name": "evacuation",
+			"address": "evacuation",
+			"initial": [5685, 5684, 5683],
+			"final": 0,
+			"actions": {	"Ordre d'évacuation du quartier": -1, 
+					"Blocage des rues alentours": 1		}
+		}
+} 
