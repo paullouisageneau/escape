@@ -41,16 +41,23 @@ def home():
 def display():
 	return render_template('display.html', room=room)
 
-# Mini-game
+# Mini-game (room MI5)
 if hasattr(room,'game'):
-	@app.route('/game', methods=['GET','POST'])
+
+	@app.route('/'+room.game.address, methods=['GET'])
 	def minigame():
-		count = room.game.initial[0]
-		end_value = room.game.final
+		return render_template(room.game.name+'.html', room=room)
+
+	@app.route('/'+room.game.address+'/action', methods=['GET','POST'])
+	def game_action():
 		if request.method == 'POST':
 			data = request.get_json()
-			room.game.execute(data['action'])
-		return render_template(room.game.name+'.html', room=room)
+			if data['order'] == 'execute':				
+				room.game.execute(data['action'])
+			if data['order'] == 'abort':
+				room.game.abort(data['action'])
+		return jsonify({'actions':room.game._actions,'gameState':room.game._gameState,
+				'casualties':room.game._casualties,'victory':room.game._victory})
 
 @app.route('/api/reset', methods=['POST'])
 def api_reset():

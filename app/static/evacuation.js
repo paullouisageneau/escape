@@ -7,15 +7,42 @@ const ve = new Vue({
 		stopTime: 0,	// timestamp at which the chrono was stopped
 		elapsed: 0,		// seconds elapsed since startTime
 		chrono: '00:00:00',	// the chrono as displayed (HH:MM:SS)
-		gameState: {},		// State of the game : actions selected by the players
+		gameState: [],		// State of the game : actions selected by the players
+		actions: [],
+		nbActions: 2,	
 		casualties: 10,		// number of casualties
-		items: ['1','2','3']
+		victory: false,
+		debug: ''
 	},
 	mounted: function() {
 		// Initialize game state
-		getJson('/api/evacuation', (data) => {
+		getJson('/evacuation/action', (data) => {
 			this.gameState = data.gameState;
-			this.$watch('gameState', function(val,oldVal) {postJson('/api/evacuation',val)} );
+			this.actions = data.actions;
+			this.casualties = data.casualties;
+			this.victory = data.victory;
 		});
+	},
+	methods: {
+		sendAction: function(item) {
+			// Send new action
+			postJson('/evacuation/action', {
+				order: 'execute', action: item
+			}, (data) => {
+			this.gameState = data.gameState;
+			this.casualties = data.casualties;
+			this.victory = data.victory;
+			});
+		},
+		abortAction: function(item) {
+			// Send new action
+			postJson('/evacuation/action', {
+				order: 'abort', action: item
+			}, (data) => {
+			this.gameState = data.gameState;
+			this.casualties = data.casualties;
+			this.victory = data.victory;
+			});
+		}
 	}
 });

@@ -1,5 +1,5 @@
 {
-	"name": "Supérette",
+	"name": "MI5",
 	"css_url": "/static/superette/style.css",
 	"chrono_offset": 18000,
 	"chrono_reversed": false,
@@ -76,9 +76,42 @@
     "game": 	{
 			"name": "evacuation",
 			"address": "evacuation",
-			"initial": [5685, 5684, 5683],
-			"final": 0,
-			"actions": {	"Ordre d'évacuation du quartier": -1, 
-					"Blocage des rues alentours": 1		}
+			"initial": [5685, 5684, 6],
+			"actions": {	
+					"Couper l'approvisionnement en eau": 0,
+					"Réunir le parlement en session extraordinaire": 0,
+					"Diffuser un message d'évacuation radio et télé": -1,
+					"Initier le rapatriement des membres de la famille royale": 0,
+					"Fermer les frontières maritimes": 0,
+					"Fermer les frontières aériennes": 0,
+					"Lancer l'évacuation du bâtiment": -1, 
+					"Blocage de la zone aérienne de Londres": 0,
+					"Ordre d'évacuation du quartier": -1, 
+					"Blocage des rues alentours": 1,
+					"Coupure du réseau électrique": 1,
+					"Mobilisation d'autobus pour l'évacuation": -1,
+					"Lancer le hashtag #PrayforMI6": 0,
+					"Ouvrir les bassins de rétention d'eau": 0,
+					"Mobiliser les équipes de déminages": 0,
+					"Bloquer les rames de métro": 1,
+					"Coupez le réseau gazier": -1,
+					"Allumer le Bat-Signal": 0,
+					"Décréter la loi martiale": 0,
+					"Sur-approvisioner les hopitaux": -1,
+					"Mobiliser les réserves pétrolières du pays": 0,
+					"Lancer l'évacuation des écoles du quartier": -1,
+					"Mobiliser les pompiers volontaires": -1,
+					"Convoquer l'état-major de l'armée": 0,
+					"Ordre d'évacuation de Londres": 1,
+					"Lever les ponts de la Thamise": 1, 
+					"Mobiliser les pompiers de Londres vers le MI6": -1,
+					"Activer le numéro court d'urgence": -1,
+					"Réquisitionner les ambulances": -1,
+					"Bloquer les GPS dans le quartier": 1,
+					"Crier très fort que tout va bien se passer": 0
+					}
+
+
+
 		}
 } 
