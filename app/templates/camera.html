@@ -11,7 +11,7 @@
 	{{ super() }}
 	<video id="video" autoplay muted></video>
 	<script>
-	initStreaming("video" () => {
+	initStreaming("video", () => {
 		startStream(1);
 	}, (error) => {
 		alert(error);
