@@ -41,6 +41,10 @@ def home():
 def display():
 	return render_template('display.html', room=room)
 
+@app.route('/camera', methods=['GET'])
+def camera():
+    return render_template('camera.html')
+
 @app.route('/api/reset', methods=['POST'])
 def api_reset():
 	global startTime, stopTime, clues, currentClue

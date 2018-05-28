@@ -2,7 +2,9 @@
 let janus = null;
 let streaming = null;
 
-function initStreaming(onSuccess, onError) {
+function initStreaming(id, onSuccess, onError) {
+	const videoElement = document.getElementById(id);
+
 	// Initialize the library (all console debuggers enabled)
 	Janus.init({debug: "all", callback: function() {
 		// Make sure the browser supports WebRTC
@@ -53,7 +55,6 @@ function initStreaming(onSuccess, onError) {
 					},
 					onremotestream: function(stream) {
 						Janus.debug("Got a remote stream");
-						videoElement = document.getElementById("video");
 						Janus.attachMediaStream(videoElement, stream);
 					},
 					oncleanup: function() {
