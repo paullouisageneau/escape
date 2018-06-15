@@ -12,7 +12,7 @@ ROOMS_DIRECTORY = "rooms"
 class Room:
 	def __init__(self, name):
 		filename = os.path.join(ROOMS_DIRECTORY, name + ".json")
-		with open(filename) as conf_file:
+		with open(filename, encoding='utf-8') as conf_file:
 			self._conf = json.load(conf_file)
 		self.events = EventStream()
 		self.toggles = [Toggle(c) for c in self._conf['toggles']]
