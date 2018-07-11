@@ -31,8 +31,8 @@ function initStreaming(id, onSuccess, onError) {
 					},
 					onmessage: function(msg, jsep) {
 						Janus.debug("Got a message");
-						if(msg["error"]) {
-							Janus.error("Error during session", error);
+						if(msg.error) {
+							Janus.error("Error during session", msg.error);
 							stopStream();
 							return;
 						}
