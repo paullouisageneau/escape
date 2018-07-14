@@ -35,8 +35,8 @@ Vue.component('streaming', {
 		}
 	},
 	watch: {
-		context: function(value, oldValue) {
-			const janus = value.janus;
+		'context.janus': function(value, oldValue) {
+			const janus = value;
 			if(janus && !this.streaming) {
 				attachJanusStreaming(janus, this.element, parseInt(this.streamId, 10))
 					.then((streaming) => {
