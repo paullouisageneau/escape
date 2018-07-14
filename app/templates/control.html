@@ -22,9 +22,11 @@
 			</div>
 			{% include 'cameras.html' %}
 		</div>
+		{% if room.puzzles %}
 		<div id="secondary">
 			{% include 'puzzles.html' %}
 		</div>
+		{% endif %}
 	</div>
 </div>
 <script src="{{ url_for('static', filename='control.js') }}"></script>

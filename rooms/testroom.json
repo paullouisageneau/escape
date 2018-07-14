@@ -7,20 +7,29 @@
     "toggles": [
 		{
 			"name": "Machin",
-			"pin": 18,
+			"pin": 17,
 			"default": false
 		},
 		{
 			"name": "Truc",
-			"pin": 19,
+			"pin": 27,
 			"default": true
 		}
     ],
     "triggers": [
 		{
 			"name": "Jouer la vidéo",
-			"type": "video",
+			"event": "video",
 			"data": "/static/video.mp4"
+		},
+		{
+			"name": "Pin trigger",
+			"pin": 22
+		},
+		{
+			"name": "Pin trigger with input",
+			"pin": 10,
+			"input_pin": 18
 		}
     ],
     "puzzles": [

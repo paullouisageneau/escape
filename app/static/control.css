@@ -124,7 +124,7 @@ section {
 }
 
 #clues {
-	flex-grow: 2;
+	flex-grow: 1000;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
@@ -172,11 +172,11 @@ section {
 }
 
 #triggers li {
-	min-width: 10em;
+	min-width: 12em;
 }
 
 #triggers .button {
-	width: 11em;
+	width: 12em;
 }
 
 #toggles {
@@ -184,7 +184,7 @@ section {
 }
 
 #toggles li {
-	min-width: 10em;
+	min-width: 12em;
 }
 
 /* For desktop, two-columns display */

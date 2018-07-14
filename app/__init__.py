@@ -4,6 +4,10 @@ import os
 import time
 import json
 
+# Make threading cooperative
+from gevent import monkey
+monkey.patch_all()
+
 from flask import Flask, request, Response, abort, render_template, jsonify, url_for
 
 from .room import Room
@@ -80,7 +84,7 @@ def api_clues():
 			room.events.publish('clue', json.dumps({ 'text': clue }))
 			return jsonify({ 'text': clue, 'index': len(clues)-1 })
 		else:
-			# Posting an empty clue allow to hide the displayed one
+			# Posting an empty clue allows to hide the displayed one
 			currentClue = ''
 			room.events.publish('clue', json.dumps({ 'text': '' }))
 			return Response('', 204)
