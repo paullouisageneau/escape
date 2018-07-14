@@ -43,5 +43,6 @@ header, footer, section, div {
 }
 
 video {
+	display: block;
 	background-color: #000000;
 }

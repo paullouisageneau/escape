@@ -1,3 +1,14 @@
 video {
 	width: 100%;
+	border: 1px solid #FFFFFF;
+}
+
+#camera-list {
+	display: flex;
+	flex-wrap: nowrap;
+	align-items: center;
+}
+
+#camera-list .placeholder {
+	flex-grow: 1;
 }

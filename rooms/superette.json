@@ -3,10 +3,7 @@
 	"css_url": "/static/superette/style.css",
 	"chrono_offset": 18000,
 	"chrono_reversed": false,
-	"cameras": [
-		"http://superette-camera1/",
-		"http://superette-camera2/"
-    ],
+	"cameras": [1, 2, 3],
     "triggers": [
 		{
 			"name": "Porte automatique",

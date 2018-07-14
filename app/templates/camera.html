@@ -3,18 +3,24 @@
 {% block head %}
 	{{ super() }}
 	<link rel="stylesheet" href="{{ url_for('static', filename='camera.css') }}">
+	<script src="{{ config['VUE_URL'] }}"></script>
 	<script src="{{ url_for('static', filename='adapter.min.js') }}"></script>
 	<script src="{{ url_for('static', filename='janus.js') }}"></script>
 	<script src="{{ url_for('static', filename='streaming.js') }}"></script>
 {% endblock %}
 {% block content %}
 	{{ super() }}
-	<video id="video" autoplay muted></video>
-	<script>
-	initStreaming("video", () => {
-		startStream(1);
-	}, (errorMessage) => {
-		alert(`Erreur: ${errorMessage}`);
-	});
-	</script>
+	<div id="camera">
+		<div id="camera-list">
+			{% for camera in room.cameras %}
+			<div id="placeholder-{{ camera }}" class="placeholder" v-show="mainCamera != '{{camera}}'" v-on:click="mainCamera='{{ camera }}'">
+				<div id="camera-{{ camera }}" class="camera">
+					<streaming type="video" stream-id="{{ camera }}"></streaming>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+		<div id="main-camera"></div>
+	</div>
+	<script src="{{ url_for('static', filename='camera.js') }}"></script>
 {% endblock %}

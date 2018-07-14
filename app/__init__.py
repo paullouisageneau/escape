@@ -47,7 +47,7 @@ def display():
 
 @app.route('/camera', methods=['GET'])
 def camera():
-    return render_template('camera.html')
+    return render_template('camera.html', room=room)
 
 @app.route('/api/reset', methods=['POST'])
 def api_reset():

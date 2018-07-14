@@ -1,9 +1,6 @@
 {
 	"name": "Salle de test",
-	"cameras": [
-		"http://testroom-camera1/",
-		"http://testroom-camera2/"
-    ],
+	"cameras": [1, 2, 3],
     "toggles": [
 		{
 			"name": "Machin",
