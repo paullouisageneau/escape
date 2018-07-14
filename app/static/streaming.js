@@ -2,14 +2,17 @@
 let janus = null;
 let streaming = null;
 
-function initStreaming(id, onSuccess, onError) {
-	const videoElement = document.getElementById(id);
+// Init the streaming
+// Note: this function cannot use a promise since onError can be triggered after onInit
+function initStreaming(elementId, onInit, onError) {
+	const mediaElement = document.getElementById(elementId);
 
 	// Initialize the library (all console debuggers enabled)
-	Janus.init({debug: "all", callback: function() {
+	Janus.init({ debug: "all", callback: function() {
 		// Make sure the browser supports WebRTC
 		if(!Janus.isWebrtcSupported()) {
-			if(onError) onError(new Error("The browser does not support WebRTC"));
+			Janus.error("WebRTC not supported");
+			if(onError) onError("Le navigateur ne supporte pas WebRTC.");
 			return;
 		}
 		// Create session
@@ -23,11 +26,11 @@ function initStreaming(id, onSuccess, onError) {
 					success: function(pluginHandle) {
 						streaming = pluginHandle;
 						Janus.log("Plugin attached (" + streaming.getPlugin() + ", id=" + streaming.getId() + ")");
-						if(onSuccess) onSuccess();
+						if(onInit) onInit();
 					},
 					error: function(error) {
-						Janus.error("Error attaching plugin", error);
-						if(onError) onError(error);
+						Janus.error("Error attaching plugin");
+						if(onError) onError("Impossible d'initialiser le service de streaming.");
 					},
 					onmessage: function(msg, jsep) {
 						Janus.debug("Got a message");
@@ -48,14 +51,15 @@ function initStreaming(id, onSuccess, onError) {
 									streaming.send({"message": body, "jsep": jsep});
 								},
 								error: function(error) {
-									Janus.error("WebRTC error", error);
+									Janus.error("WebRTC negociation failed");
+									if(onError) onError("La négociation des paramètres audio et vidéo a échoué.");
 								}
 							});
 						}
 					},
 					onremotestream: function(stream) {
 						Janus.debug("Got a remote stream");
-						Janus.attachMediaStream(videoElement, stream);
+						Janus.attachMediaStream(mediaElement, stream);
 					},
 					oncleanup: function() {
 						Janus.log("Got a cleanup notification");
@@ -63,16 +67,17 @@ function initStreaming(id, onSuccess, onError) {
 				});
 			},
 			error: function(error) {
-				Janus.error("Error creating session", error);
-				if(onError) onError(error);
+				Janus.error("Error creating session");
+				if(onError) onError("Impossible de contacter le service de streaming.");
 			}
 		});
 	}});
 }
 
-function startStream(selectedStream) {
-	Janus.log("Selected stream id #" + selectedStream);
-	const body = { "request": "watch", id: parseInt(selectedStream) };
+// Start streaming 
+function startStream(streamId) {
+	Janus.log(`Selected stream ${streamId}`);
+	const body = { "request": "watch", id: streamId };
 	streaming.send({ "message": body });
 }
 

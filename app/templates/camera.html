@@ -2,7 +2,7 @@
 {% block title %}Camera{% endblock %}
 {% block head %}
 	{{ super() }}
-	<link rel="stylesheet" href="{{ url_for('static', filename='control.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='camera.css') }}">
 	<script src="{{ url_for('static', filename='adapter.min.js') }}"></script>
 	<script src="{{ url_for('static', filename='janus.js') }}"></script>
 	<script src="{{ url_for('static', filename='streaming.js') }}"></script>
@@ -13,8 +13,8 @@
 	<script>
 	initStreaming("video", () => {
 		startStream(1);
-	}, (error) => {
-		alert(error);
+	}, (errorMessage) => {
+		alert(`Erreur: ${errorMessage}`);
 	});
 	</script>
 {% endblock %}

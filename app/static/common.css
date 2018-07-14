@@ -41,3 +41,7 @@ input {
 header, footer, section, div {
 	display: block;
 }
+
+video {
+	background-color: #000000;
+}
