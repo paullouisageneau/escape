@@ -22,5 +22,8 @@
 		</div>
 		<div id="main-camera"></div>
 	</div>
+	{% if room.cameras %}
+	<script>const defaultCamera = '{{ room.cameras[0] }}';</script>
+	{% endif %}
 	<script src="{{ url_for('static', filename='camera.js') }}"></script>
 {% endblock %}

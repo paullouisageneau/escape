@@ -9,18 +9,22 @@ const vm = new Vue({
 		mainCamera: null,
 	},
 	mounted: function() {
-		this.mainCamera = 1; // TODO
+		if(defaultCamera) {
+			this.mainCamera = defaultCamera;
+		}
 	},
 	methods: {
 		attachMainCamera: function(cameraId) {
 			const element = document.getElementById(`camera-${cameraId}`);
 			const main = document.getElementById(`main-camera`);
 			main.appendChild(element);
+			element.muted = false;
 		},
 		detachMainCamera: function(cameraId) {
 			const element = document.getElementById(`camera-${cameraId}`);
 			const placeholder = document.getElementById(`placeholder-${cameraId}`);
 			placeholder.appendChild(element);
+			element.muted = true;
 		},
 	},
 	watch: {

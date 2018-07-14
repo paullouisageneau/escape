@@ -25,9 +25,9 @@
 	</div>  
 	<script src="{{ url_for('static', filename='display.js') }}"></script>
 {% if room.chrono_offset %}
-	<script>chronoOffset = {{ room.chrono_offset }};</script>
+	<script>const chronoOffset = {{ room.chrono_offset }};</script>
 {% endif %}
 {% if room.chrono_reversed %}
-	<script>chronoReversed = true;</script>
+	<script>const chronoReversed = true;</script>
 {% endif %}
 {% endblock %}
