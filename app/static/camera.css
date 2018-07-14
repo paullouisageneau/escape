@@ -2,9 +2,6 @@ video {
 	max-width: 100%;
 	margin-left: auto;
 	margin-right: auto;
-}
-
-#camera {
 	background-color: #000000;
 }
 
@@ -18,6 +15,7 @@ video {
 	flex-grow: 1;
 	cursor: pointer;
 	border: 1px solid #FFFFFF;
+	background-color: #000000;
 }
 
 #camera-list video {
@@ -26,5 +24,10 @@ video {
 
 #main-camera {
 	border: 1px solid #FFFFFF;
+	background-color: #000000;
 }
 
+#microphones li {
+	display: inline-block;
+	width: 12em;
+}

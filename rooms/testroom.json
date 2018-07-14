@@ -1,6 +1,29 @@
 {
 	"name": "Salle de test",
-	"cameras": [1, 2, 3],
+	"cameras": [
+		{
+			"name": "Camera 1",
+			"stream": 1
+		},
+		{
+			"name": "Camera 2",
+			"stream": 2
+		},
+		{
+			"name": "Camera 3",
+			"stream": 3
+		}
+	],
+	"microphones": [
+		{
+			"name": "Micro 1",
+			"stream": 11
+		},
+		{
+			"name": "Micro 2",
+			"stream": 12
+		}
+	],
     "toggles": [
 		{
 			"name": "Machin",

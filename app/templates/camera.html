@@ -3,6 +3,7 @@
 {% block head %}
 	{{ super() }}
 	<link rel="stylesheet" href="{{ url_for('static', filename='camera.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='control.css') }}">
 	<script src="{{ config['VUE_URL'] }}"></script>
 	<script src="{{ url_for('static', filename='adapter.min.js') }}"></script>
 	<script src="{{ url_for('static', filename='janus.js') }}"></script>
@@ -11,19 +12,34 @@
 {% block content %}
 	{{ super() }}
 	<div id="camera">
+		{% if room.microphones %}
+		<div id="microphones">
+			<ul>
+				{% for mic in room.microphones %}
+				<li>
+					<label class="switch_wrapper">
+						<span class="switch">
+							<input type="checkbox" value="{{ loop.index0 }}" v-model="enabledMics">
+							<span class="slider"></span>
+						</span>
+						<span>{{ mic.name }}</span>
+					</label>
+					<streaming type="audio" stream-id="{{ mic.stream }}" v-if="enabledMics.includes('{{ loop.index0 }}')"></streaming>
+				</li>
+				{% endfor %}
+			</ul>
+		</div>
+		{% endif %}
 		<div id="camera-list">
 			{% for camera in room.cameras %}
-			<div id="placeholder-{{ camera }}" class="placeholder" v-show="mainCamera!='{{ camera }}'" v-on:click="mainCamera='{{ camera }}'">
-				<div id="camera-{{ camera }}" class="camera">
-					<streaming type="video" stream-id="{{ camera }}"></streaming>
+			<div id="placeholder-{{ camera.stream }}" class="placeholder" v-show="mainCamera!='{{ loop.index0 }}'" v-on:click="mainCamera='{{ loop.index0 }}'">
+				<div id="camera-{{ loop.index0 }}" class="camera">
+					<streaming type="video" stream-id="{{ camera.stream }}" muted="true"></streaming>
 				</div>
 			</div>
 			{% endfor %}
 		</div>
 		<div id="main-camera"></div>
 	</div>
-	{% if room.cameras %}
-	<script>const defaultCamera = '{{ room.cameras[0] }}';</script>
-	{% endif %}
 	<script src="{{ url_for('static', filename='camera.js') }}"></script>
 {% endblock %}

@@ -32,7 +32,11 @@ class Room:
 
 	@property
 	def cameras(self):
-		return self._conf['cameras']
+		return self._conf['cameras'] if 'cameras' in self._conf else []
+	
+	@property
+	def microphones(self):
+		return self._conf['microphones'] if 'microphones' in self._conf else []
 
 	@property
 	def css_url(self):

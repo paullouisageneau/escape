@@ -7,11 +7,10 @@ const vm = new Vue({
 	el: '#camera',			// the vue instance controls the element whose id is "display"
 	data: {
 		mainCamera: null,
+		enabledMics: [],
 	},
 	mounted: function() {
-		if(defaultCamera) {
-			this.mainCamera = defaultCamera;
-		}
+		this.mainCamera = '0';
 	},
 	methods: {
 		attachMainCamera: function(cameraId) {
