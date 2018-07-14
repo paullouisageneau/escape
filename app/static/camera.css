@@ -24,7 +24,7 @@ video {
 	max-height: 38vh;
 }
 
-#main-camera video {
+#main-camera {
 	border: 1px solid #FFFFFF;
 }
 
