@@ -11,4 +11,5 @@ video {
 
 #camera-list .placeholder {
 	flex-grow: 1;
+	cursor: pointer;
 }
