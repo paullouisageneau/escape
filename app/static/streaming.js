@@ -62,7 +62,7 @@ Vue.component('streaming', {
 				});
 		}
 	},
-	template: '<audio v-if="isAudio" id="{{ elementId }}"></audio><video v-else id="{{ elementId }}"></video>'
+	template: '<audio v-if="isAudio" v-bind:id="elementId"></audio><video v-else v-bind:id="elementId"></video>'
 });
 
 
