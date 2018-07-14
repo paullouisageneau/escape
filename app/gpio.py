@@ -60,8 +60,8 @@ class Pin:
 		self.value = False
 	
 	def listen(self, callback):
-		def wrapped_callback():
-			print("Detected a pulse on pin {}".format(self._number))
+		def wrapped_callback(number):
+			print("Detected a pulse on pin {}".format(number))
 			callback()
 		if enable:
 			try:
