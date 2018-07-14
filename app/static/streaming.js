@@ -93,6 +93,7 @@ function createJanusSession(url) {
 
 function attachJanusStreaming(janus, mediaElement, streamId) {
 	return new Promise((resolve, reject) => {
+		let streaming = null;
 		// Attach to streaming plugin
 		janus.attach({
 			plugin: "janus.plugin.streaming",
