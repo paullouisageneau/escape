@@ -1,15 +1,28 @@
 video {
 	width: 100%;
-	border: 1px solid #FFFFFF;
+}
+
+#camera {
+	background-color: #000000;
 }
 
 #camera-list {
 	display: flex;
 	flex-wrap: nowrap;
-	align-items: center;
+	align-items: stretch;
 }
 
 #camera-list .placeholder {
 	flex-grow: 1;
 	cursor: pointer;
+	border: 1px solid #FFFFFF;
 }
+
+#camera-list video {
+	max-height: 38vh;
+}
+
+#main-camera video {
+	border: 1px solid #FFFFFF;
+}
+
