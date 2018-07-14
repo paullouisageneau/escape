@@ -6,7 +6,7 @@ const janusContext = {
 
 window.addEventListener('load', () => {
 	createJanusSession(janusContext.url)
-		.then(() => {
+		.then((janus) => {
 			janusContext.janus = janus;
 		})
 		.catch((error) => {
@@ -36,8 +36,9 @@ Vue.component('streaming', {
 	},
 	watch: {
 		context: function(value, oldValue) {
-			if(value.janus && !this.streaming) {
-				attachJanusStreaming(this.element, parseInt(this.streamId, 10))
+			const janus = value.janus;
+			if(janus && !this.streaming) {
+				attachJanusStreaming(janus, this.element, parseInt(this.streamId, 10))
 					.then((streaming) => {
 						this.streaming = streaming;
 					})
@@ -76,7 +77,7 @@ function createJanusSession(url) {
 	});
 }
 
-function attachJanusStreaming(mediaElement, streamId) {
+function attachJanusStreaming(janus, mediaElement, streamId) {
 	return new Promise((resolve, reject) => {
 		// Attach to streaming plugin
 		janus.attach({
