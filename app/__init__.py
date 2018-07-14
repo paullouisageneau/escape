@@ -56,9 +56,7 @@ def api_reset():
 	stopTime = 0
 	clues = []
 	currentClue = ''
-	for toggle in room.toggles:
-		toggle.reset()
-	room.events.publish('reset', json.dumps({}))
+	room.reset()
 	return Response('', 204)
 
 @app.route('/api/chrono', methods=['GET', 'POST'])

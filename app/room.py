@@ -16,9 +16,15 @@ class Room:
 			conf = json.load(conf_file)
 		self._conf = conf
 		self.events = EventStream()
+		
 		self.toggles = [Toggle(c) for c in conf['toggles']] if 'toggles' in conf else []
 		self.triggers = [Trigger(c, self.events) for c in conf['triggers']] if 'triggers' in conf else []
 		self.puzzles = [Puzzle(c) for c in conf['puzzles']] if 'puzzles' in conf else []
+		
+		reset_conf = { 'name': 'reset', 'event': 'reset', 'data': '' }
+		if 'reset_pin' in conf:
+			reset_conf['pin'] = int(conf['reset_pin'])
+		self.reset_trigger = Trigger(reset_conf, self.events)
 
 	@property
 	def name(self):
@@ -39,3 +45,8 @@ class Room:
 	@property
 	def chrono_reversed(self):
 		return bool(self._conf.get('chrono_reversed', False))
+	
+	def reset(self):
+		for toggle in self.toggles:
+			toggle.reset()
+		self.reset_trigger.pull()
