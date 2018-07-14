@@ -34,6 +34,7 @@
 			{% for camera in room.cameras %}
 			<div id="placeholder-{{ camera.stream }}" class="placeholder" v-show="mainCamera!='{{ loop.index0 }}'" v-on:click="mainCamera='{{ loop.index0 }}'">
 				<div id="camera-{{ loop.index0 }}" class="camera">
+					<div class="name-tag">{{ camera.name }}</div>
 					<streaming type="video" stream-id="{{ camera.stream }}" muted="true"></streaming>
 				</div>
 			</div>

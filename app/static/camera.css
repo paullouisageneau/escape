@@ -9,6 +9,7 @@ video {
 	display: flex;
 	flex-wrap: nowrap;
 	align-items: stretch;
+	margin-top: 1em;
 }
 
 #camera-list .placeholder {
@@ -23,6 +24,7 @@ video {
 }
 
 #main-camera {
+	margin-top: 1em;
 	border: 1px solid #FFFFFF;
 	background-color: #000000;
 }
@@ -30,4 +32,18 @@ video {
 #microphones li {
 	display: inline-block;
 	width: 12em;
+}
+
+.camera {
+	position: relative;
+}
+
+.name-tag {
+	position: absolute;
+	top: -0.75em;
+	left: 0.5em;
+	padding: 0.25em 0.5em 0.25em 0.5em;
+	border: 1px solid #808080;
+	border-radius: 3px;
+	background-color: #FFFFFF;
 }
