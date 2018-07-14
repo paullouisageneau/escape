@@ -34,18 +34,32 @@ Vue.component('streaming', {
 			return document.getElementById(this.elementId);
 		}
 	},
+	mounted: function() {
+		const { janus } = this.context;
+		if(janus) {
+			this.attach(janus);
+		}
+	},
 	watch: {
 		'context.janus': function(value, oldValue) {
 			const janus = value;
 			if(janus && !this.streaming) {
-				attachJanusStreaming(janus, this.element, parseInt(this.streamId, 10))
-					.then((streaming) => {
-						this.streaming = streaming;
-					})
-					.catch((error) => {
-						alert(`Erreur: ${error.message}`);
-					});
+				this.attach(janus);
 			}
+		}
+	},
+	methods: {
+		attach: function(janus) {
+			if(this.streaming) {
+				return;
+			}
+			attachJanusStreaming(janus, this.element, parseInt(this.streamId, 10))
+				.then((streaming) => {
+					this.streaming = streaming;
+				})
+				.catch((error) => {
+					alert(`Erreur: ${error.message}`);
+				});
 		}
 	},
 	template: '<audio v-if="isAudio" id="{{ elementId }}"></audio><video v-else id="{{ elementId }}"></video>'

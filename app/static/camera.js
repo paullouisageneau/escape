@@ -6,7 +6,7 @@ const vm = new Vue({
 	delimiters:['${', '}'],	// by default, it's {{ }}, which would conflicts with Flask Jinja templates
 	el: '#camera',			// the vue instance controls the element whose id is "display"
 	data: {
-		mainCamera: undefined,
+		mainCamera: null,
 	},
 	mounted: function() {
 		this.mainCamera = 1; // TODO
