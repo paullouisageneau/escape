@@ -13,7 +13,7 @@
 	<div id="camera">
 		<div id="camera-list">
 			{% for camera in room.cameras %}
-			<div id="placeholder-{{ camera }}" class="placeholder" v-show="mainCamera != '{{camera}}'" v-on:click="mainCamera='{{ camera }}'">
+			<div id="placeholder-{{ camera }}" class="placeholder" v-show="mainCamera!='{{ camera }}'" v-on:click="mainCamera='{{ camera }}'">
 				<div id="camera-{{ camera }}" class="camera">
 					<streaming type="video" stream-id="{{ camera }}"></streaming>
 				</div>
