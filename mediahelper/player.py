@@ -1,18 +1,16 @@
 
+import os
 import subprocess
 
 class Player:
-	def __init__(self, baseUrl):
-		self._baseUrl = baseUrl
+	def __init__(self, media_path):
+		self._media_path = media_path
 	
-	def play(self, url):
-		if not url:
-			return
-		if not '://' in url:
-			url = self._baseUrl + (url if url[0] == '/' else '/' + url);
+	def play(self, path):
+		location = path if '://' in path else os.path.join(self._media_path, path)
 		
-		print('Playing media at URL: {}'.format(url))
-		self._run(['omxplayer', '-b', '-o', 'hdmi', url])
+		print('Playing media at location: {}'.format(location))
+		self._run(['omxplayer', '-b', '-o', 'hdmi', location])
 		self._run(['xrefresh', '-display', ':0'])
 	
 	def _run(self, args):

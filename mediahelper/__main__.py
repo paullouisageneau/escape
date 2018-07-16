@@ -5,12 +5,13 @@ from .client import Client
 
 def main():
 	try:
-		if len(sys.argv) < 2:
-			print("Usage: {} URL".format(sys.argv[0]))
+		if len(sys.argv) < 3:
+			print("Usage: {} URL MEDIA_PATH".format(sys.argv[0]))
 			return 1
 		
 		url = sys.argv[1]
-		client = Client(url)
+		media_path = sys.argv[2]
+		client = Client(url, media_path)
 		client.run()
 		
 	except KeyboardInterrupt:
