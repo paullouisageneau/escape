@@ -38,12 +38,16 @@ const vm = new Vue({
 		
 		// Play video
 		events.addEventListener('video', (event) => {
-			this.video = event.data;
+			if(!window.location.hash || !window.location.hash.includes('novideo')) {
+				this.video = event.data;
+			}
 		});
 		
 		// Play audio
 		events.addEventListener('audio', (event) => {
-			this.audio = event.data;
+			if(!window.location.hash || !window.location.hash.includes('noaudio')) {
+				this.audio = event.data;
+			}
 		});
 		
 		// Reset room
