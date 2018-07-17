@@ -11,6 +11,7 @@ class Client:
 		self.player = Player(media_path)
 
 	def run(self):
+		print("Listening for video events...")
 		for event in self.events:
-			if event.event == 'video' or event.event == 'audio':
+			if event.event == 'video':
 				self.player.play(event.data)
