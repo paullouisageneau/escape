@@ -17,6 +17,9 @@
 		<audio v-if="audio" v-on:ended="audio = null" autoplay hidden>
 			<source v-bind:src="audio" type="audio/mpeg">
 		</audio>
+		<audio v-if="backgroundAudio" v-bind:volume="backgroundVolume" autoplay hidden loop>
+			<source v-bind:src="backgroundAudio" type="audio/mpeg">
+		</audio>
 		<div id="chrono">${chrono}</div>
 		<div id="clue" v-if="clue">
 			Nouvel indice:<br>

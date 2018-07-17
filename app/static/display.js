@@ -13,6 +13,12 @@ const vm = new Vue({
 		clue: '',			// the currently displayed clue
 		video: null,		// the URL of the playing video, if any
 		audio: null,		// the URL of the playing audio, if any
+		backgroundAudio: null,	// the URL of the playing audio, if any
+	},
+	computed: {
+		backgroundVolume: function() {
+			return this.audio || this.clue ? 0.3 : 1.0;
+		}
 	},
 	mounted: function() {
 		const events = new EventSource('/api/events');
@@ -50,6 +56,13 @@ const vm = new Vue({
 			}
 		});
 		
+		// Play background audio
+		events.addEventListener('background_audio', (event) => {
+			if(!window.location.hash || !window.location.hash.includes('noaudio')) {
+				this.backgroundAudio = event.data;
+			}
+		});
+		
 		// Reset room
 		events.addEventListener('reset', (event) => {
 			this.reset();
@@ -57,6 +70,7 @@ const vm = new Vue({
 		
 		// Setup update callback every second
 		setInterval(this.update, 1000);
+		this.update();
 	},
 	methods: {
 		update: function() {
@@ -75,12 +89,14 @@ const vm = new Vue({
 			const t = Math.max(chronoOffset + this.elapsed * (chronoReversed ? -1 : 1), 0);
 			this.chrono = formatTime(t);
 		},
+
 		reset: function() {
 			this.startTime = 0;
 			this.stopTime = 0;
 			this.clue = '';
 			this.video = null;
 			this.audio = null;
+			this.backgroundAudio = null;
 		}
 	},
 	watch: {
@@ -90,6 +106,12 @@ const vm = new Vue({
 		},
 		stopTime: function() {
 			this.update();
+		},
+		backgroundVolume: function(value, oldValue) {
+			const element = document.getElementById('backgroundAudio');
+			if(element) {
+				element.volume = value;
+			}
 		}
 	}
 });

@@ -43,6 +43,16 @@
 			"data": "/static/video.mp4"
 		},
 		{
+			"name": "Jouer l'audio",
+			"event": "audio",
+			"data": "/static/audio.mp3"
+		},
+		{
+			"name": "Jouer la musique",
+			"event": "background_audio",
+			"data": "/static/background_audio.mp3"
+		},
+		{
 			"name": "Pin trigger",
 			"pin": 22
 		},
