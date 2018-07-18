@@ -45,21 +45,21 @@ const vm = new Vue({
 		// Play video
 		events.addEventListener('video', (event) => {
 			if(!window.location.hash || !window.location.hash.includes('novideo')) {
-				this.video = event.data;
+				this.video = event.data || null;
 			}
 		});
 		
 		// Play audio
 		events.addEventListener('audio', (event) => {
 			if(!window.location.hash || !window.location.hash.includes('noaudio')) {
-				this.audio = event.data;
+				this.audio = event.data || null;
 			}
 		});
 		
 		// Play background audio
 		events.addEventListener('background_audio', (event) => {
 			if(!window.location.hash || !window.location.hash.includes('noaudio')) {
-				this.backgroundAudio = event.data;
+				this.backgroundAudio = event.data || null;
 			}
 		});
 		

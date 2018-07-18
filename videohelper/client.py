@@ -14,4 +14,7 @@ class Client:
 		print("Listening for video events...")
 		for event in self.events:
 			if event.event == 'video':
-				self.player.play(event.data)
+				if event.data:
+					self.player.play(event.data)
+				else:
+					self.player.stop()

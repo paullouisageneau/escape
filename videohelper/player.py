@@ -9,12 +9,15 @@ class Player:
 		self._proc = None
 	
 	def play(self, path):
-		location = path if '://' in path else self._media_path + '/' + path.lstrip('/')
-		print('Playing media at location: {}'.format(location))
-		self._run(['omxplayer', '-b', '-o', AUDIO_DEV, location])
+		self.stop()
+		if path:
+			location = path if '://' in path else self._media_path + '/' + path.lstrip('/')
+			print('Playing media at location: {}'.format(location))
+			self._proc = subprocess.Popen(['omxplayer', '-b', '-o', AUDIO_DEV, location])
 	
-	def _run(self, args):
+	def stop(self):
 		if self._proc and not self._proc.poll():
 			self._proc.terminate()
 			self._proc.wait()
-		self._proc = subprocess.Popen(args)
+		self._proc = None
+
