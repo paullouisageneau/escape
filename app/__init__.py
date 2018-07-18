@@ -8,7 +8,7 @@ import json
 from gevent import monkey
 monkey.patch_all()
 
-from flask import Flask, request, Response, abort, render_template, jsonify, url_for
+from flask import Flask, request, Response, abort, render_template, send_from_directory, jsonify, url_for
 
 from .room import Room
 
@@ -36,6 +36,10 @@ clues = []
 currentClue = ''
 
 # ----- Routes definition -----
+
+@app.route('/media/<filename>')
+def media_file(filename):
+    return send_from_directory(app.config['MEDIA_PATH'], filename, conditional=True)
 
 @app.route('/', methods=['GET'])
 def home():

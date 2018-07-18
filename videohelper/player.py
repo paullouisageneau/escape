@@ -2,6 +2,7 @@
 import subprocess
 
 AUDIO_DEV = 'local' # hdmi/local/both
+MEDIA_PREFIX = 'media/'
 
 class Player:
 	def __init__(self, media_path):
@@ -11,9 +12,12 @@ class Player:
 	def play(self, path):
 		self.stop()
 		if path:
-			location = path if '://' in path else self._media_path + '/' + path.lstrip('/')
-			print('Playing media at location: {}'.format(location))
-			self._proc = subprocess.Popen(['omxplayer', '-b', '-o', AUDIO_DEV, location], stdin=subprocess.PIPE, close_fds=True)
+			if not '://' in path:
+				path = path.lstrip('/')
+				path = path[len(MEDIA_PREFIX):] if path.startswith(MEDIA_PREFIX) else path
+				path = self._media_path + path
+			print('Playing media: {}'.format(path))
+			self._proc = subprocess.Popen(['omxplayer', '-b', '-o', AUDIO_DEV, path], stdin=subprocess.PIPE, close_fds=True)
 	
 	def stop(self):
 		if self._proc and self._proc.poll() is None:

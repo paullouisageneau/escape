@@ -1,6 +1,6 @@
 {
 	"name": "Supérette",
-	"css_url": "/static/superette/style.css",
+	"css_url": "/media/superette/style.css",
 	"chrono_offset": 18000,
 	"chrono_reversed": false,
 	"cameras": [
@@ -49,10 +49,10 @@
 			"pin": 9
 		},
 		{
-			"name": "Commande son indice",
+			"name": "Musique d'arrière plan",
 			"input_pin": 18,
 			"event": "video",
-			"data": "/static/superette/indice.mp4"
+			"data": "/media/superette/background.mp4"
 		}
     ]
 } 

@@ -9,3 +9,5 @@ VUE_URL = "https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.js"
 # The file "[ROOM_NAME].json" must exist in the directory
 ROOM_NAME = "testroom"
 #ROOM_NAME = "superette"
+
+MEDIA_PATH = "../media"
