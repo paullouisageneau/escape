@@ -137,5 +137,8 @@ def api_events():
 	event_stream = room.events.subscribe()
 	room.events.publish('chrono', json.dumps({ 'start': startTime, 'stop': stopTime }))
 	room.events.publish('clue', json.dumps({ 'text': currentClue }))
-	return Response(event_stream, mimetype="text/event-stream")
+	resp = Response(event_stream, mimetype="text/event-stream")
+	resp.headers['Cache-Control'] = 'no-cache'
+	resp.headers['X-Accel-Buffering'] = 'no'
+	return resp
 
