@@ -108,7 +108,7 @@ const vm = new Vue({
 			this.update();
 		},
 		backgroundVolume: function(value, oldValue) {
-			const element = document.getElementById('backgroundAudio');
+			const element = document.getElementById('background-audio');
 			if(element) {
 				element.volume = value;
 			}
