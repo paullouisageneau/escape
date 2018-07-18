@@ -1,5 +1,6 @@
 
 import subprocess
+import time
 
 AUDIO_DEV = 'local' # hdmi/local/both
 
@@ -16,8 +17,8 @@ class Player:
 			self._proc = subprocess.Popen(['omxplayer', '-b', '-o', AUDIO_DEV, location])
 	
 	def stop(self):
-		if self._proc and not self._proc.poll():
+		if self._proc and self._proc.poll() is None:
 			self._proc.terminate()
 			self._proc.wait()
+			time.sleep(1)
 		self._proc = None
-
