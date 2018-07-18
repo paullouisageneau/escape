@@ -1,6 +1,5 @@
 
 import subprocess
-import time
 
 AUDIO_DEV = 'local' # hdmi/local/both
 
@@ -14,11 +13,14 @@ class Player:
 		if path:
 			location = path if '://' in path else self._media_path + '/' + path.lstrip('/')
 			print('Playing media at location: {}'.format(location))
-			self._proc = subprocess.Popen(['omxplayer', '-b', '-o', AUDIO_DEV, location])
+			self._proc = subprocess.Popen(['omxplayer', '-b', '-o', AUDIO_DEV, location], stdin=subprocess.PIPE, close_fds=True)
 	
 	def stop(self):
 		if self._proc and self._proc.poll() is None:
-			self._proc.terminate()
+			try:
+				self._proc.stdin.write('q'.encode())
+				self._proc.stdin.flush()
+			except IOError:
+				pass
 			self._proc.wait()
-			time.sleep(1)
 		self._proc = None
