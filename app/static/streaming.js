@@ -122,7 +122,7 @@ function attachJanusStreaming(janus, mediaElement, streamId) {
 				Janus.debug("Got a message");
 				if(msg.error) {
 					Janus.error("Error during session", msg.error);
-					reject(new Error("La session de streaming a été interrompue."));
+					reject(new Error("La session de streaming a échoué."));
 					return;
 				}
 				if(jsep) {
