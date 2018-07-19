@@ -9,7 +9,8 @@
 {{ super() }}
 <div id="control">
 	<header>
-		<input type="button" class="button" value="Réinitialiser" v-on:click="reset">
+		<input type="button" id="reset" class="button" value="Réinitialiser" v-on:click="reset">
+		<a href="/camera" target="_blank">View cameras</a>
 		<h1>{{ room.name }}</h1>
 	</header>
 	<div id="columns">

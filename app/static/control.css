@@ -55,7 +55,7 @@ input:checked + .slider:before {
 
 .button {
 	display: inline-block;
-	padding: 0.3em 1em 0.3em 1em;
+	padding: 0.35em 1em 0.35em 1em;
 	margin: 0.2em 0.25em 0.5em 0.25em;
 	border: none;
 	border-radius: 0.75em;
@@ -64,7 +64,6 @@ input:checked + .slider:before {
 	text-align: center;
 	text-decoration: none;
 	outline: none;
-	font-size: 100%;
 	box-shadow: 0 0.4em #B0B0B0;
 	cursor: pointer;
 }
@@ -93,14 +92,19 @@ header .button:hover {
 	background-color: #800000;
 }
 
+header a {
+	display: inline-block;
+	padding: 0.35em 1em 0.35em 1em;
+	margin: 0.2em 0.25em 0.5em 0.25em;
+	float: right;
+}
+
 input[type=text] {
 	margin: 0.25em 0.25em;
 	padding: 0.5em 0.5em;
 	border: 1px solid #808080;
 	border-radius: 3px;
 	font-family: monospace;
-	font-size: 100%;
-	font-weight: normal;
 	color: #000000;
 	background-color: #F0F0F0;
 }

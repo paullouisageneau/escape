@@ -36,6 +36,10 @@ h2, h3, h4, h4, h6 {
 
 input {
 	margin: 0.25em;
+	font-family: inherit;
+	font-size: 100%;
+	font-weight: normal;
+	text-decoration: none;
 }
 
 header, footer, section, div {
