@@ -1,6 +1,7 @@
 {
 	"name": "Supérette",
-	"css_url": "/media/superette/style.css",
+	"style_url": "/media/superette/style.css",
+	"notification_audio_url": "/media/audio.mp3",
 	"chrono_offset": 18000,
 	"chrono_reversed": false,
 	"cameras": [

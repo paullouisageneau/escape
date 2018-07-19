@@ -25,6 +25,12 @@ class Room:
 		if 'reset_pin' in conf:
 			reset_conf['pin'] = int(conf['reset_pin'])
 		self.reset_trigger = Trigger(reset_conf, self.events)
+		
+		if 'notification_audio_url' in conf:
+			notify_conf = { 'name': 'notify', 'event': 'audio', 'data': conf['notification_audio_url'] }
+			self.notify_trigger = Trigger(notify_conf, self.events)
+		else:
+			self.notify_trigger = None
 
 	@property
 	def name(self):
@@ -39,8 +45,8 @@ class Room:
 		return self._conf['microphones'] if 'microphones' in self._conf else []
 
 	@property
-	def css_url(self):
-		return self._conf.get('css_url', '')
+	def style_url(self):
+		return self._conf.get('style_url', '')
 
 	@property
 	def chrono_offset(self):
@@ -54,3 +60,8 @@ class Room:
 		for toggle in self.toggles:
 			toggle.reset()
 		self.reset_trigger.pull()
+		
+	def notify(self):
+		if self.notify_trigger:
+			self.notify_trigger.pull()
+

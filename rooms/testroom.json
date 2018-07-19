@@ -1,5 +1,6 @@
 {
 	"name": "Salle de test",
+	"notification_audio_url": "/media/audio.mp3",
 	"cameras": [
 		{
 			"name": "Camera 1",

@@ -84,6 +84,7 @@ def api_clues():
 			clues.append(clue)
 			currentClue = clue
 			room.events.publish('clue', json.dumps({ 'text': clue }))
+			room.notify()
 			return jsonify({ 'text': clue, 'index': len(clues)-1 })
 		else:
 			# Posting an empty clue allows to hide the displayed one
