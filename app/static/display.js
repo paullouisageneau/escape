@@ -22,6 +22,8 @@ const vm = new Vue({
 	},
 	mounted: function() {
 		const events = new EventSource('/api/events');
+		const noVideo = window.location.hash && window.location.hash.includes('novideo');
+		const noAudio = window.location.hash && window.location.hash.includes('noaudio');
 		
 		// Initialize chrono
 		getJson('/api/chrono', (chrono) => {
@@ -44,22 +46,31 @@ const vm = new Vue({
 		
 		// Play video
 		events.addEventListener('video', (event) => {
-			if(!window.location.hash || !window.location.hash.includes('novideo')) {
-				this.video = event.data || null;
+			this.video = null;
+			if(event.data && !noVideo) {
+				Vue.nextTick(() => {
+					this.video = event.data;
+				});
 			}
 		});
 		
 		// Play audio
 		events.addEventListener('audio', (event) => {
-			if(!window.location.hash || !window.location.hash.includes('noaudio')) {
-				this.audio = event.data || null;
+			this.audio = null;
+			if(event.data && !noAudio) {
+				Vue.nextTick(() => {
+					this.audio = event.data;
+				});
 			}
 		});
 		
 		// Play background audio
 		events.addEventListener('background_audio', (event) => {
-			if(!window.location.hash || !window.location.hash.includes('noaudio')) {
-				this.backgroundAudio = event.data || null;
+			this.backgroundAudio = null;
+			if(event.data && !noAudio) {
+				Vue.nextTick(() => {
+					this.backgroundAudio = event.data;
+				});
 			}
 		});
 		

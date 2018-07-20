@@ -11,13 +11,13 @@
 {% block content %}
 	{{ super() }}
 	<div id="display">
-		<video v-if="video" v-on:ended="video = null" autoplay>
+		<video v-if="video" v-on:ended="video = null" v-on:error="video = null" autoplay>
 			<source v-bind:src="video" type="video/mp4">
 		</video>
-		<audio v-if="audio" v-on:ended="audio = null" autoplay hidden>
+		<audio v-if="audio" v-on:ended="audio = null" v-on:error="audio = null" autoplay hidden>
 			<source v-bind:src="audio" type="audio/mpeg">
 		</audio>
-		<audio v-if="backgroundAudio" v-bind:volume="backgroundVolume" id="background-audio" autoplay hidden loop>
+		<audio v-if="backgroundAudio" v-on:error="backgroundAudio = null" v-bind:volume="backgroundVolume" id="background-audio" autoplay hidden loop>
 			<source v-bind:src="backgroundAudio" type="audio/mpeg">
 		</audio>
 		<div id="chrono">${chrono}</div>
