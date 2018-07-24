@@ -188,11 +188,11 @@ input[type=text] {
 }
 
 #triggers li {
-	min-width: 12em;
+	min-width: 15em;
 }
 
 #triggers .button {
-	width: 12em;
+	width: 15em;
 }
 
 #toggles {
@@ -200,7 +200,7 @@ input[type=text] {
 }
 
 #toggles li {
-	min-width: 12em;
+	min-width: 15em;
 }
 
 /* For desktop, two-columns display */

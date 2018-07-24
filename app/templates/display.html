@@ -3,7 +3,7 @@
 {% block head %}
 	{{ super() }}
 	<link rel="stylesheet" href="{{ url_for('static', filename='display.css') }}">
-{% if room.css_url %}
+{% if room.style_url %}
 	<link rel="stylesheet" href="{{ room.style_url }}">
 {% endif %}
 	<script src="{{ config['VUE_URL'] }}"></script>
@@ -28,9 +28,9 @@
 	</div>  
 	<script src="{{ url_for('static', filename='display.js') }}"></script>
 {% if room.chrono_offset %}
-	<script>const chronoOffset = {{ room.chrono_offset }};</script>
+	<script>chronoOffset = {{ room.chrono_offset }};</script>
 {% endif %}
 {% if room.chrono_reversed %}
-	<script>const chronoReversed = true;</script>
+	<script>chronoReversed = true;</script>
 {% endif %}
 {% endblock %}

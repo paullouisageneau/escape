@@ -37,7 +37,7 @@ currentClue = ''
 
 # ----- Routes definition -----
 
-@app.route('/media/<filename>')
+@app.route('/media/<path:filename>')
 def media_file(filename):
     return send_from_directory(app.config['MEDIA_PATH'], filename, conditional=True)
 
