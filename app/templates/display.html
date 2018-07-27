@@ -20,7 +20,7 @@
 		<audio v-if="backgroundAudio" v-on:error="backgroundAudio = null" v-bind:volume="backgroundVolume" id="background-audio" autoplay hidden loop>
 			<source v-bind:src="backgroundAudio" type="audio/mpeg">
 		</audio>
-		<div id="chrono">${chrono}</div>
+		<div id="chrono"><span v-bind:class="{ blinking: (stopTime > 0) }">${chrono}</span></div>
 		<div id="clue" v-if="clue">
 			Nouvel indice:<br>
 			${clue}

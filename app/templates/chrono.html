@@ -5,7 +5,7 @@
 	<div class="buttons">
 		<div>
 			<input type="button" class="button" value="Démarrer" v-if="startTime == 0" v-on:click="start()">
-			<input v-if="stopTime == 0 && startTime > 0" type="button" class="button" value="Arrêter" v-bind:disabled=false v-on:click="stop()">
+			<input v-if="stopTime == 0 && startTime > 0" type="button" class="button" value="Pause" v-bind:disabled=false v-on:click="stop()">
 			<input v-if="stopTime > 0" type="button" class="button" value="Reprendre" v-bind:disabled=false v-on:click="start()">
 		</div>
 		<div>
