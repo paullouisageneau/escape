@@ -21,3 +21,9 @@ body {
 #chrono::before {
 	content: "18/05/2018 ";
 }
+
+#clue  {
+	width: 80%;
+	margin: 10% auto 0 auto;
+}
+
