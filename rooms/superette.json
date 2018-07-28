@@ -55,6 +55,10 @@
 		{
 			"name": "Porte du frigo",
 			"pin": 9
+		},
+		{
+			"name": "Détecteurs de mouvement",
+			"pin": 11
 		}
     ]
 }
