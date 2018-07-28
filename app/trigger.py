@@ -20,8 +20,10 @@ class Trigger:
 			self._pin = None
 		
 		if 'input_pin' in conf:
+			def callback():
+				self.pull()
 			self._input_pin = Pin(int(conf['input_pin']))
-			self._input_pin.listen(self.pull)
+			self._input_pin.listen(callback)
 		else:
 			self._input_pin = None
 		

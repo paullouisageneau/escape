@@ -20,6 +20,7 @@ class EventStream:
 				for s in self._subscriptions:
 					s.put((event, data))
 			spawn(notify)
+			sleep(0) # yield
 		return len(self._subscriptions)
 
 	def subscribe(self):
