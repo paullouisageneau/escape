@@ -203,6 +203,22 @@ input[type=text] {
 	min-width: 15em;
 }
 
+.blinking {
+	animation: blinker 0.5s infinite;
+}
+
+@keyframes blinker {
+	0% {
+		visibility: hidden;
+	}
+	50% {
+		visibility: hidden;
+	}
+	100% {
+		visibility: visible;
+	}
+}
+
 /* For desktop, two-columns display */
 @media only screen and (min-width: 768px) {
 	#columns {

@@ -1,6 +1,6 @@
 <section id="chrono">
 	<div class="chronometer">
-		<span v-if="chrono">${chrono}</span>
+		<span v-if="chrono" v-bind:class="{ blinking: (stopTime > 0) }">${chrono}</span>
 	</div>
 	<div class="buttons">
 		<div>
