@@ -15,15 +15,17 @@ const vm = new Vue({
 	methods: {
 		attachMainCamera: function(cameraId) {
 			const element = document.getElementById(`camera-${cameraId}`);
-			const main = document.getElementById(`main-camera`);
+			const main = document.getElementById('main-camera');
 			main.appendChild(element);
-			element.muted = false;
+			const video = element.querySelector('video');
+			video.muted = false;
 		},
 		detachMainCamera: function(cameraId) {
 			const element = document.getElementById(`camera-${cameraId}`);
 			const placeholder = document.getElementById(`placeholder-${cameraId}`);
 			placeholder.appendChild(element);
-			element.muted = true;
+			const video = element.querySelector('video');
+			video.muted = true;
 		},
 	},
 	watch: {
