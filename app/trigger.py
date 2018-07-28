@@ -3,6 +3,8 @@ from gevent import sleep
 
 from .gpio import Pin
 
+ALT_PULSE_DURATION = 500
+
 class Trigger:
 	def __init__(self, conf, room):
 		self._name = conf['name']
@@ -22,10 +24,10 @@ class Trigger:
 			self._pin = None
 	
 		if 'pin_alt' in conf:
-			self._alt_pin = Pin(int(conf['pin_alt']))
-			self._alt_pin.clear()
+			self._pin_alt = Pin(int(conf['pin_alt']))
+			self._pin_alt.clear()
 		else:
-			self._alt_pin = None
+			self._pin_alt = None
 
 		if 'input_pin' in conf:
 			def callback():
@@ -53,15 +55,15 @@ class Trigger:
 
 	def pull(self):
 		success = False
-		if self._alt_pin:
-			self._alt_pin.value = True
-			self._pin.value = True
-			sleep(0.5)
-			self._alt_pin.value = False
-			self._pin.value = False
-			success = True
-		elif self._pin:
-			self._pin.pulse()
+		if self._pin:
+			if self._pin_alt:
+				self._pin_alt.value = True
+				self._pin.value = True
+				sleep(ALT_PULSE_DURATION/1000.)
+				self._pin_alt.value = False
+				self._pin.value = False
+			else:
+				self._pin.pulse()
 			success = True
 
 		if self._event:
