@@ -18,17 +18,17 @@ class Room:
 		self.events = EventStream()
 		
 		self.toggles = [Toggle(c) for c in conf['toggles']] if 'toggles' in conf else []
-		self.triggers = [Trigger(c, self.events) for c in conf['triggers']] if 'triggers' in conf else []
+		self.triggers = [Trigger(c, self) for c in conf['triggers']] if 'triggers' in conf else []
 		self.puzzles = [Puzzle(c) for c in conf['puzzles']] if 'puzzles' in conf else []
 		
 		reset_conf = { 'name': 'reset', 'event': 'reset', 'data': '' }
 		if 'reset_pin' in conf:
 			reset_conf['pin'] = int(conf['reset_pin'])
-		self.reset_trigger = Trigger(reset_conf, self.events)
+		self.reset_trigger = Trigger(reset_conf, self)
 		
 		if 'notification_audio_url' in conf:
 			notify_conf = { 'name': 'notify', 'event': 'audio', 'data': conf['notification_audio_url'] }
-			self.notify_trigger = Trigger(notify_conf, self.events)
+			self.notify_trigger = Trigger(notify_conf, self)
 		else:
 			self.notify_trigger = None
 

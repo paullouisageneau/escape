@@ -23,7 +23,8 @@
 		{
 			"name": "Dialogue d'avertissement",
 			"event": "video",
-			"data": "/media/superette/alerte.mp4"
+			"data": "/media/superette/alerte.mp4",
+			"notify": true
 		},
 		{
 			"name": "Musique de victoire",

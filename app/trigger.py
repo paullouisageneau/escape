@@ -2,9 +2,9 @@
 from .gpio import Pin
 
 class Trigger:
-	def __init__(self, conf, events):
+	def __init__(self, conf, room):
 		self._name = conf['name']
-		self._events = events
+		self._room = room
 		
 		if 'event' in conf:
 			self._event = conf['event']
@@ -24,6 +24,8 @@ class Trigger:
 			self._input_pin.listen(self.pull)
 		else:
 			self._input_pin = None
+		
+		self._notify = 'notify' in conf and conf['notify']
 
 	@property
 	def name(self):
@@ -40,7 +42,9 @@ class Trigger:
 			self._pin.pulse()
 			success = True
 		if self._event:
-			success|= self._events.publish(self._event, self._data) > 0
+			success|= self._room.events.publish(self._event, self._data) > 0
+		if self._notify:
+			self._room.notify()
 		return success
 
 	def to_dict(self):
