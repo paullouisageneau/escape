@@ -4,6 +4,8 @@
 	"notification_audio_url": "/media/superette/klaxon.mp3",
 	"chrono_offset": 18000,
 	"chrono_reversed": false,
+	"reset_pin": 10,
+	"reset_pin_alt": 9,
 	"cameras": [
 		{
 			"name": "Camera 1",
@@ -14,7 +16,7 @@
 			"stream": 2
 		}
 	],
-    "triggers": [
+	"triggers": [
 		{
 			"name": "Klaxon",
 			"event": "audio",
@@ -39,7 +41,7 @@
 		},
 		{
 			"name": "Porte automatique",
-			"pin": 18
+			"pin": 17
 		},
 		{
 			"name": "Tiroir balance",
