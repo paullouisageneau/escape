@@ -1,17 +1,19 @@
 {% if room.toggles %}
-<section id="toggles" class="toggles">
-	<ul>
-		{% for toggle in room.toggles %}
-		<li>
-			<label class="switch_wrapper">
-				<span class="switch">
-					<input type="checkbox" value="{{ loop.index0 }}" v-model="enabled">
-					<span class="slider"></span>
-				</span>
-				<span>{{ toggle.name }}</span>
-			</label>
-		</li>
-		{% endfor %}
-	</ul>
+<section id="toggles">
+	<div class="toggles">
+		<ul>
+			{% for toggle in room.toggles %}
+			<li>
+				<label class="switch_wrapper">
+					<span class="switch">
+						<input type="checkbox" value="{{ loop.index0 }}" v-model="enabled">
+						<span class="slider"></span>
+					</span>
+					<span>{{ toggle.name }}</span>
+				</label>
+			</li>
+			{% endfor %}
+		</ul>
+	<div>
 </section>
 {% endif %}

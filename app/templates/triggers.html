@@ -1,6 +1,7 @@
 {% if room.triggers %}
+<section id="triggers">
 {% if room.media_triggers_indexes|length > 0 %}
-<section id="triggers-media" class="triggers">
+<div class="triggers">
 	<ul>
 		{% for trigger in room.triggers %}
 		{% if trigger.is_media %}
@@ -10,10 +11,10 @@
 		{% endif %}
 		{% endfor %}
 	</ul>
-</section>
+</div>
 {% endif %}
 {% if room.media_triggers_indexes|length < room.triggers|length %}
-<section id="triggers" class="triggers">
+<div class="triggers">
 	<ul>
 		{% for trigger in room.triggers %}
 		{% if not trigger.is_media %}
@@ -23,6 +24,7 @@
 		{% endif %}
 		{% endfor %}
 	</ul>
-</section>
+</div>
 {% endif %}
+</section>
 {% endif %}
