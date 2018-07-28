@@ -56,6 +56,10 @@ class Room:
 	def chrono_reversed(self):
 		return bool(self._conf.get('chrono_reversed', False))
 	
+	@property
+	def media_triggers_indexes(self):
+		return [i for i in range(len(self.triggers)) if self.triggers[i].is_media]
+	
 	def reset(self):
 		for toggle in self.toggles:
 			toggle.reset()

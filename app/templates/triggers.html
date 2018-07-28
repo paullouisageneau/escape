@@ -1,11 +1,28 @@
 {% if room.triggers %}
-<section id="triggers">
+{% if room.media_triggers_indexes|length > 0 %}
+<section id="triggers-media" class="triggers">
 	<ul>
 		{% for trigger in room.triggers %}
+		{% if trigger.is_media %}
 		<li>
 			<input type="button" class="button" value="{{ trigger.name }}" v-on:click="trigger({{ loop.index0 }})">
 		</li>
+		{% endif %}
 		{% endfor %}
 	</ul>
 </section>
+{% endif %}
+{% if room.media_triggers_indexes|length < room.triggers|length %}
+<section id="triggers" class="triggers">
+	<ul>
+		{% for trigger in room.triggers %}
+		{% if not trigger.is_media %}
+		<li>
+			<input type="button" class="button" value="{{ trigger.name }}" v-on:click="trigger({{ loop.index0 }})">
+		</li>
+		{% endif %}
+		{% endfor %}
+	</ul>
+</section>
+{% endif %}
 {% endif %}

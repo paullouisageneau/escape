@@ -29,6 +29,11 @@ class Trigger:
 	def name(self):
 		return self._name
 
+	@property
+	def is_media(self):
+		# return true if media only
+		return self._pin is None
+
 	def pull(self):
 		success = False
 		if self._pin:

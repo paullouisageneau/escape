@@ -183,23 +183,23 @@ input[type=text] {
 	overflow-y: scroll;
 }
 
-#triggers {
+section.triggers {
 	flex-grow: 1;
 }
 
-#triggers li {
+section.triggers li {
 	min-width: 15em;
 }
 
-#triggers .button {
+section.triggers .button {
 	width: 15em;
 }
 
-#toggles {
+section.toggles {
 	flex-grow: 1;
 }
 
-#toggles li {
+section.toggles li {
 	min-width: 15em;
 }
 
