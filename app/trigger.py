@@ -1,4 +1,6 @@
 
+from gevent import sleep
+
 from .gpio import Pin
 
 class Trigger:
@@ -18,7 +20,13 @@ class Trigger:
 			self._pin.clear()
 		else:
 			self._pin = None
-		
+	
+		if 'pin_alt' in conf:
+			self._alt_pin = Pin(int(conf['pin_alt']))
+			self._alt_pin.clear()
+		else:
+			self._alt_pin = None
+
 		if 'input_pin' in conf:
 			def callback():
 				self.pull()
@@ -28,6 +36,8 @@ class Trigger:
 			self._input_pin = None
 		
 		self._notify = 'notify' in conf and conf['notify']
+		self._togglable = 'togglable' in conf and conf['togglable']
+		self._toggle = False
 
 	@property
 	def name(self):
@@ -38,15 +48,28 @@ class Trigger:
 		# return true if media only
 		return self._pin is None
 
+	def reset(self):
+		self._toggle = False
+
 	def pull(self):
 		success = False
-		if self._pin:
+		if self._alt_pin:
+			self._alt_pin.value = True
+			self._pin.value = True
+			sleep(0.5)
+			self._alt_pin.value = False
+			self._pin.value = False
+			success = True
+		elif self._pin:
 			self._pin.pulse()
 			success = True
+
 		if self._event:
-			success|= self._room.events.publish(self._event, self._data) > 0
+			success|= self._room.events.publish(self._event, self._data if not self._toggle else '') > 0
 		if self._notify:
 			self._room.notify()
+		if self._togglable:
+			self._toggle = not self._toggle
 		return success
 
 	def to_dict(self):

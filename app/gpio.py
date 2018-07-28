@@ -67,7 +67,7 @@ class Pin:
 			try:
 				if self._mode != GPIO.IN:
 					GPIO.setup(self._number, GPIO.IN)
-				GPIO.add_event_detect(self._number, GPIO.RISING, callback=wrapped_callback, bouncetime=PULSE_DURATION*2)
+				GPIO.add_event_detect(self._number, GPIO.RISING, callback=wrapped_callback, bouncetime=PULSE_DURATION*4)
 			except RuntimeError:
 				print("Unable to read GPIO pin {}".format(self._number))
 		print("Waiting for a pulse on pin {}".format(self._number))

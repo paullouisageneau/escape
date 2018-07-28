@@ -24,6 +24,8 @@ class Room:
 		reset_conf = { 'name': 'reset', 'event': 'reset', 'data': '' }
 		if 'reset_pin' in conf:
 			reset_conf['pin'] = int(conf['reset_pin'])
+			if 'reset_pin_alt' in conf:
+				reset_conf['pin_alt'] = int(conf['reset_pin_alt'])
 		self.reset_trigger = Trigger(reset_conf, self)
 		
 		if 'notification_audio_url' in conf:
@@ -63,6 +65,8 @@ class Room:
 	def reset(self):
 		for toggle in self.toggles:
 			toggle.reset()
+		for trigger in self.triggers:
+			trigger.reset()
 		self.reset_trigger.pull()
 		
 	def notify(self):
