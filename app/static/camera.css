@@ -20,11 +20,12 @@ video {
 }
 
 #camera-list video {
-	max-height: 33vh;
+	max-height: 30vh;
 }
 
 #main-camera {
 	margin-top: 1em;
+	max-height: 60vh;
 	border: 1px solid #FFFFFF;
 	background-color: #000000;
 }
