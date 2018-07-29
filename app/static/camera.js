@@ -4,7 +4,7 @@ let chronoReversed = false;
 
 const vm = new Vue({
 	delimiters:['${', '}'],	// by default, it's {{ }}, which would conflicts with Flask Jinja templates
-	el: '#camera',			// the vue instance controls the element whose id is "display"
+	el: '#camera',			// the vue instance controls the element whose id is "camera"
 	data: {
 		mainCamera: null,
 		enabledMics: [],
