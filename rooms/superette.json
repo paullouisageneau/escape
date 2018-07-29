@@ -37,7 +37,8 @@
 			"name": "Forcer la playlist",
 			"input_pin": 18,
 			"event": "background_audio",
-			"data": "/media/superette/playlist.mp3"
+			"data": "/media/superette/playlist.mp3",
+			"togglable": true
 		},
 		{
 			"name": "Porte automatique",
