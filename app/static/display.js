@@ -16,6 +16,9 @@ const vm = new Vue({
 		backgroundAudio: null,	// the URL of the playing audio, if any
 	},
 	computed: {
+		paused: function() {
+			return this.stopTime > 0;
+		},
 		backgroundVolume: function() {
 			return this.audio || this.clue ? 0.3 : 1.0;
 		}
@@ -118,7 +121,14 @@ const vm = new Vue({
 		stopTime: function() {
 			this.update();
 		},
-		backgroundVolume: function(value, oldValue) {
+		paused: function(value) {
+			const element = document.getElementById('background-audio');
+			if(element) {
+				if(value) element.pause();
+				else element.play();
+			}
+		},
+		backgroundVolume: function(value) {
 			const element = document.getElementById('background-audio');
 			if(element) {
 				element.volume = value;
