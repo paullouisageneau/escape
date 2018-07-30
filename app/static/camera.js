@@ -19,6 +19,7 @@ const vm = new Vue({
 			main.appendChild(element);
 			const video = element.querySelector('video');
 			video.muted = false;
+			video.play();
 		},
 		detachMainCamera: function(cameraId) {
 			const element = document.getElementById(`camera-${cameraId}`);
@@ -26,6 +27,7 @@ const vm = new Vue({
 			placeholder.appendChild(element);
 			const video = element.querySelector('video');
 			video.muted = true;
+			video.play();
 		},
 	},
 	watch: {
