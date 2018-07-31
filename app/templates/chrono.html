@@ -9,10 +9,10 @@
 			<input v-if="stopTime > 0" type="button" class="button" value="Reprendre" v-bind:disabled=false v-on:click="start()">
 		</div>
 		<div>
-			<input type="button" class="button" value="Ajouter 1 min" v-bind:disabled="!startTime" v-on:click="startTime-=60">
+			<input type="button" class="button" value="Ajouter 1 min" v-bind:disabled="!startTime" v-on:click="startTime+=60">
 		</div>
 		<div>
-			<input type="button" class="button" value="Retirer 1 min" v-bind:disabled="!startTime" v-on:click="startTime+=60">
+			<input type="button" class="button" value="Retirer 1 min" v-bind:disabled="!startTime" v-on:click="startTime-=60">
 		</div>
 	</div>
 </section>
