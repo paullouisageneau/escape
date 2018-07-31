@@ -17,18 +17,22 @@ const vm = new Vue({
 			const element = document.getElementById(`camera-${cameraId}`);
 			const main = document.getElementById('main-camera');
 			main.appendChild(element);
-			const video = element.querySelector('video');
-			video.muted = false;
-			video.play();
+			this.playVideo(element.querySelector('video'), false);
 		},
 		detachMainCamera: function(cameraId) {
 			const element = document.getElementById(`camera-${cameraId}`);
 			const placeholder = document.getElementById(`placeholder-${cameraId}`);
 			placeholder.appendChild(element);
-			const video = element.querySelector('video');
-			video.muted = true;
-			video.play();
+			this.playVideo(element.querySelector('video'), true);
 		},
+		playVideo: function(video, muted) {
+			if(!video) return;
+			video.muted = muted;
+			const playPromise = video.play();
+			if(playPromise !== undefined) {
+				playPromise.catch(e => {});
+			}
+		}
 	},
 	watch: {
 		mainCamera: function(value, oldValue) {
@@ -38,7 +42,7 @@ const vm = new Vue({
 			if(value) {
 				this.attachMainCamera(value);
 			}
-		},
+		}
 	}
 });
 

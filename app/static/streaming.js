@@ -146,7 +146,10 @@ function attachJanusStreaming(janus, mediaElement, streamId) {
 			onremotestream: function(stream) {
 				Janus.debug("Got a remote stream");
 				Janus.attachMediaStream(mediaElement, stream);
-				mediaElement.play();
+				const playPromise = mediaElement.play();
+				if(playPromise !== undefined) {
+					playPromise.catch(e => {});
+				}
 				resolve(streaming);
 			},
 			oncleanup: function() {
