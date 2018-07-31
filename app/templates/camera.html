@@ -36,10 +36,10 @@
 				<li>
 					<div id="camera-{{ loop.index0 }}" class="camera" v-on:click="selectedCam = {{ loop.index0 }}">
 						<div class="tag">
-							<span class="name">{{ camera.name }}</span>
-							<span class="audio-enabled" v-if="selectedCam == {{ loop.index0 }}">
-								<img class="icon" src="/static/icon_audio.png" alt="audio">
-							</span>
+							<div class="tag-content">
+								<img class="icon" src="/static/icon_audio.png" alt="audio" v-if="selectedCam == {{ loop.index0 }}">
+								<span class="name">{{ camera.name }}</span>
+							</div>
 						</div>
 						<streaming type="video" stream-id="{{ camera.stream }}" muted="true"></streaming>
 					</div>

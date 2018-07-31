@@ -40,7 +40,11 @@ video {
 	background-color: #FFFFFF;
 }
 
-.tag .icon {
+.tag-content {
+	min-height: 17px;
+}
+
+.tag-content .icon {
 	display: inline-block;
 	height: 16px;
 	vertical-align: middle;
