@@ -6,41 +6,26 @@ const vm = new Vue({
 	delimiters:['${', '}'],	// by default, it's {{ }}, which would conflicts with Flask Jinja templates
 	el: '#camera',			// the vue instance controls the element whose id is "camera"
 	data: {
-		mainCamera: null,
+		selectedCam: null,
 		enabledMics: [],
 	},
 	mounted: function() {
-		this.mainCamera = '0';
+		this.selectedCam = 0;
 	},
 	methods: {
-		attachMainCamera: function(cameraId) {
-			const element = document.getElementById(`camera-${cameraId}`);
-			const main = document.getElementById('main-camera');
-			main.appendChild(element);
-			this.playVideo(element.querySelector('video'), false);
-		},
-		detachMainCamera: function(cameraId) {
-			const element = document.getElementById(`camera-${cameraId}`);
-			const placeholder = document.getElementById(`placeholder-${cameraId}`);
-			placeholder.appendChild(element);
-			this.playVideo(element.querySelector('video'), true);
-		},
-		playVideo: function(video, muted) {
-			if(!video) return;
-			video.muted = muted;
-			const playPromise = video.play();
-			if(playPromise !== undefined) {
-				playPromise.catch(e => {});
+		muteCameras: function() {
+			const elements = document.querySelectorAll('#cameras video');
+			for(e of elements) {
+				e.muted = true;
 			}
 		}
 	},
 	watch: {
-		mainCamera: function(value, oldValue) {
-			if(oldValue) {
-				this.detachMainCamera(oldValue);
-			}
-			if(value) {
-				this.attachMainCamera(value);
+		selectedCam: function(value) {
+			this.muteCameras();
+			const element = document.querySelector(`#camera-${value} video`);
+			if(element) {
+				element.muted = false;
 			}
 		}
 	}

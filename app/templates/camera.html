@@ -30,17 +30,23 @@
 			</ul>
 		</div>
 		{% endif %}
-		<div id="camera-list">
-			{% for camera in room.cameras %}
-			<div id="placeholder-{{ loop.index0 }}" class="placeholder" v-show="mainCamera!='{{ loop.index0 }}'" v-on:click="mainCamera='{{ loop.index0 }}'">
-				<div id="camera-{{ loop.index0 }}" class="camera">
-					<div class="name-tag">{{ camera.name }}</div>
-					<streaming type="video" stream-id="{{ camera.stream }}" muted="true"></streaming>
-				</div>
-			</div>
-			{% endfor %}
+		<div id="cameras">
+			<ul>
+				{% for camera in room.cameras %}
+				<li>
+					<div id="camera-{{ loop.index0 }}" class="camera" v-on:click="selectedCam = {{ loop.index0 }}">
+						<div class="tag">
+							<span class="name">{{ camera.name }}</span>
+							<span class="audio-enabled" v-if="selectedCam == {{ loop.index0 }}">
+								<img class="icon" src="/static/icon_audio.png" alt="audio">
+							</span>
+						</div>
+						<streaming type="video" stream-id="{{ camera.stream }}" muted="true"></streaming>
+					</div>
+				</li>
+				{% endfor %}
+			</ul>
 		</div>
-		<div id="main-camera"></div>
 	</div>
 	<script src="{{ url_for('static', filename='camera.js') }}"></script>
 {% endblock %}
