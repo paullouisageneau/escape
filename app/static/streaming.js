@@ -1,11 +1,12 @@
 
 const janusContext = {
 	url: window.location.protocol + "//" + window.location.host + "/janus",
+	iceServers: [{ url: "stun:stun.l.google.com:19302" }],
 	janus: null
 };
 
 window.addEventListener('load', () => {
-	createJanusSession(janusContext.url)
+	createJanusSession(janusContext.url, janusContext.iceServers)
 		.then((janus) => {
 			janusContext.janus = janus;
 		})
@@ -75,7 +76,7 @@ Vue.component('streaming', {
 	template: '<audio v-if="isAudio" v-bind:id="elementId"></audio><video v-else v-bind:id="elementId"></video>'
 });
 
-function createJanusSession(url) {
+function createJanusSession(url, iceServers) {
 	return new Promise((resolve, reject) => {
 		// Initialize the library (all console debuggers enabled)
 		Janus.init({ debug: "all", callback: function() {
@@ -87,6 +88,7 @@ function createJanusSession(url) {
 			}
 			// Create session
 			const janus = new Janus({
+				iceServers,
 				server: url,
 				success: function() {
 					resolve(janus);
