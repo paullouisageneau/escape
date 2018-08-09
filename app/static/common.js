@@ -12,7 +12,7 @@ function formatTime(secs) {
 	return `${("0"+h).slice(-2)}:${("0"+m).slice(-2)}:${("0"+s).slice(-2)}`;
 }
 
-function getJson(url, callback = () => {}) {
+function getJson(url, callback = () => {}, silent) {
 	fetch(url).then((response) => {
 		if(!response.ok) throw Error(`${response.status} ${response.statusText}`);
 		if(response.status == 204) callback();
@@ -21,11 +21,11 @@ function getJson(url, callback = () => {}) {
 		callback(responseData);
 	}).catch((error) => {
 		console.error(error);
-		alert('La requête au serveur a échoué.');
+		if(!silent) alert('Erreur: La requête au serveur a échoué.');
 	});
 }
 
-function postJson(url, data = {}, callback = () => {}) {
+function postJson(url, data = {}, callback = () => {}, silent) {
 	fetch(url, {
 		method: 'POST',
 		body: JSON.stringify(data),
@@ -40,6 +40,6 @@ function postJson(url, data = {}, callback = () => {}) {
 		callback(responseData);
 	}).catch((error) => {
 		console.error(error);
-		alert('La requête au serveur a échoué.');
+		if(!silent) alert('Erreur: La requête au serveur a échoué.');
 	});
 }

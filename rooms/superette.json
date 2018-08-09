@@ -9,11 +9,23 @@
 	"cameras": [
 		{
 			"name": "Camera 1",
-			"stream": 1
+			"stream": 1,
+			"controller": {
+				"type": "ipcam",
+				"host": "192.168.1.111",
+				"username": "admin",
+				"password": "admin"
+			}
 		},
 		{
 			"name": "Camera 2",
-			"stream": 2
+			"stream": 2,
+			"controller": {
+				"type": "ipcam",
+				"host": "192.168.1.112",
+				"username": "admin",
+				"password": "admin"
+			}
 		}
 	],
 	"triggers": [

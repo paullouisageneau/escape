@@ -8,6 +8,7 @@
 	<script src="{{ url_for('static', filename='adapter.min.js') }}"></script>
 	<script src="{{ url_for('static', filename='janus.js') }}"></script>
 	<script src="{{ url_for('static', filename='streaming.js') }}"></script>
+	<script src="{{ url_for('static', filename='controller.js') }}"></script>
 {% endblock %}
 {% block content %}
 	{{ super() }}
@@ -41,6 +42,9 @@
 								<span class="name">{{ camera.name }}</span>
 							</div>
 						</div>
+						{% if camera.controller %}
+						<controller camera="{{ loop.index0 }}"></controller>
+						{% endif %}
 						<streaming type="video" stream-id="{{ camera.stream }}" muted="true"></streaming>
 					</div>
 				</li>

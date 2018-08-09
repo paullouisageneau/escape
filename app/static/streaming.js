@@ -15,7 +15,7 @@ window.addEventListener('load', () => {
 });
 
 Vue.component('streaming', {
-	delimiters:['${', '}'],	// by default, it's {{ }}, which would conflicts with Flask Jinja templates
+	delimiters:['${', '}'],
 	props: ['type', 'streamId', 'muted'],
 	data: function() {
 		return {

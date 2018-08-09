@@ -4,7 +4,13 @@
 	"cameras": [
 		{
 			"name": "Camera 1",
-			"stream": 1
+			"stream": 1,
+			"controller": {
+				"type": "ipcam",
+				"host": "localhost",
+				"username": "test",
+				"password": "test"
+			}
 		},
 		{
 			"name": "Camera 2",

@@ -39,11 +39,11 @@ currentClue = ''
 
 @app.route('/media/<path:filename>')
 def media_file(filename):
-    return send_from_directory(app.config['MEDIA_PATH'], filename, conditional=True)
+	return send_from_directory(app.config['MEDIA_PATH'], filename, conditional=True)
 
 @app.route('/', methods=['GET'])
 def home():
-    return render_template('control.html', room=room)
+	return render_template('control.html', room=room)
 
 @app.route('/display', methods=['GET'])
 def display():
@@ -51,7 +51,20 @@ def display():
 
 @app.route('/camera', methods=['GET'])
 def camera():
-    return render_template('camera.html', room=room)
+	return render_template('camera.html', room=room)
+
+@app.route('/api/camera/<int:index>', methods=['POST'])
+def camera_controller(index):
+	if not index in range(len(room.cameras)):
+		abort(404)
+	camera = room.cameras[index]
+	if not camera.controller:
+		abort(404)
+	data = request.get_json()
+	action = data.get('action', 'stop')
+	if not camera.controller.command(action):
+		abort(500)
+	return response('', 204)
 
 @app.route('/api/reset', methods=['POST'])
 def api_reset():

@@ -5,6 +5,8 @@ import json
 from .event import EventStream
 from .toggle import Toggle
 from .trigger import Trigger
+from .camera import Camera
+from .microphone import Microphone
 from .puzzle import Puzzle
 
 ROOMS_DIRECTORY = "rooms"
@@ -17,9 +19,11 @@ class Room:
 		self._conf = conf
 		self.events = EventStream()
 		
-		self.toggles = [Toggle(c) for c in conf['toggles']] if 'toggles' in conf else []
-		self.triggers = [Trigger(c, self) for c in conf['triggers']] if 'triggers' in conf else []
-		self.puzzles = [Puzzle(c) for c in conf['puzzles']] if 'puzzles' in conf else []
+		self.toggles = [Toggle(c) for c in conf.get('toggles', [])]
+		self.triggers = [Trigger(c, self) for c in conf.get('triggers', [])]
+		self.cameras = [Camera(c) for c in conf.get('cameras', [])]
+		self.microphones = [Microphone(c) for c in conf.get('microphones', [])]
+		self.puzzles = [Puzzle(c) for c in conf.get('puzzles', [])]
 		
 		reset_conf = { 'name': 'reset', 'event': 'reset', 'data': '' }
 		if 'reset_pin' in conf:
@@ -37,14 +41,6 @@ class Room:
 	@property
 	def name(self):
 		return self._conf['name']
-
-	@property
-	def cameras(self):
-		return self._conf['cameras'] if 'cameras' in self._conf else []
-	
-	@property
-	def microphones(self):
-		return self._conf['microphones'] if 'microphones' in self._conf else []
 
 	@property
 	def style_url(self):
