@@ -18,10 +18,7 @@ Vue.component('controller', {
 			const data = {
 				action,
 			};
-			const silent = action == 'init' || action == 'stop';
-			postJson(`/api/camera/${this.camera}`, data, () => {
-			
-			}, silent);
+			postJson(`/api/camera/${this.camera}`, data, () => {}, true);
 		}
 	},
 	template: `
