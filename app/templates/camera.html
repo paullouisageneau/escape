@@ -43,9 +43,9 @@
 							</div>
 						</div>
 						{% if camera.controller %}
-						<controller camera="{{ loop.index0 }}"></controller>
+						<controller camera="{{ loop.index0 }}" reversed="{{ 'true' if camera.is_reversed else 'false' }}"></controller>
 						{% endif %}
-						<streaming type="video" stream-id="{{ camera.stream }}" muted="true"></streaming>
+						<streaming type="video" stream-id="{{ camera.stream }}" reversed="{{ 'true' if camera.is_reversed else 'false' }}" muted="true"></streaming>
 					</div>
 				</li>
 				{% endfor %}

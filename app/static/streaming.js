@@ -16,7 +16,7 @@ window.addEventListener('load', () => {
 
 Vue.component('streaming', {
 	delimiters:['${', '}'],
-	props: ['type', 'streamId', 'muted'],
+	props: ['type', 'streamId', 'muted', 'reversed'],
 	data: function() {
 		return {
 			context: janusContext,
@@ -25,7 +25,13 @@ Vue.component('streaming', {
 	},
 	computed: {
 		isAudio: function() {
-			return this.type == "audio";
+			return this.type && this.type.toLowerCase() == "audio";
+		},
+		isReversed: function() {
+			return this.reversed && this.reversed.toLowerCase() == "true"; // reversed is an HTML parameter
+		},
+		isMuted: function() {
+			return this.muted && this.muted.toLowerCase() == "true"; // muted is an HTML parameter
 		},
 		elementId: function() {
 			return `streaming-${this.streamId}`;
@@ -35,7 +41,7 @@ Vue.component('streaming', {
 		}
 	},
 	mounted: function() {
-		this.element.muted = (this.muted && this.muted.toLowerCase() == "true");
+		this.element.muted = this.isMuted;
 		const { janus } = this.context;
 		if(janus) {
 			this.attach(janus);
@@ -72,7 +78,7 @@ Vue.component('streaming', {
 			}
 		}
 	},
-	template: '<audio v-if="isAudio" v-bind:id="elementId"></audio><video v-else v-bind:id="elementId"></video>'
+	template: '<audio v-if="isAudio" v-bind:id="elementId"></audio><video v-else v-bind:id="elementId" v-bind:class="{ reversed: isReversed }"></video>'
 });
 
 function createJanusSession(url) {

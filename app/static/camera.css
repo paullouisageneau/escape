@@ -4,6 +4,10 @@ video {
 	border-radius: 3px;
 }
 
+video.reversed {
+	transform: rotate(180deg);
+}
+
 #cameras ul {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
@@ -35,7 +39,7 @@ video {
 	top: 5px;
 	right: 5px;
 	padding: 0.25em 0.5em 0.25em 0.5em;
-	border: 1px solid #808080;
+	border: 2px solid #000000;
 	border-radius: 3px;
 	background-color: #FFFFFF;
 }
@@ -60,46 +64,41 @@ video {
 	left: 10px;
 }
 
-.control-up {
+.controller img {
 	width: 48px;
 	height: 48px;
+	filter: saturate(0) brightness(3);
+}
+
+.controller img.enabled:active {
+	filter: saturate(1) brightness(1);
+	transform: translateY(2px);
+}
+
+.control-up {
 	grid-column: 2;
 	grid-row: 1;
 }
 
 .control-down {
-	width: 48px;
-	height: 48px;
 	grid-column: 2;
 	grid-row: 3;
 }
 
 .control-left {
-	width: 48px;
-	height: 48px;
 	grid-column: 1;
 	grid-row: 2;
 }
 
 .control-right {
-	width: 48px;
-	height: 48px;
 	grid-column: 3;
 	grid-row: 2;
 }
 
 .control-center {
-	width: 48px;
-	height: 48px;
 	grid-column: 2;
 	grid-row: 2;
 }
 
-.controller img {
-	filter: saturate(0) brightness(3);
-}
 
-.controller img:active {
-	filter: saturate(1) brightness(1);
-	transform: translateY(2px);
-}
+

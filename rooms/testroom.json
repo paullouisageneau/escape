@@ -5,6 +5,7 @@
 		{
 			"name": "Camera 1",
 			"stream": 1,
+			"reversed": true,
 			"controller": {
 				"type": "ipcam",
 				"host": "localhost",
