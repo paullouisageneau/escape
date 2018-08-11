@@ -1,5 +1,7 @@
 video {
 	width: 100%;
+	min-width: 320px;
+	min-height: 240px;
 	background-color: #000000;
 	border-radius: 3px;
 }
@@ -60,8 +62,8 @@ video.reversed {
 	gap: 2px 2px;
 	position: absolute;
 	z-index: 99;
-	bottom: 10px;
-	left: 10px;
+	bottom: 5px;
+	left: 5px;
 }
 
 .controller img {
