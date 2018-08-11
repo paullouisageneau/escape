@@ -95,3 +95,11 @@ video {
 	grid-row: 2;
 }
 
+.controller img {
+	filter: saturate(0) brightness(3);
+}
+
+.controller img:active {
+	filter: saturate(1) brightness(1);
+	transform: translateY(2px);
+}

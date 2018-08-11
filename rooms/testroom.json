@@ -57,7 +57,8 @@
 		{
 			"name": "Jouer la musique",
 			"event": "background_audio",
-			"data": "/media/background_audio.mp3"
+			"data": "/media/background_audio.mp3",
+			"togglable": true
 		},
 		{
 			"name": "Pin trigger",

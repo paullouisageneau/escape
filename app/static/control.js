@@ -84,13 +84,17 @@ const vm = new Vue({
 				stop: this.stopTime
 			});
 		},
-		sendClue: function() {
-			if(!this.inputClue) {
-				alert("Entrez d'abord un indice.");
-				return;
+		sendClue: function(text) {
+			if(!text) {
+				if(!this.inputClue) {
+					alert("Entrez d'abord un indice.");
+					return;
+				}
+				text = this.inputClue;
+				this.inputClue = '';
 			}
 			postJson('/api/clues', {
-				text: this.inputClue
+				text: text
 			}, (clue) => {
 				this.clues.push(clue.text);
 				this.currentClueIndex = this.clues.length-1;
@@ -99,7 +103,6 @@ const vm = new Vue({
 					scroll.scrollTop = scroll.scrollHeight;
 				}, 0);
 			});
-			this.inputClue = '';
 		},
 		hideClue: function() {
 			this.currentClueIndex = -1;
