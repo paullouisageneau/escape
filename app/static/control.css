@@ -172,7 +172,7 @@ input[type=text] {
 
 #clues .history {
 	flex-grow: 1;
-	min-width: 25em;
+	min-width: 20em;
 	margin-left: 1em;
 }
 
