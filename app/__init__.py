@@ -64,7 +64,7 @@ def camera_controller(index):
 	action = data.get('action', 'stop')
 	if not camera.controller.command(action):
 		abort(500)
-	return response('', 204)
+	return Response('', 204)
 
 @app.route('/api/reset', methods=['POST'])
 def api_reset():
