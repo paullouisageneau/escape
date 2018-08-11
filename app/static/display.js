@@ -69,11 +69,20 @@ const vm = new Vue({
 		
 		// Play background audio
 		events.addEventListener('background_audio', (event) => {
-			this.backgroundAudio = null;
-			if(event.data && !noAudio) {
-				Vue.nextTick(() => {
-					this.backgroundAudio = event.data;
-				});
+			if(!noAudio) {
+				const element = document.getElementById('background-audio');
+				if(!event.data) {
+					if(element) element.pause();
+				} 
+				else if(event.data == this.backgroundAudio) {
+					if(element) element.play();
+				}
+				else {
+					this.backgroundAudio = null;
+					Vue.nextTick(() => {
+						this.backgroundAudio = event.data;
+					});
+				}
 			}
 		});
 		
