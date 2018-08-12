@@ -51,7 +51,7 @@ audio {
 	border: 5px solid white;
 	border-radius: 5px;
 	z-index: -1;
-	animation: clue-blinker 1s infinite;
+	animation: clue-blinker 1s infinite steps(10);
 }
 
 @keyframes clue-blinker {
@@ -61,7 +61,7 @@ audio {
 }
 
 .blinking {
-	animation: blinker 1s infinite;
+	animation: blinker 1s infinite steps(10);
 }
 
 @keyframes blinker {
@@ -69,5 +69,4 @@ audio {
     opacity: 0;
   }
 }
-
 

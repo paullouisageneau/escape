@@ -213,7 +213,7 @@ input[type=text] {
 }
 
 .blinking {
-	animation: blinker 0.5s infinite;
+	animation: blinker 0.5s infinite steps(10);
 }
 
 @keyframes blinker {
