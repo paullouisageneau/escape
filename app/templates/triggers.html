@@ -4,7 +4,7 @@
 <div class="triggers">
 	<ul>
 		{% for trigger in room.triggers %}
-		{% if trigger.is_media %}
+		{% if not trigger.hidden and trigger.is_media %}
 		<li>
 			<input type="button" class="button" value="{{ trigger.name }}" v-on:click="trigger({{ loop.index0 }})">
 		</li>
@@ -17,7 +17,7 @@
 <div class="triggers">
 	<ul>
 		{% for trigger in room.triggers %}
-		{% if not trigger.is_media %}
+		{% if not trigger.hidden and not trigger.is_media %}
 		<li>
 			<input type="button" class="button" value="{{ trigger.name }}" v-on:click="trigger({{ loop.index0 }})">
 		</li>

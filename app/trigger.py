@@ -8,6 +8,7 @@ ALT_PULSE_DURATION = 500
 class Trigger:
 	def __init__(self, conf, room):
 		self._name = conf['name']
+		self._hidden = 'hidden' in conf and conf['hidden']
 		self._room = room
 		
 		if 'event' in conf:
@@ -44,6 +45,10 @@ class Trigger:
 	@property
 	def name(self):
 		return self._name
+
+	@property
+	def hidden(self):
+		return self._hidden
 
 	@property
 	def is_media(self):

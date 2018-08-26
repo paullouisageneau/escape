@@ -3,6 +3,7 @@
 	<div class="toggles">
 		<ul>
 			{% for toggle in room.toggles %}
+			{% if not toggle.hidden %}
 			<li>
 				<label class="switch_wrapper">
 					<span class="switch">
@@ -12,6 +13,7 @@
 					<span>{{ toggle.name }}</span>
 				</label>
 			</li>
+			{% endif %}
 			{% endfor %}
 		</ul>
 	<div>
