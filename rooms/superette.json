@@ -46,7 +46,18 @@
 			"data": "/media/superette/we_are_the_champions.mp3"
 		},
 		{
-			"name": "Forcer la playlist",
+			"name": "Playlist - Play",
+			"event": "background_audio",
+			"data": "/media/superette/playlist.mp3"
+		},
+		{
+			"name": "Playlist - Pause",
+			"event": "background_audio",
+			"data": ""
+		},
+		{
+			"name": "Automate - Lumière",
+			"hidden": true,
 			"input_pin": 18,
 			"event": "background_audio",
 			"data": "/media/superette/playlist.mp3",
