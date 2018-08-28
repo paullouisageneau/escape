@@ -182,7 +182,7 @@ input[type=text] {
 }
 
 #clues .scroll {
-	height: 8em;
+	height: 10em;
 	overflow-y: scroll;
 }
 
@@ -195,10 +195,12 @@ input[type=text] {
 
 #triggers li {
 	min-width: 15em;
+	padding: 0.5em;
 }
 
 #triggers .button {
 	width: 15em;
+
 }
 
 #toggles {
@@ -210,6 +212,7 @@ input[type=text] {
 
 #toggles li {
 	min-width: 15em;
+	padding: 0.3em;
 }
 
 .blinking {
