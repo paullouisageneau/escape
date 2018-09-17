@@ -6,7 +6,7 @@
 		{% for trigger in room.triggers %}
 		{% if not trigger.hidden and trigger.is_media %}
 		<li>
-			<input type="button" class="button" value="{{ trigger.name }}" v-on:click="trigger({{ loop.index0 }})">
+			<input id="trigger-{{ loop.index0 }}" type="button" class="button" value="{{ trigger.name }}" v-on:click="trigger({{ loop.index0 }})">
 		</li>
 		{% endif %}
 		{% endfor %}
@@ -19,7 +19,7 @@
 		{% for trigger in room.triggers %}
 		{% if not trigger.hidden and not trigger.is_media %}
 		<li>
-			<input type="button" class="button" value="{{ trigger.name }}" v-on:click="trigger({{ loop.index0 }})">
+			<input id="trigger-{{ loop.index0 }}" type="button" class="button" value="{{ trigger.name }}" v-on:click="trigger({{ loop.index0 }})">
 		</li>
 		{% endif %}
 		{% endfor %}

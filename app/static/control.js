@@ -61,7 +61,13 @@ const vm = new Vue({
 			this.stopTime = time();
 		},
 		trigger: function(i) {
-			postJson(`/api/triggers/${i}`, {});
+			postJson(`/api/triggers/${i}`, {}, (trigger) => {
+				// The name of the trigger can have changed
+				if(trigger.name) {
+					const input = document.getElementById(`trigger-${i}`);
+					input.value = trigger.name;
+				}
+			});
 		},
 		update: function() {
 			// The chrono must be updated each second

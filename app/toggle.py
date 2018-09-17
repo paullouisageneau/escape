@@ -3,7 +3,13 @@ from .gpio import Pin
 
 class Toggle:
 	def __init__(self, conf):
+		if not 'name' in conf:
+			raise KeyError('No name specified for toggle')
+		
 		self._name = conf['name']
+		if type(self._name) != str or len(self._name) == 0:
+			raise TypeError('Invalid name for toggle')
+		
 		self._hidden = 'hidden' in conf and conf['hidden']
 		
 		if not 'pin' in conf:
@@ -42,5 +48,5 @@ class Toggle:
 		self._pin.value = self._value
 
 	def to_dict(self):
-		return { "name": self._name, "value": self._value }
+		return { "name": self.name, "value": self.value }
 

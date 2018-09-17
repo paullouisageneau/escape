@@ -143,10 +143,11 @@ def api_trigger(index):
 	if index >= len(room.triggers):
 		abort(404)
 	trigger = room.triggers[index]
-	response = trigger.to_dict()
-	response['triggered'] = False
+	triggered = False
 	if request.method == 'POST':
-		response['triggered'] = trigger.pull()
+		triggered = trigger.pull()
+	response = trigger.to_dict()
+	response['triggered'] = triggered
 	return jsonify(response)
 
 @app.route('/api/events', methods=['GET'])

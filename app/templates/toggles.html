@@ -7,7 +7,7 @@
 			<li>
 				<label class="switch_wrapper">
 					<span class="switch">
-						<input type="checkbox" value="{{ loop.index0 }}" v-model="enabled">
+						<input id="toggle-{{ loop.index0 }}" type="checkbox" value="{{ loop.index0 }}" v-model="enabled">
 						<span class="slider"></span>
 					</span>
 					<span>{{ toggle.name }}</span>

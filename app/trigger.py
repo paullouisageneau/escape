@@ -7,9 +7,16 @@ ALT_PULSE_DURATION = 500
 
 class Trigger:
 	def __init__(self, conf, room):
-		self._name = conf['name']
-		self._hidden = 'hidden' in conf and conf['hidden']
 		self._room = room
+		
+		if not 'name' in conf:
+			raise KeyError('No name specified for trigger')
+		
+		self._name = conf['name']
+		if not type(self._name) in (str, list) or len(self._name) == 0:
+			raise TypeError('Invalid name for toggle')
+		
+		self._hidden = 'hidden' in conf and conf['hidden']
 		
 		if 'event' in conf:
 			self._event = conf['event']
@@ -40,10 +47,13 @@ class Trigger:
 		
 		self._notify = 'notify' in conf and conf['notify']
 		self._togglable = 'togglable' in conf and conf['togglable']
-		self._toggle = False
+		self._count = 0
 
 	@property
 	def name(self):
+		if isinstance(self._name, list):
+			count = self._count // 2 if self._togglable else self._count
+			return self._name[min(count, len(self._name) - 1)]
 		return self._name
 
 	@property
@@ -56,7 +66,7 @@ class Trigger:
 		return self._pin is None
 
 	def reset(self):
-		self._toggle = False
+		self._count = 0
 
 	def pull(self):
 		success = False
@@ -72,12 +82,15 @@ class Trigger:
 			success = True
 
 		if self._event:
-			success|= self._room.events.publish(self._event, self._data if not self._toggle else '') > 0
-		if self._notify:
-			self._room.notify()
-		if self._togglable:
-			self._toggle = not self._toggle
+			enabled = not self._togglable or self._count % 2 == 0
+			success|= self._room.events.publish(self._event, self._data if enabled else '') > 0
+		
+		if success:
+			self._count+= 1
+			if self._notify:
+				self._room.notify()
+		
 		return success
 
 	def to_dict(self):
-		return { "name": self._name }
+		return { "name": self.name }

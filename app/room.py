@@ -67,5 +67,7 @@ class Room:
 		
 	def notify(self):
 		if self.notify_trigger:
-			self.notify_trigger.pull()
+			return self.notify_trigger.pull()
+		else:
+			return False
 

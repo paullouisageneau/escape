@@ -68,6 +68,14 @@
 			"name": "Pin trigger with input",
 			"pin": 10,
 			"input_pin": 18
+		},
+		{
+			"name": [
+				"Changing name",
+				"Another name",
+				"Last name"
+			],
+			"pin": 23
 		}
     ],
     "puzzles": [
