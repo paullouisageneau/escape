@@ -1,0 +1,77 @@
+{
+	"name": "Horloge",
+	"style_url": "/media/horloge/style.css",
+	"notification_audio_url": "/media/horloge/notification.mp3",
+	"chrono_offset": 60,
+	"chrono_reversed": true,
+	"reset_pin": 5,
+	"cameras": [
+		{
+			"name": "Camera 1",
+			"stream": 1,
+			"controller": {
+				"type": "ipcam",
+				"host": "192.168.1.131",
+				"username": "admin",
+				"password": "admin"
+			}
+		},
+		{
+			"name": "Camera 2",
+			"stream": 2,
+			"controller": {
+				"type": "ipcam",
+				"host": "192.168.1.132",
+				"username": "admin",
+				"password": "admin"
+			}
+		},
+		{
+			"name": "Camera 3",
+			"stream": 3,
+			"controller": {
+				"type": "ipcam",
+				"host": "192.168.1.133",
+				"username": "admin",
+				"password": "admin"
+			}
+		}
+	],
+	"triggers": [
+		{
+			"name": [
+				"Porte Roue",
+				"Porte Chronos",
+				"Porte de sortie"
+			],
+			"pin": 17
+		},
+		{
+			"name": "Cadran solaire",
+			"pin": 27
+		},
+		{
+			"name": [
+				"Cloche 1",
+				"Cloche 2",
+				"Cloche 3"
+			],
+			"pin": 22
+		},
+		{
+			"name": "Allumage soleil",
+			"pin": 10
+		},
+		{
+			"name": "Rotation système solaire",
+			"pin": 9
+		},
+		{
+			"name": "Sortie",
+			"event": "background_audio",
+			"data": "/media/horloge/sortie.mp3",
+			"input_pin": 18,
+			"pin": 11
+		}
+    ]
+}
