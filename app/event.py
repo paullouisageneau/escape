@@ -26,10 +26,12 @@ class EventStream:
 	def subscribe(self):
 		q = Queue()
 		self._subscriptions.append(q)
-		try:
-			yield "retry: {}\n\n".format(RETRY)
-			while True:
-				event, data = q.get()
-				yield "event: {}\ndata: {}\n\n".format(event, data)
-		except GeneratorExit:
-			self._subscriptions.remove(q)
+		def generator():
+			try:
+				yield "retry: {}\n\n".format(RETRY)
+				while True:
+					event, data = q.get()
+					yield "event: {}\ndata: {}\n\n".format(event, data)
+			except GeneratorExit:
+				self._subscriptions.remove(q)
+		return generator()
