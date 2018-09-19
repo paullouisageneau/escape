@@ -1,6 +1,7 @@
 
 import os
 import json
+import time
 
 from .event import EventStream
 from .toggle import Toggle
@@ -37,6 +38,12 @@ class Room:
 			self.notify_trigger = Trigger(notify_conf, self)
 		else:
 			self.notify_trigger = None
+		
+		self.start_time = 0 # If chrono was started, contains the timestamp
+		self.stop_time = 0  # If chrono was stopped, contains the timestamp
+		
+		self.clues = []        # List of sent clues
+		self.current_clue = '' # Current displayed clue
 
 	@property
 	def name(self):
@@ -58,7 +65,54 @@ class Room:
 	def media_triggers_indexes(self):
 		return [i for i in range(len(self.triggers)) if self.triggers[i].is_media]
 	
+	def subscribe(self):
+		event_stream = self.events.subscribe()
+		# Re-publish events
+		self.update_chrono()
+		self.update_clue()
+		return event_stream
+	
+	def start_chrono(self, start_time):
+		self.set_chrono(start_time, 0)
+	
+	def stop_chrono(self, stop_time):
+		self.set_chrono(self.start_time, stop_time)
+	
+	def set_chrono(self, start_time, stop_time):
+		if start_time != self.start_time or stop_time != self.stop_time:
+			self.start_time = start_time
+			self.stop_time = stop_time
+			self.update_chrono()
+	    
+	def set_clue(self, clue):
+		if self.current_clue != clue:
+			self.current_clue = clue
+			if clue:
+				self.clues.append(clue)
+			self.update_clue()
+	
+	def update_chrono(self):
+		self.events.publish('chrono', json.dumps({ 'start': self.start_time, 'stop': self.stop_time }))
+		if self.start_time > 0 and 'chrono_video_url' in self._conf:
+			if self.stop_time > 0:
+				self.events.publish('video', '')
+			else:
+				video_url = self._conf['chrono_video_url']
+				offset = self._conf.get('chrono_video_offset', 0)
+				delta = int(max(time.time() - self.start_time, 0) + offset)
+				self.events.publish('video', '{}#t={}'.format(video_url, delta))
+	
+	def update_clue(self):
+		if self.current_clue:
+			self.events.publish('video', '')
+		else:
+			self.update_chrono()
+		self.events.publish('clue', json.dumps({ 'text': self.current_clue }))
+	
 	def reset(self):
+		self.set_clue('');
+		self.set_chrono(0, 0);
+		self.clues = []
 		for toggle in self.toggles:
 			toggle.reset()
 		for trigger in self.triggers:

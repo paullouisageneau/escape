@@ -1,7 +1,6 @@
 
 import sys
 import os
-import time
 import json
 
 # Make threading cooperative
@@ -22,18 +21,6 @@ app.config.from_object('config')
 
 # Import room configuration
 room = Room(app.config['ROOM_NAME'])
-
-# If chrono was started, startTime contains the corresponding timestamp
-startTime = 0
-
-# If chrono was stopped, stopTime contains the corresponding timestamp
-stopTime = 0
-
-# List of the sent clues
-clues = []
-
-# Current displayed clue
-currentClue = ''
 
 # ----- Routes definition -----
 
@@ -68,57 +55,44 @@ def camera_controller(index):
 
 @app.route('/api/reset', methods=['POST'])
 def api_reset():
-	global startTime, stopTime, clues, currentClue
-	startTime = 0
-	stopTime = 0
-	clues = []
-	currentClue = ''
 	room.reset()
 	return Response('', 204)
 
 @app.route('/api/chrono', methods=['GET', 'POST'])
 def api_chrono():
-	global startTime, stopTime
 	if request.method == 'POST':
 		data = request.get_json()
-		startTime = data['start']
-		stopTime = data['stop']
-		clue = ''
-		room.events.publish('chrono', json.dumps({ 'start': startTime, 'stop': stopTime }))
-	return jsonify({ 'start': startTime, 'stop': stopTime })
+		start_time = data['start']
+		stop_time = data['stop']
+		room.set_chrono(start_time, stop_time)
+	return jsonify({ 'start': room.start_time, 'stop': room.stop_time })
 
 @app.route('/api/clues', methods=['GET', 'POST'])
 def api_clues():
-	global clues, currentClue
 	if request.method == 'POST':
 		data = request.get_json()
 		clue = data['text']
 		if clue:
-			clues.append(clue)
-			currentClue = clue
-			room.events.publish('clue', json.dumps({ 'text': clue }))
+			room.set_clue(clue)
 			room.notify()
-			return jsonify({ 'text': clue, 'index': len(clues)-1 })
+			return jsonify({ 'text': clue, 'index': len(room.clues)-1 })
 		else:
-			# Posting an empty clue allows to hide the displayed one
-			currentClue = ''
-			room.events.publish('clue', json.dumps({ 'text': '' }))
+			room.set_clue('')
 			return Response('', 204)
-	return jsonify([{ 'text': c } for c in clues])
+	return jsonify([{ 'text': c } for c in room.clues])
 
 @app.route('/api/clues/current', methods=['GET'])
 def api_last_clue():
-	global clues, currentClue
-	if currentClue:
-		return jsonify({ 'text': currentClue, 'index': len(clues)-1 })
+	if room.current_clue:
+		return jsonify({ 'text': room.current_clue, 'index': len(room.clues)-1 })
 	else:
 		return jsonify({ 'text': '', 'index': -1 })
 
 @app.route('/api/clues/<int:index>', methods=['GET'])
 def api_clue(index):
-	if index >= len(clues):
+	if index >= len(room.clues):
 		abort(404)
-	return jsonify({ 'text': clues[index] })
+	return jsonify({ 'text': room.clues[index] })
 
 @app.route('/api/toggles', methods=['GET'])
 def api_toggles():
@@ -152,10 +126,7 @@ def api_trigger(index):
 
 @app.route('/api/events', methods=['GET'])
 def api_events():
-	global startTime, stopTime
-	event_stream = room.events.subscribe()
-	room.events.publish('chrono', json.dumps({ 'start': startTime, 'stop': stopTime }))
-	room.events.publish('clue', json.dumps({ 'text': currentClue }))
+	event_stream = room.subscribe()
 	resp = Response(event_stream, mimetype="text/event-stream")
 	resp.headers['Cache-Control'] = 'no-cache'
 	resp.headers['X-Accel-Buffering'] = 'no'

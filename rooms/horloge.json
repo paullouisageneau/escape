@@ -1,10 +1,11 @@
 {
 	"name": "Horloge",
 	"style_url": "/media/horloge/style.css",
-	"notification_audio_url": "/media/horloge/notification.mp3",
-	"chrono_offset": 60,
+	"chrono_offset": 3600,
 	"chrono_reversed": true,
-	"reset_pin": 5,
+	"chrono_video_url": "/media/horloge/sablier.mp4",
+	"chrono_video_offset": 43,
+	"reset_pin": 28,
 	"cameras": [
 		{
 			"name": "Camera 1",
@@ -39,6 +40,17 @@
 	],
 	"triggers": [
 		{
+			"name": "Playlist - Play",
+			"event": "background_audio",
+			"data": "/media/horloge/playlist.mp3"
+		},
+		{
+			"name": "Playlist - Pause",
+			"event": "background_audio",
+			"data": "",
+			"input_pin": 23
+		},
+		{
 			"name": [
 				"Porte Roue",
 				"Porte Chronos",
@@ -68,10 +80,25 @@
 		},
 		{
 			"name": "Sortie",
-			"event": "background_audio",
-			"data": "/media/horloge/sortie.mp3",
-			"input_pin": 18,
 			"pin": 11
+		},
+		{
+			"name": "Effet boule 1 et 2",
+			"event": "audio",
+			"data": "/media/horloge/boule1.mp3",
+			"input_pin": 18
+		},
+		{
+			"name": "Effet boule 3",
+			"event": "audio",
+			"data": "/media/horloge/boule3.mp3",
+			"input_pin": 23
+		},
+		{
+			"name": "Stop effet",
+			"event": "audio",
+			"data": ""
 		}
     ]
 }
+
