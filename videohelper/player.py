@@ -22,7 +22,7 @@ class Player:
 			path, hashString = path.split('#', 1);
 			hashParams = parse_qs(hashString);
 			if 't' in hashParams:
-				startTime = int(hashParams['t'].split(',', 1)[0])
+				startTime = int(hashParams['t'][0].split(',', 1)[0])
 			
 		print('Playing media: {}'.format(path))
 		self._proc = subprocess.Popen(['omxplayer', '-b', '-o', AUDIO_DEV, '-l', str(startTime), path], stdin=subprocess.PIPE, close_fds=True)
