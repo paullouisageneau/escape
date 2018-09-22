@@ -47,7 +47,7 @@ class EventSource(object):
 						self.last_id = event.id
 					if event.retry:
 						self.retry = event.retry
-					if event.data:
+					if event.data is not None:
 						return event
 			
 			time.sleep(self.retry/1000.)
