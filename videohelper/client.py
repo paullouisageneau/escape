@@ -18,3 +18,6 @@ class Client:
 					self.player.play(event.data)
 				else:
 					self.player.stop()
+			elif event.event == 'reset':
+				self.player.stop()
+
