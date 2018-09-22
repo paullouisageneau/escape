@@ -5,7 +5,7 @@
 	"chrono_reversed": true,
 	"chrono_video_url": "/media/horloge/sablier.mp4",
 	"chrono_video_offset": 43,
-	"reset_pin": 28,
+	"reset_pin": 24,
 	"cameras": [
 		{
 			"name": "Camera 1",
@@ -79,7 +79,7 @@
 			"pin": 9
 		},
 		{
-			"name": "Sortie",
+			"name": "Sortie et effet boule 3",
 			"pin": 11
 		},
 		{
@@ -87,12 +87,6 @@
 			"event": "audio",
 			"data": "/media/horloge/boule1.mp3",
 			"input_pin": 18
-		},
-		{
-			"name": "Effet boule 3",
-			"event": "audio",
-			"data": "/media/horloge/boule3.mp3",
-			"input_pin": 23
 		},
 		{
 			"name": "Stop effet",
