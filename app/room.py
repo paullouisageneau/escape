@@ -96,7 +96,7 @@ class Room:
 		if 'chrono_video_url' in self._conf:
 			if self.stop_time > 0:
 				self.events.publish('video', '')
-			else:
+			elif self.start_time > 0:
 				video_url = self._conf['chrono_video_url']
 				offset = self._conf.get('chrono_video_offset', 0)
 				delta = int(max(time.time() - self.start_time, 0) + offset)
