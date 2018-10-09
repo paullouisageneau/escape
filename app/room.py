@@ -93,6 +93,10 @@ class Room:
 	
 	def update_chrono(self):
 		self.events.publish('chrono', json.dumps({ 'start': self.start_time, 'stop': self.stop_time }))
+		if 'playlist_url' in self._conf:
+			if self.start_time > 0 and self.stop_time == 0:
+				audio_url = self._conf['playlist_url']
+				self.events.publish('background_audio', audio_url)
 		if 'chrono_video_url' in self._conf:
 			if self.stop_time > 0:
 				self.events.publish('video', '')

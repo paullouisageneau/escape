@@ -5,6 +5,7 @@
 	"chrono_reversed": true,
 	"chrono_video_url": "/media/horloge/sablier.mp4",
 	"chrono_video_offset": 43,
+	"playlist_url": "/media/horloge/playlist.mp3",
 	"reset_pin": 24,
 	"cameras": [
 		{
