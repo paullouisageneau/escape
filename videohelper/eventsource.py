@@ -5,7 +5,35 @@ import time
 from requests import RequestException
 
 # Simple SSE client
-class EventSource(object):
+
+class Event:
+	def __init__(self, raw):
+		self.event = None
+		self.id = None
+		self.retry = None
+		self.data = None
+		
+		# Parse event line by line
+		for line in raw.splitlines():
+			if not line:
+				continue
+			[name, value] = line.split(':', 1) if ':' in line else [line, '']
+			if value.startswith(' '):
+				value = value[1:]
+			
+			if name == 'event':
+				self.event = value
+			elif name == 'id':
+				self.id = value
+			elif name == 'retry':
+				self.retry = int(value)
+			elif name == 'data':
+				if self.data:
+					self.data+= '\n' + value
+				else:
+					self.data = value
+
+class EventSource:
 	def __init__(self, url, *, session=None, last_id=None, retry=3000):
 		self.url = url
 		self.session = session
@@ -52,31 +80,4 @@ class EventSource(object):
 			
 			time.sleep(self.retry/1000.)
 			self._connect()
-			
-class Event(object):
-	def __init__(self, raw):
-		self.event = None
-		self.id = None
-		self.retry = None
-		self.data = None
-		
-		# Parse event line by line
-		for line in raw.splitlines():
-			if not line:
-				continue
-			[name, value] = line.split(':', 1) if ':' in line else [line, '']
-			if value.startswith(' '):
-				value = value[1:]
-			
-			if name == 'event':
-				self.event = value
-			elif name == 'id':
-				self.id = value
-			elif name == 'retry':
-				self.retry = int(value)
-			elif name == 'data':
-				if self.data:
-					self.data+= '\n' + value
-				else:
-					self.data = value
 
