@@ -132,11 +132,12 @@ const vm = new Vue({
 			this.update();
 		},
 		paused: function(value) {
-			const element = document.getElementById('background-audio');
-			if(element) {
-				if(value) element.pause();
-				else element.play();
-			}
+			// Disconnected background audio from chrono
+			//const element = document.getElementById('background-audio');
+			//if(element) {
+			//	if(value) element.pause();
+			//	else element.play();
+			//}
 		},
 		backgroundVolume: function(value) {
 			const element = document.getElementById('background-audio');

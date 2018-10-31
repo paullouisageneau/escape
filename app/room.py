@@ -44,6 +44,8 @@ class Room:
 		
 		self.clues = []        # List of sent clues
 		self.current_clue = '' # Current displayed clue
+		
+		self._playlist_started = False
 
 	@property
 	def name(self):
@@ -94,9 +96,10 @@ class Room:
 	def update_chrono(self, source = 'room'):
 		self.events.publish('chrono', json.dumps({ 'start': self.start_time, 'stop': self.stop_time, 'source': source }))
 		if 'playlist_url' in self._conf:
-			if self.start_time > 0 and self.stop_time == 0:
+			if self.start_time > 0 and self.stop_time == 0 and not self._playlist_started:
 				audio_url = self._conf['playlist_url']
 				self.events.publish('background_audio', audio_url)
+				self._playlist_started = True
 		if 'chrono_video_url' in self._conf:
 			if self.stop_time > 0:
 				self.events.publish('video', '')
@@ -117,6 +120,7 @@ class Room:
 		self.set_clue('');
 		self.set_chrono(0, 0);
 		self.clues = []
+		self._playlist_started = False
 		for toggle in self.toggles:
 			toggle.reset()
 		for trigger in self.triggers:
