@@ -64,6 +64,13 @@
 			"togglable": true
 		},
 		{
+			"name": "Automate - Pause",
+			"hidden": true,
+			"input_pin": 23,
+			"event": "chrono",
+			"data": "stop",
+		},
+		{
 			"name": "Porte automatique",
 			"pin": 17
 		},

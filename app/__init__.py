@@ -64,7 +64,7 @@ def api_chrono():
 		data = request.get_json()
 		start_time = data['start']
 		stop_time = data['stop']
-		room.set_chrono(start_time, stop_time)
+		room.set_chrono(start_time, stop_time, 'api')
 	return jsonify({ 'start': room.start_time, 'stop': room.stop_time })
 
 @app.route('/api/clues', methods=['GET', 'POST'])

@@ -19,7 +19,7 @@ const vm = new Vue({
 			this.startTime = chrono.start;
 			this.stopTime = chrono.stop;
 		});
-
+		
 		// Initialize clues history
 		getJson('/api/clues', (array) => {
 			this.clues = array.map(c => c.text);
@@ -45,6 +45,17 @@ const vm = new Vue({
 				array.filter(i => !oldArray.includes(i)).forEach(i => doPost(i, true));
 				oldArray.filter(i => !array.includes(i)).forEach(i => doPost(i, false));
 			});
+		});
+		
+		const events = new EventSource('/api/events');
+		
+		// Chrono update
+		events.addEventListener('chrono', (event) => {
+			const chrono = JSON.parse(event.data);
+			if(chrono.source != 'api') {
+				this.startTime = chrono.start;
+				this.stopTime = chrono.stop;
+			}
 		});
 		
 		// Setup update callback every second

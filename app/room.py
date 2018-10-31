@@ -72,17 +72,17 @@ class Room:
 		self.update_clue()
 		return event_stream
 	
-	def start_chrono(self, start_time):
-		self.set_chrono(start_time, 0)
+	def start_chrono(self):
+		self.set_chrono(self.startTime + (time.time() - self.stopTime), 0)
 	
-	def stop_chrono(self, stop_time):
-		self.set_chrono(self.start_time, stop_time)
+	def stop_chrono(self):
+		self.set_chrono(self.start_time, time.time())
 	
-	def set_chrono(self, start_time, stop_time):
+	def set_chrono(self, start_time, stop_time, source = 'room'):
 		if start_time != self.start_time or stop_time != self.stop_time:
 			self.start_time = start_time
 			self.stop_time = stop_time
-			self.update_chrono()
+			self.update_chrono(source)
 	    
 	def set_clue(self, clue):
 		if self.current_clue != clue:
@@ -91,8 +91,8 @@ class Room:
 				self.clues.append(clue)
 			self.update_clue()
 	
-	def update_chrono(self):
-		self.events.publish('chrono', json.dumps({ 'start': self.start_time, 'stop': self.stop_time }))
+	def update_chrono(self, source = 'room'):
+		self.events.publish('chrono', json.dumps({ 'start': self.start_time, 'stop': self.stop_time, 'source': source }))
 		if 'playlist_url' in self._conf:
 			if self.start_time > 0 and self.stop_time == 0:
 				audio_url = self._conf['playlist_url']

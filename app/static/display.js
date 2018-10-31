@@ -24,7 +24,6 @@ const vm = new Vue({
 		}
 	},
 	mounted: function() {
-		const events = new EventSource('/api/events');
 		const noVideo = window.location.hash && window.location.hash.includes('novideo');
 		const noAudio = window.location.hash && window.location.hash.includes('noaudio');
 		
@@ -33,6 +32,8 @@ const vm = new Vue({
 			this.startTime = chrono.start;
 			this.stopTime = chrono.stop;
 		});
+		
+		const events = new EventSource('/api/events');
 		
 		// Chrono update
 		events.addEventListener('chrono', (event) => {
