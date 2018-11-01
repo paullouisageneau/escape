@@ -3,6 +3,7 @@ import time
 import atexit
 
 PULSE_DURATION = 100
+RECV_PULSE_DURATION = 500
 
 enable = True
 try:
@@ -67,7 +68,7 @@ class Pin:
 			try:
 				if self._mode != GPIO.IN:
 					GPIO.setup(self._number, GPIO.IN)
-				GPIO.add_event_detect(self._number, GPIO.RISING, callback=wrapped_callback, bouncetime=PULSE_DURATION*4)
+				GPIO.add_event_detect(self._number, GPIO.RISING, callback=wrapped_callback, bouncetime=int(RECV_PULSE_DURATION*1.5))
 			except RuntimeError:
 				print("Unable to read GPIO pin {}".format(self._number))
 		print("Waiting for a pulse on pin {}".format(self._number))
