@@ -68,7 +68,7 @@
 			"hidden": true,
 			"input_pin": 23,
 			"event": "chrono",
-			"data": "stop",
+			"data": "stop"
 		},
 		{
 			"name": "Porte automatique",
