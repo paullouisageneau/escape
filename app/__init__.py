@@ -64,7 +64,7 @@ def api_chrono():
 		data = request.get_json()
 		start_time = data['start']
 		stop_time = data['stop']
-		room.set_chrono(start_time, stop_time, 'api')
+		room.set_chrono(start_time, stop_time)
 	return jsonify({ 'start': room.start_time, 'stop': room.stop_time })
 
 @app.route('/api/clues', methods=['GET', 'POST'])
@@ -93,6 +93,20 @@ def api_clue(index):
 	if index >= len(room.clues):
 		abort(404)
 	return jsonify({ 'text': room.clues[index] })
+
+@app.route('/api/messages', methods=['GET', 'POST'])
+def api_messages():
+	if request.method == 'POST':
+		message = request.get_json()
+		room.handle_message(message)
+		return jsonify(message)
+	return jsonify(room.messages)
+
+@app.route('/api/messages/<int:index>', methods=['GET'])
+def api_message(index):
+	if index >= len(room.messages):
+		abort(404)
+	return jsonify(room.messages[index])
 
 @app.route('/api/toggles', methods=['GET'])
 def api_toggles():

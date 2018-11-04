@@ -27,6 +27,17 @@ const vm = new Vue({
 		const noVideo = window.location.hash && window.location.hash.includes('novideo');
 		const noAudio = window.location.hash && window.location.hash.includes('noaudio');
 		
+		// Initialize chrono
+		getJson('/api/chrono', (chrono) => {
+			this.startTime = chrono.start;
+			this.stopTime = chrono.stop;
+		});
+		
+		// Initialize clue
+		getJson('/api/clues/current', (clue) => {
+			this.clue = clue.text;
+		});
+		
 		const events = new EventSource('/api/events');
 		
 		// Chrono update

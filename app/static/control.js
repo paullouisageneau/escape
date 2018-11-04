@@ -9,8 +9,9 @@ const vm = new Vue({
 		chrono: '00:00:00',	// the chrono as displayed (HH:MM:SS)
 		inputClue: '',		// the clue input from the user
 		clues: [],			// all the sent clues
+		inputMessage: '',	// the message input from the user
+		messages: [],		// the message list
 		currentClueIndex: -1,	// index of the current clue
-		show: false,	// last clue is visible
 		enabled: []		// the indexes of enabled toggles
 	},
 	mounted: function() {
@@ -52,10 +53,33 @@ const vm = new Vue({
 		// Chrono update
 		events.addEventListener('chrono', (event) => {
 			const chrono = JSON.parse(event.data);
-			if(chrono.source != 'api') {
-				this.startTime = chrono.start;
-				this.stopTime = chrono.stop;
+			this.startTime = chrono.start;
+			this.stopTime = chrono.stop;
+		});
+		
+		// Clue update
+		events.addEventListener('clue', (event) => {
+			const clue = JSON.parse(event.data);
+			if(!clue.text) {
+				this.currentClueIndex = -1;
+				return;
 			}
+			this.clues.push(clue.text);
+			this.currentClueIndex = this.clues.length-1;
+			setTimeout(() => {
+				const scroll = this.$el.querySelector("#clues .scroll");
+				scroll.scrollTop = scroll.scrollHeight;
+			}, 0);
+		});
+
+		// Messages
+		events.addEventListener('message', (event) => {
+			const message = JSON.parse(event.data);
+			this.messages.push(message);
+			setTimeout(() => {
+				const scroll = this.$el.querySelector("#messages .scroll");
+				scroll.scrollTop = scroll.scrollHeight;
+			}, 0);
 		});
 		
 		// Setup update callback every second
@@ -66,10 +90,16 @@ const vm = new Vue({
 			// stopTime set to zero means the chronometer is running
 			this.startTime = this.startTime + (time() - this.stopTime);
 			this.stopTime = 0;
+			this.syncTime();
 		},
 		stop: function() {
 			// stopTime set to nonzero value means the chronometer is stopped at stopTime
 			this.stopTime = time();
+			this.syncTime();
+		},
+		delay: function(d) {
+			this.startTime = Math.min(this.startTime + d, time());
+			this.syncTime();
 		},
 		trigger: function(i) {
 			postJson(`/api/triggers/${i}`, {}, (trigger) => {
@@ -112,21 +142,25 @@ const vm = new Vue({
 			}
 			postJson('/api/clues', {
 				text: text
-			}, (clue) => {
-				this.clues.push(clue.text);
-				this.currentClueIndex = this.clues.length-1;
-				setTimeout(() => {
-					const scroll = this.$el.querySelector("#clues .scroll");
-					scroll.scrollTop = scroll.scrollHeight;
-				}, 0);
+			});
+		},
+		sendMessage: function(text) {
+			if(!text) {
+				if(!this.inputMessage) {
+					alert("Entrez d'abord un message.");
+					return;
+				}
+				text = this.inputMessage;
+				this.inputMessage = '';
+			}
+			postJson('/api/messages', {
+				sender: 'GM',
+				text: text
 			});
 		},
 		hideClue: function() {
-			this.currentClueIndex = -1;
 			postJson('/api/clues', {
 				text: ''
-			}, (clue) => {
-				this.show = false;
 			});
 		},
 		reset: function() {
@@ -139,17 +173,10 @@ const vm = new Vue({
 	},
 	watch: {
 		startTime: function(value, oldValue) {
-			if(value > time()) {
-				this.startTime = time();
-				return;
-			}
 			this.elapsed = 0;	// Allow the chrono to decrease
-			this.syncTime();
 			this.update();
 		},
 		stopTime: function(value, oldValue) {
-			if(!value) return;
-			this.syncTime();
 			this.update();
 		}
 	}

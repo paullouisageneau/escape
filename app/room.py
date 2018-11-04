@@ -24,8 +24,7 @@ class Room:
 		self.triggers = [Trigger(c, self) for c in conf.get('triggers', [])]
 		self.cameras = [Camera(c) for c in conf.get('cameras', [])]
 		self.microphones = [Microphone(c) for c in conf.get('microphones', [])]
-		self.puzzles = [Puzzle(c) for c in conf.get('puzzles', [])]
-		
+
 		reset_conf = { 'name': 'reset', 'event': 'reset', 'data': '' }
 		if 'reset_pin' in conf:
 			reset_conf['pin'] = int(conf['reset_pin'])
@@ -44,6 +43,8 @@ class Room:
 		
 		self.clues = []        # List of sent clues
 		self.current_clue = '' # Current displayed clue
+		
+		self.messages = []     # List of messages
 		
 		self._playlist_started = False
 
@@ -64,14 +65,15 @@ class Room:
 		return bool(self._conf.get('chrono_reversed', False))
 	
 	@property
+	def messages_enabled(self):
+		return bool(self._conf.get('messages_enabled', False))
+	
+	@property
 	def media_triggers_indexes(self):
 		return [i for i in range(len(self.triggers)) if self.triggers[i].is_media]
 	
 	def subscribe(self):
 		event_stream = self.events.subscribe()
-		# Re-publish events
-		self.update_chrono()
-		self.update_clue()
 		return event_stream
 	
 	def start_chrono(self):
@@ -80,28 +82,24 @@ class Room:
 	def stop_chrono(self):
 		self.set_chrono(self.start_time, time.time())
 	
-	def set_chrono(self, start_time, stop_time, source = 'room'):
+	def set_chrono(self, start_time, stop_time):
 		if start_time != self.start_time or stop_time != self.stop_time:
 			self.start_time = start_time
 			self.stop_time = stop_time
-			self.update_chrono(source)
-	    
-	def set_clue(self, clue):
-		if self.current_clue != clue:
-			self.current_clue = clue
-			if clue:
-				self.clues.append(clue)
-			self.update_clue()
+			self.update_chrono()
+			self.update_chrono_media()
 	
-	def update_chrono(self, source = 'room'):
-		self.events.publish('chrono', json.dumps({ 'start': self.start_time, 'stop': self.stop_time, 'source': source }))
+	def update_chrono(self):
+		self.events.publish('chrono', json.dumps({ 'start': self.start_time, 'stop': self.stop_time }))
+		
+	def update_chrono_media(self):
 		if 'playlist_url' in self._conf:
 			if self.start_time > 0 and self.stop_time == 0 and not self._playlist_started:
 				audio_url = self._conf['playlist_url']
 				self.events.publish('background_audio', audio_url)
 				self._playlist_started = True
 		if 'chrono_video_url' in self._conf:
-			if self.stop_time > 0:
+			if self.stop_time > 0 or self.current_clue:
 				self.events.publish('video', '')
 			elif self.start_time > 0:
 				video_url = self._conf['chrono_video_url']
@@ -109,17 +107,26 @@ class Room:
 				delta = int(max(time.time() - self.start_time, 0) + offset)
 				self.events.publish('video', '{}#t={}'.format(video_url, delta))
 	
+	def set_clue(self, clue):
+		if self.current_clue != clue:
+			self.current_clue = clue
+			if clue:
+				self.clues.append(clue)
+			self.update_clue()
+			self.update_chrono_media()
+	
 	def update_clue(self):
-		if self.current_clue:
-			self.events.publish('video', '')
-		else:
-			self.update_chrono()
 		self.events.publish('clue', json.dumps({ 'text': self.current_clue }))
+	
+	def handle_message(self, message):
+		self.messages.append(message)
+		self.events.publish('message', json.dumps(message))
 	
 	def reset(self):
 		self.set_clue('');
 		self.set_chrono(0, 0);
 		self.clues = []
+		self.messages = []
 		self._playlist_started = False
 		for toggle in self.toggles:
 			toggle.reset()

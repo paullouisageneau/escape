@@ -1,0 +1,21 @@
+<section id="messages">
+	<h2>Messages</h2>
+	<div class="form">
+		<div>
+			<input type="text" name="message" class="message" v-model="inputMessage">
+		</div>
+		<div>
+			<input type="button" class="button" value="Envoyer" v-on:click="sendMessage()">
+		</div>
+	</div>
+	<div class="history">
+		<div class="scroll">
+			<ol>
+				<li v-for="message in messages">
+					<span class="sender">${message.sender}:</span>
+					<span class="text">${message.text}</span>
+				</li>
+			</ol>
+		</div>
+	</div>
+</section>

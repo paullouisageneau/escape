@@ -22,9 +22,9 @@
 				{% include 'toggles.html' %}
 			</div>
 		</div>
-		{% if room.puzzles %}
+		{% if room.messages_enabled %}
 		<div id="secondary">
-			{% include 'puzzles.html' %}
+			{% include 'messages.html' %}
 		</div>
 		{% endif %}
 	</div>
