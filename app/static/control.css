@@ -1,9 +1,21 @@
+header {
+	display: block;
+	clear: both;
+}
+
+main {
+	display: block;
+	clear: both;
+}
+
 section {
+	display: block;
 	margin: 0.25em 0.25em;
 	padding: 0.5em 0.5em;
 	border: 1px solid #808080;
 	border-radius: 3px;
 	overflow: hidden;
+	clear: both;
 }
 
 .switch {
@@ -112,11 +124,6 @@ input[type=text] {
 	background-color: #F0F0F0;
 }
 
-#columns {
-	display: block;
-	clear: both;
-}
-
 #chrono {
 	display: flex;
 	flex-wrap: wrap;
@@ -147,15 +154,16 @@ input[type=text] {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
-	list-style-type: disc;
 }
 
 #clues > div {
+	flex-grow: 1;
+	min-width: 20em;
 	margin-bottom: 0.5em;
 }
 
 #clues input[type=text] {
-	width: 99%;
+	width: 98%;
 }
 
 #clues .button {
@@ -171,7 +179,7 @@ input[type=text] {
 }
 
 #clues .history {
-	flex-grow: 1;
+	flex-grow: 1000;
 	min-width: 20em;
 	margin-left: 1em;
 }
@@ -183,6 +191,56 @@ input[type=text] {
 
 #clues .scroll {
 	height: 10em;
+	margin-top: 0.25em;
+	overflow-y: scroll;
+}
+
+#messages {
+	flex-grow: 1000;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	list-style-type: disc;
+}
+
+#messages > div {
+	flex-grow: 1;
+	min-width: 20em;
+	margin-bottom: 0.5em;
+}
+
+#messages input[type=text] {
+	width: 98%;
+}
+
+#messages .button {
+	width: 10em;
+}
+
+#messages .message {
+	font-family: monospace;
+}
+
+#messages .message .sender {
+	font-weight: bold;
+}
+
+#messages .history {
+	flex-grow: 2;
+	margin-left: 1em;
+}
+
+#messages p {
+	margin-bottom: 0.25em;
+}
+
+#messages ol {
+	padding-left: 0.5em;
+}
+
+#messages .scroll {
+	height: 20em;
+	margin-top: 0.25em;
 	overflow-y: scroll;
 }
 
@@ -231,17 +289,3 @@ input[type=text] {
 	}
 }
 
-/* For desktop, two-columns display */
-@media only screen and (min-width: 768px) {
-	#columns {
-		display: flex;
-	}
-
-	#primary {
-		flex-grow: 1;
-	}
-
-	#secondary {
-		min-width: 24em;
-	}
-}

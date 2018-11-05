@@ -24,10 +24,10 @@
 		<div id="clue" v-if="clue">${clue}</div>
 	</div>
 	<script src="{{ url_for('static', filename='display.js') }}"></script>
-{% if room.chrono_offset %}
+	{% if room.chrono_offset %}
 	<script>chronoOffset = {{ room.chrono_offset }};</script>
-{% endif %}
-{% if room.chrono_reversed %}
+	{% endif %}
+	{% if room.chrono_reversed %}
 	<script>chronoReversed = true;</script>
-{% endif %}
+	{% endif %}
 {% endblock %}

@@ -1,4 +1,6 @@
 
+let messagesSender = 'User';
+
 const vm = new Vue({
 	delimiters:['${', '}'],	// by default, it's {{ }}, which would conflicts with Flask Jinja templates
 	el: '#control',			// the vue instance controls the element whose id is "control"
@@ -30,7 +32,12 @@ const vm = new Vue({
 		getJson('/api/clues/current', (clue) => {
 			this.currentClueIndex = clue.index;
 		});
-
+		
+		// Initialize messages history
+		getJson('/api/messages', (array) => {
+			this.messages = array;
+		});
+		
 		// Initialize toggles
 		getJson('/api/toggles', (array) => {
 			// Initialize enabled with the indexes of the enabled toggles
@@ -154,7 +161,7 @@ const vm = new Vue({
 				this.inputMessage = '';
 			}
 			postJson('/api/messages', {
-				sender: 'GM',
+				sender: messagesSender,
 				text: text
 			});
 		},

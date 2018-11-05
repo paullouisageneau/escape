@@ -1,33 +1,32 @@
 {% extends "base.html" %}
 {% block title %}{{ room.name }}{% endblock %}
 {% block head %}
-{{ super() }}
-<link rel="stylesheet" href="{{ url_for('static', filename='control.css') }}">
-<script src="{{ config['VUE_URL'] }}"></script>
+	{{ super() }}
+	<link rel="stylesheet" href="{{ url_for('static', filename='control.css') }}">
+	<script src="{{ config['VUE_URL'] }}"></script>
 {% endblock %}
 {% block content %}
-{{ super() }}
-<div id="control">
-	<header>
-		<input type="button" id="reset" class="button red" value="Réinitialiser" v-on:click="reset">
-		<a href="/camera" target="_blank">View cameras</a>
-		<h1>{{ room.name }}</h1>
-	</header>
-	<div id="columns">
-		<div id="primary">
+	{{ super() }}
+	<div id="control">
+		<header>
+			<input type="button" id="reset" class="button red" value="Réinitialiser" v-on:click="reset">
+			<a href="/camera" target="_blank">View cameras</a>
+			<h1>{{ room.name }}</h1>
+		</header>
+		<main>
 			{% include 'chrono.html' %}
 			<div id="interactions">
 				{% include 'clues.html' %}
 				{% include 'triggers.html' %}
 				{% include 'toggles.html' %}
 			</div>
-		</div>
-		{% if room.messages_enabled %}
-		<div id="secondary">
+			{% if room.messages_enabled %}
 			{% include 'messages.html' %}
-		</div>
-		{% endif %}
+			{% endif %}
+		</main>
 	</div>
-</div>
-<script src="{{ url_for('static', filename='control.js') }}"></script>
+	{<script src="{{ url_for('static', filename='control.js') }}"></script>
+	{% if room.messages_sender %}
+	<script>messagesSender = '{{ room.messages_sender }}';</script>
+	{% endif %}
 {% endblock %}

@@ -1,7 +1,7 @@
 <section id="messages">
-	<h2>Messages</h2>
 	<div class="form">
 		<div>
+			<p>Message:</p>
 			<input type="text" name="message" class="message" v-model="inputMessage">
 		</div>
 		<div>
@@ -9,11 +9,15 @@
 		</div>
 	</div>
 	<div class="history">
+		<p>Historique des messages:</p>
 		<div class="scroll">
-			<ol>
+			<p v-if="!messages.length">Aucun</p>
+			<ol v-if="messages.length">
 				<li v-for="message in messages">
-					<span class="sender">${message.sender}:</span>
-					<span class="text">${message.text}</span>
+					<span class="message">
+						<span class="sender">${message.sender}:</span>
+						<span class="text">${message.text}</span>
+					</span>
 				</li>
 			</ol>
 		</div>

@@ -69,6 +69,10 @@ class Room:
 		return bool(self._conf.get('messages_enabled', False))
 	
 	@property
+	def messages_sender(self):
+		return self._conf.get('messages_sender', '')
+	
+	@property
 	def media_triggers_indexes(self):
 		return [i for i in range(len(self.triggers)) if self.triggers[i].is_media]
 	

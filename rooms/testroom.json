@@ -1,6 +1,7 @@
 {
 	"name": "Salle de test",
 	"messages_enabled": true,
+	"messages_sender": "Test",
 	"notification_audio_url": "/media/audio.mp3",
 	"cameras": [
 		{
