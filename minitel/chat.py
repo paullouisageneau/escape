@@ -50,8 +50,9 @@ class Chat:
 				ch = stdscr.getch()
 				with self._condition:
 					if ch == curses.KEY_ENTER or ch == 10 or ch == 13:
-						self.send(self._input)
-						self._input = ""
+						if self._input:
+							self.send(self._input)
+							self._input = ""
 					elif ch == curses.KEY_BACKSPACE or ch == curses.KEY_DC or ch == 127:
 						if len(self._input) > 0:
 							self._input = self._input[:-1]
@@ -62,11 +63,11 @@ class Chat:
 		def curses_main(stdscr):
 			stdscr.clear()
 			stdscr.refresh()
-			y, x = stdscr.getmaxyx()
-			win = curses.newwin(y-1, x, 0, 0)
+			sy, sx = stdscr.getmaxyx()
+			win = curses.newwin(sy-1, sx, 0, 0)
 			win.scrollok(True)
 			win.idlok(True)
-			input_win = curses.newwin(1, x, y-1, 0)
+			input_win = curses.newwin(1, sx, sy-1, 0)
 			
 			input_thread = threading.Thread(target=input_loop, args=(stdscr,));
 			input_thread.start()
@@ -74,13 +75,19 @@ class Chat:
 			index = 0
 			with self._condition:
 				while True:
+					changed = False
 					while index < len(self.messages):
 						message = self.messages[index]
 						line = "{}: {}\n".format(message.sender, message.text)
 						win.addstr(line)
 						index+= 1
-					win.refresh()
-					input_win.clear()
+						changed = True
+					if changed:
+						win.refresh()
+					if len(self._input) > sx-3:
+						self._input = self._input[:sx-3]
+						curses.beep()
+					input_win.erase()
 					input_win.addstr(0, 0, "> " + self._input)
 					input_win.refresh()
 					self._condition.wait()
