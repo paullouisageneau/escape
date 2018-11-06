@@ -25,7 +25,7 @@
 			{% endif %}
 		</main>
 	</div>
-	{<script src="{{ url_for('static', filename='control.js') }}"></script>
+	<script src="{{ url_for('static', filename='control.js') }}"></script>
 	{% if room.messages_sender %}
 	<script>messagesSender = '{{ room.messages_sender }}';</script>
 	{% endif %}
