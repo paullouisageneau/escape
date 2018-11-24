@@ -2,8 +2,8 @@
 import time
 import atexit
 
-PULSE_DURATION = 100
-RECV_PULSE_DURATION = 500
+PULSE_DURATION = 200
+RECV_PULSE_DURATION = 200
 
 enable = True
 try:
