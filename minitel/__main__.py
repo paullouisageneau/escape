@@ -1,5 +1,6 @@
 
 import sys
+import signal
 
 from .chat import Chat
 from .client import Client

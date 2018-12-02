@@ -17,7 +17,7 @@ class Message:
 	
 	@classmethod
 	def parse(cls, data):
-		m = json.loads(data)
+		m = json.loads(data) if isinstance(data, str) else data
 		return Message(m['sender'], m['text']) if m else None
 
 class Chat:
@@ -31,13 +31,18 @@ class Chat:
 		message = Message.parse(data)
 		if message:
 			self._push(message)
+			return True
+		return False
 	
 	def send(self, text):
 		message = Message(SENDER, text)
-		self._sendFunc(message.dump())
+		return self._sendFunc(message.dump())
 	
 	def clear(self):
-		self.messages = []
+		with self._condition:
+			self.messages = []
+			self._input = ""
+			self._condition.notify()
 	
 	def _push(self, message):
 		with self._condition:
@@ -51,7 +56,8 @@ class Chat:
 				with self._condition:
 					if ch == curses.KEY_ENTER or ch == 10 or ch == 13:
 						if self._input:
-							self.send(self._input)
+							if not self.send(self._input):
+								curses.beep()
 							self._input = ""
 					elif ch == curses.KEY_BACKSPACE or ch == curses.KEY_DC or ch == 127:
 						if len(self._input) > 0:
@@ -75,15 +81,15 @@ class Chat:
 			index = 0
 			with self._condition:
 				while True:
-					changed = False
+					if index > len(self.messages):
+						win.clear()
+						index = 0
 					while index < len(self.messages):
 						message = self.messages[index]
 						line = "{}: {}\n".format(message.sender, message.text)
 						win.addstr(line)
 						index+= 1
-						changed = True
-					if changed:
-						win.refresh()
+					win.refresh()
 					if len(self._input) > sx-3:
 						self._input = self._input[:sx-3]
 						curses.beep()
