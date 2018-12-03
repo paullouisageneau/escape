@@ -13,6 +13,7 @@ MESSAGES_PATH = '/api/messages'
 RETRY_DELAY = 1
 MAX_BACKLOG = 22
 MSG_CONNECTING = "Connexion..."
+MSG_CLOSING = "Fin."
 
 class ClientRetry(Retry):
 	def __init__(self, **kwargs):
@@ -47,10 +48,14 @@ class Client:
 		self._populate()
 		events = EventSource(self.url + EVENTS_PATH)
 		self.chat.start()
-		for event in events:
-			if event.event == 'message':
-				self.chat.recv(event.data)
-			elif event.event == 'reset':
-				self.chat.clear()
+		try:
+			for event in events:
+				if event.event == 'message':
+					self.chat.recv(event.data)
+				elif event.event == 'reset':
+					self.chat.clear()
+		finally:
+			self.chat.stop()
+			print(MSG_CLOSING)
 
 
