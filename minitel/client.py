@@ -23,9 +23,9 @@ class ClientRetry(Retry):
 		time.sleep(RETRY_DELAY)
 
 class Client:
-	def __init__(self, url):
+	def __init__(self, url, username):
 		self.url = url.rstrip('/')
-		self.chat = Chat(lambda data: self.send(data))
+		self.chat = Chat(username, lambda data: self.send(data))
 
 	def send(self, data):
 		headers = { 'Content-Type': 'application/json' }

@@ -5,8 +5,6 @@ import threading
 import _thread
 import json
 
-SENDER = 'Minitel'
-
 class Message:
 	def __init__(self, sender, text):
 		self.sender = sender
@@ -22,9 +20,10 @@ class Message:
 		return Message(m['sender'], m['text']) if m else None
 
 class Chat:
-	def __init__(self, sendFunc):
+	def __init__(self, username, send_func):
 		self.messages = []
-		self._sendFunc = sendFunc
+		self._username = username
+		self._send_func = send_func
 		self._condition = threading.Condition()
 		self._curses_thread = None
 		self._stopped = False
@@ -38,8 +37,8 @@ class Chat:
 		return False
 	
 	def send(self, text):
-		message = Message(SENDER, text)
-		return self._sendFunc(message.dump())
+		message = Message(self._username, text)
+		return self._send_func(message.dump())
 	
 	def clear(self):
 		with self._condition:
