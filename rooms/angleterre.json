@@ -68,12 +68,12 @@
 			"name": "Vidéo 1",
 			"event": "video",
 			"data": "/media/video.mp4",
-			"input_pin": 23,
+			"input_pin": 23
 		},
 		{
 			"name": "Vidéo 2",
 			"event": "video",
-			"data": "/media/video.mp4",
+			"data": "/media/video.mp4"
 		}
     ]
 }
