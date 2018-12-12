@@ -1,0 +1,80 @@
+{
+	"name": "MI6",
+	"style_url": "/media/angleterre/style.css",
+	"chrono_offset": 3600,
+	"chrono_reversed": true,
+	"reset_pin": 24,
+	"cameras": [
+		{
+			"name": "Camera 1",
+			"stream": 1,
+			"controller": {
+				"type": "ipcam",
+				"host": "192.168.1.141",
+				"username": "admin",
+				"password": "admin"
+			}
+		},
+		{
+			"name": "Camera 2",
+			"stream": 2,
+			"controller": {
+				"type": "ipcam",
+				"host": "192.168.1.142",
+				"username": "admin",
+				"password": "admin"
+			}
+		},
+		{
+			"name": "Camera 3",
+			"stream": 3,
+			"controller": {
+				"type": "ipcam",
+				"host": "192.168.1.143",
+				"username": "admin",
+				"password": "admin"
+			}
+		}
+	],
+	"triggers": [
+		{
+			"name": [
+				"Porte 1",
+				"Porte 2",
+				"Bibliothèque"
+			],
+			"pin": 17
+		},
+		{
+			"name": "Tiroir lampes UV",
+			"pin": 27
+		},
+		{
+			"name": "Digicode bibliothèque ON/OFF",
+			"pin": 22
+		},
+		{
+			"name": "Lumière ON/OFF",
+			"pin": 10
+		},
+		{
+			"name": "Automate - Pause",
+			"hidden": true,
+			"input_pin": 18,
+			"event": "chrono",
+			"data": "stop"
+		},
+		{
+			"name": "Vidéo 1",
+			"event": "video",
+			"data": "/media/video.mp4",
+			"input_pin": 23,
+		},
+		{
+			"name": "Vidéo 2",
+			"event": "video",
+			"data": "/media/video.mp4",
+		}
+    ]
+}
+
