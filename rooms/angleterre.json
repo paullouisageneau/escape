@@ -1,6 +1,8 @@
 {
 	"name": "MI6",
 	"style_url": "/media/angleterre/style.css",
+	"messages_enabled": true,
+	"messages_sender": "GM",
 	"chrono_offset": 3600,
 	"chrono_reversed": true,
 	"reset_pin": 24,
