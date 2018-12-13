@@ -5,7 +5,7 @@
 	"messages_sender": "GM",
 	"chrono_offset": 3600,
 	"chrono_reversed": true,
-	"reset_pin": 25,
+	"reset_pin": 11,
 	"cameras": [
 		{
 			"name": "Camera 1",
@@ -35,23 +35,29 @@
 	"triggers": [
 		{
 			"name": [
-				"Porte 1",
-				"Porte 2",
-				"Bibliothèque"
+				"Bibliothèque",
+				"Porte briefing"
 			],
 			"pin": 17
 		},
 		{
-			"name": "Tiroir lampes UV",
+			"name": [
+				"Porte armes",
+				"Porte couloir"
+			],
 			"pin": 27
 		},
 		{
-			"name": "Digicode bibliothèque",
+			"name": "Tiroir lampes UV",
 			"pin": 22
 		},
 		{
-			"name": "Lumière ON/OFF",
+			"name": "Digicode bibliothèque",
 			"pin": 10
+		},
+		{
+			"name": "Lumière ON/OFF",
+			"pin": 9
 		},
 		{
 			"name": "Automate - Pause",
