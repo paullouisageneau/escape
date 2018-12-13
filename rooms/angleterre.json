@@ -5,7 +5,7 @@
 	"messages_sender": "GM",
 	"chrono_offset": 3600,
 	"chrono_reversed": true,
-	"reset_pin": 24,
+	"reset_pin": 25,
 	"cameras": [
 		{
 			"name": "Camera 1",
@@ -29,13 +29,7 @@
 		},
 		{
 			"name": "Camera 3",
-			"stream": 3,
-			"controller": {
-				"type": "ipcam",
-				"host": "192.168.1.143",
-				"username": "admin",
-				"password": "admin"
-			}
+			"stream": 3
 		}
 	],
 	"triggers": [
@@ -69,13 +63,14 @@
 		{
 			"name": "Vidéo 1",
 			"event": "video",
-			"data": "/media/video.mp4",
+			"data": "/media/angleterre/video1.mp4",
 			"input_pin": 23
 		},
 		{
 			"name": "Vidéo 2",
 			"event": "video",
-			"data": "/media/video.mp4"
+			"data": "/media/angleterre/video2.mp4",
+			"input_pin": 24
 		}
     ]
 }
