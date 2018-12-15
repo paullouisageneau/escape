@@ -10,8 +10,8 @@ port = 8080
 def main():
 	try:
 		# Run the webapp on specified port
-		print("Listening on http://127.0.0.1:{}/".format(port))
-		http_server = WSGIServer(("127.0.0.1", port), app)
+		print("Listening on port {}".format(port))
+		http_server = WSGIServer(("0.0.0.0", port), app)
 		http_server.serve_forever()
 	except KeyboardInterrupt:
 		return 0
