@@ -2,7 +2,7 @@
 import subprocess
 from urllib.parse import parse_qs
 
-AUDIO_DEV = 'local' # hdmi/local/both
+AUDIO_DEV = 'hdmi' # hdmi/local/both
 MEDIA_PREFIX = 'media/'
 
 class Player:
