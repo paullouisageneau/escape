@@ -137,6 +137,9 @@ class Room:
 		for trigger in self.triggers:
 			trigger.reset()
 		self.reset_trigger.pull()
+		# Personalized chat prompt
+		self.handle_message({ 'sender': "Green", 'text': "Tenez-moi au courant de l'enquête ici." })
+		self.handle_message({ 'sender': "Green", 'text': "Dites-moi si vous avez un suspect."})
 		
 	def notify(self):
 		if self.notify_trigger:

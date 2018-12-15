@@ -2,7 +2,7 @@
 	"name": "MI6",
 	"style_url": "http://127.0.0.1:8080/media/angleterre/style.css",
 	"messages_enabled": true,
-	"messages_sender": "GM",
+	"messages_sender": "Green",
 	"chrono_offset": 3600,
 	"chrono_reversed": true,
 	"reset_pin": 11,
