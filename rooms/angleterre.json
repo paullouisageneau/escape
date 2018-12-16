@@ -1,6 +1,7 @@
 {
 	"name": "MI6",
 	"style_url": "http://127.0.0.1:8080/media/angleterre/style.css",
+	"notification_audio_url": "http://127.0.0.1:8080/media/angleterre/notification.mp3",
 	"messages_enabled": true,
 	"messages_sender": "Green",
 	"chrono_offset": 3600,
