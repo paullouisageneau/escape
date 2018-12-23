@@ -20,6 +20,8 @@ def Controller(conf):
 	
 	if type == 'ipcam':
 		return IpCamController(host, username, password)
+	elif type == 'linksys':
+		return LinksysController(host, username, password)
 	else:
 		raise ValueError('Invalid controller type')
 
@@ -40,6 +42,38 @@ class IpCamController:
 			url+= 'ptzctrl.cgi'
 			params = { '-step': 0, '-act': action, '-speed': 45 }
 		
+		auth = HTTPBasicAuth(self.username, self.password) if self.username or self.password else None
+		try:
+			req = requests.get(url, params=params, auth=auth)
+			return req.ok
+		except RequestException as e:
+			print(e)
+			return False
+
+class LinksysController:
+	def __init__(self, host, username, password):
+		self.host = host
+		self.username = username
+		self.password = password
+
+	def command(self, action):
+		print('Sending "{}" to camera at {}'.format(action, self.host))
+		url = 'http://{}/cgi/ptdc.cgi'.format(self.host)
+
+		x = 0
+		y = 0
+		if action == 'up':
+			y = -10
+		elif action = 'down':
+			y = 10
+		elif action = 'left':
+			x = -10
+		elif action = 'right':
+			y = 10
+
+		url+= 'param.cgi'
+		params = { 'command': 'set_relative_pos', 'posX': x, 'posY': y }
+
 		auth = HTTPBasicAuth(self.username, self.password) if self.username or self.password else None
 		try:
 			req = requests.get(url, params=params, auth=auth)
