@@ -57,21 +57,21 @@ class LinksysController:
 		self.password = password
 
 	def command(self, action):
-		print('Sending "{}" to camera at {}'.format(action, self.host))
-		url = 'http://{}/cgi/ptdc.cgi'.format(self.host)
-
 		x = 0
 		y = 0
 		if action == 'up':
+			y = 10
+		elif action == 'down':
 			y = -10
-		elif action = 'down':
-			y = 10
-		elif action = 'left':
+		elif action == 'left':
 			x = -10
-		elif action = 'right':
-			y = 10
+		elif action == 'right':
+			x = 10
+		else:
+			return True
 
-		url+= 'param.cgi'
+		print('Sending "{}" to camera at {}'.format(action, self.host))
+		url = 'http://{}/cgi/ptdc.cgi'.format(self.host)
 		params = { 'command': 'set_relative_pos', 'posX': x, 'posY': y }
 
 		auth = HTTPBasicAuth(self.username, self.password) if self.username or self.password else None
