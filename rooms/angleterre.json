@@ -55,7 +55,10 @@
 			"pin": 27
 		},
 		{
-			"name": "Tiroir lampes UV",
+			"name": [
+				"Tiroir lampes UV",
+				"Lecteur de cartes"
+			],
 			"pin": 22
 		},
 		{
@@ -71,7 +74,8 @@
 			"hidden": true,
 			"input_pin": 18,
 			"event": "chrono",
-			"data": "stop"
+			"data": "stop",
+			"togglable": "true"
 		},
 		{
 			"name": "Vidéo 1",
