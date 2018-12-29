@@ -86,8 +86,7 @@
 		{
 			"name": "Vidéo 2",
 			"event": "video",
-			"data": "/media/angleterre/video2.mp4",
-			"input_pin": 24
+			"data": "/media/angleterre/video2.mp4"
 		},
 		{
 			"name": "Stop vidéos",
