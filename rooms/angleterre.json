@@ -6,6 +6,7 @@
 	"messages_sender": "Green",
 	"chrono_offset": 3600,
 	"chrono_reversed": true,
+	"playlist_url": "http://127.0.0.1:8080/media/angleterre/playlist.mp3",
 	"reset_pin": 11,
 	"cameras": [
 		{
