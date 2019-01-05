@@ -33,7 +33,7 @@
 			"name": "Camera 3",
 			"stream": 3,
 			"controller": {
-				"type": "linksys",
+				"type": "ipcam",
 				"host": "192.168.1.143",
 				"username": "admin",
 				"password": "admin"
