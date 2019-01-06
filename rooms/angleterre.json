@@ -75,7 +75,7 @@
 			"hidden": true,
 			"input_pin": 18,
 			"event": "chrono",
-			"data": "toggle",
+			"data": "toggle"
 		},
 		{
 			"name": "Vidéo 1",
