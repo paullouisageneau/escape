@@ -81,7 +81,7 @@ class Room:
 		return event_stream
 	
 	def start_chrono(self):
-		self.set_chrono(self.startTime + (time.time() - self.stopTime), 0)
+		self.set_chrono(min(self.start_time + (time.time() - self.stop_time), time.time()), 0)
 	
 	def stop_chrono(self):
 		self.set_chrono(self.start_time, time.time())
