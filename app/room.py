@@ -86,6 +86,12 @@ class Room:
 	def stop_chrono(self):
 		self.set_chrono(self.start_time, time.time())
 	
+	def toggle_chrono(self):
+		if self.start_time > 0 and self.stop_time == 0:
+			self.stop_chrono()
+		else:
+			self.start_chrono()
+	
 	def set_chrono(self, start_time, stop_time):
 		if start_time != self.start_time or stop_time != self.stop_time:
 			self.start_time = start_time

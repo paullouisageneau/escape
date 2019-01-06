@@ -84,7 +84,9 @@ class Trigger:
 		if self._event:
 			enabled = not self._togglable or self._count % 2 == 0
 			if self._event == 'chrono':
-				if (self._data == 'stop') == enabled:
+				if self._data == 'toggle':
+					self._room.toggle_chrono()
+				elif (self._data == 'stop') == enabled:
 					self._room.stop_chrono()
 				else:
 					self._room.start_chrono()
