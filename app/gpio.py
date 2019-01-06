@@ -4,6 +4,7 @@ import atexit
 
 PULSE_DURATION = 200
 RECV_PULSE_DURATION = 200
+IGNORE_DURATION = 1000
 
 enable = True
 try:
@@ -61,9 +62,17 @@ class Pin:
 		self.value = False
 	
 	def listen(self, callback):
+		ref = time.perf_counter()
 		def wrapped_callback(number):
-			print("Detected a pulse on pin {}".format(number))
-			callback()
+			nonlocal ref
+			current = time.perf_counter()
+			if current >= ref + IGNORE_DURATION/1000.:
+				ref = current
+				print("Detected a pulse on pin {}".format(number))
+				callback()
+			else:
+				print("Ignored a pulse on pin {}".format(number))
+		
 		if enable:
 			try:
 				if self._mode != GPIO.IN:
