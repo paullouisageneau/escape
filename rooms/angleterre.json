@@ -89,8 +89,18 @@
 			"data": "/media/angleterre/video2.mp4"
 		},
 		{
-			"name": "Stop vidéos",
+			"name": "Stop vidéo",
 			"event": "video",
+			"data": ""
+		},
+		{
+			"name": "Mission impossible",
+			"event": "background_audio",
+			"data": "/media/angleterre/mission_impossible.mp3"
+		},
+		{
+			"name": "Stop audio",
+			"event": "background_audio",
 			"data": ""
 		}
     ]
