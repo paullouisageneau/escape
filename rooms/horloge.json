@@ -88,6 +88,16 @@
 			"input_pin": 18
 		},
 		{
+			"name": "Effet ouverture Chronos",
+			"event": "audio",
+			"data": "/media/horloge/ouverture_chronos.mp3"
+		},
+		{
+			"name": "Effet tic-tac redémarrage",
+			"event": "audio",
+			"data": "/media/horloge/tictac.mp3"
+		},
+		{
 			"name": "Stop effet",
 			"event": "audio",
 			"data": ""
