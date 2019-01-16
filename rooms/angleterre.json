@@ -96,7 +96,7 @@
 		{
 			"name": "Mission impossible",
 			"event": "background_audio",
-			"data": "/media/angleterre/mission_impossible.mp3"
+			"data": "http://localhost:8080/media/angleterre/mission_impossible.mp3"
 		},
 		{
 			"name": "Stop audio",
