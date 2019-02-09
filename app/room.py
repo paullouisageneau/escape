@@ -127,8 +127,8 @@ class Room:
 		self.events.publish('message', json.dumps(message))
 	
 	def reset(self):
-		self.set_clue('');
-		self.set_chrono(0, 0);
+		self.set_clue('')
+		self.set_chrono(0, 0)
 		self.clues = []
 		self.messages = []
 		self._playlist_started = False

@@ -5,15 +5,15 @@ class Camera:
 	def __init__(self, conf):
 		self._name = conf['name']
 		
-		if not 'stream' in conf:
+		if 'stream' not in conf:
 			raise ValueError('Missing camera stream')
 		self._stream = conf['stream']
 		
-		self._is_reversed = conf.get('reversed', False) == True
+		self._is_reversed = conf.get('reversed', False) is True
 		
 		if 'controller' in conf:
 			self.controller = Controller(conf['controller'])
-		else :
+		else:
 			self.controller = None
 	
 	@property

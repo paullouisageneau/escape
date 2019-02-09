@@ -28,7 +28,7 @@ class Client:
 
 	def send(self, data):
 		headers = { 'Content-Type': 'application/json' }
-		r = requests.post(self.url + MESSAGES_PATH, data = data, headers = headers)
+		r = requests.post(self.url + MESSAGES_PATH, data=data, headers=headers)
 		return r.ok
 
 	def _populate(self):

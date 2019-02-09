@@ -3,7 +3,7 @@ class Microphone:
 	def __init__(self, conf):
 		self._name = conf['name']
 		
-		if not 'stream' in conf:
+		if 'stream' not in conf:
 			raise ValueError('Missing microphone stream')
 		self._stream = conf['stream']
 	
