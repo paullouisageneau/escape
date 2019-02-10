@@ -1,7 +1,8 @@
- 
-import sys
+#!/usr/bin/env python3
 
-from app.__main__ import main
+import sys
+import app
 
 # Run the app !
-sys.exit(main())
+sys.exit(app.main())
+

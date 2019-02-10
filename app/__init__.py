@@ -146,3 +146,6 @@ def api_events():
 	resp.headers['X-Accel-Buffering'] = 'no'
 	return resp
 
+# Import main to expose it outside
+from .__main__ import main
+

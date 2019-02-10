@@ -1,6 +1,7 @@
- 
+#!/usr/bin/env python3
+
 import sys
+import minitel
 
-from minitel.__main__ import main
+sys.exit(minitel.main())
 
-sys.exit(main())
