@@ -97,6 +97,8 @@ class Chat:
 						message = self.messages[index]
 						line = "{}: {}\n".format(message.sender, message.text)
 						win.addstr(line)
+						if message.sender != username:
+							curses.beep()
 						index+= 1
 					win.refresh()
 					if len(self._input) > sx-3:
