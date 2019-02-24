@@ -84,35 +84,9 @@ const vm = new Vue({
 					if(element) element.play();
 				}
 				else {
-					let previousSrc, previousTime;
-					if(element) {
-						const source = element.getElementsByTagName('source')[0];
-						previousSrc = source.src;
-						previousTime = element.currentTime;
-					}
 					this.backgroundAudio = null;
 					Vue.nextTick(() => {
 						this.backgroundAudio = event.data;
-						// Loop on previous background audio if it was present
-						if(previousSrc) {
-							Vue.nextTick(() => {
-								const element = document.getElementById('background-audio');
-								if(element) {
-									element.loop = false;
-									element.onended = () => {
-										const source = element.getElementsByTagName('source')[0];
-										source.src = previousSrc;
-										element.loop = true;
-										element.load();
-										element.play();
-										element.oncanplay = () => {
-											element.currentTime = previousTime;
-											element.oncanplay = () => {};
-										};
-									};
-								}
-							});
-						}
 					});
 				}
 			}
