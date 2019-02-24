@@ -20,7 +20,7 @@ const vm = new Vue({
 			return this.stopTime > 0;
 		},
 		backgroundVolume: function() {
-			return this.audio || this.clue ? 0.3 : 1.0;
+			return this.audio || this.clue ? 0 : 1.0;
 		}
 	},
 	mounted: function() {

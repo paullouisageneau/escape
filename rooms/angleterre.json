@@ -95,12 +95,12 @@
 		},
 		{
 			"name": "Mission impossible",
-			"event": "background_audio",
-			"data": "http://localhost:8080/media/angleterre/mission_impossible.mp3"
+			"event": "audio",
+			"data": "http://127.0.0.1:8080/media/angleterre/mission_impossible.mp3"
 		},
 		{
 			"name": "Stop audio",
-			"event": "background_audio",
+			"event": "audio",
 			"data": ""
 		}
     ]
