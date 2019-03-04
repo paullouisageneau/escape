@@ -93,13 +93,16 @@ class Chat:
 					if index > len(self.messages):
 						win.clear()
 						index = 0
+					has_new = False
 					while index < len(self.messages):
 						message = self.messages[index]
 						line = "{}: {}\n".format(message.sender, message.text)
 						win.addstr(line)
 						if message.sender != self._username:
-							curses.beep()
+							has_new = True
 						index+= 1
+					if has_new:
+						curses.beep()
 					win.refresh()
 					if len(self._input) > sx-3:
 						self._input = self._input[:sx-3]
