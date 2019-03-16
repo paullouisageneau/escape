@@ -1,6 +1,6 @@
- 
+#!/usr/bin/env python3
+
 import sys
+import videohelper
 
-from videohelper.__main__ import main
-
-sys.exit(main())
+sys.exit(videohelper.main())

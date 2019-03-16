@@ -3,7 +3,7 @@ from .gpio import Pin
 
 class Toggle:
 	def __init__(self, conf):
-		if not 'name' in conf:
+		if 'name' not in conf:
 			raise KeyError('No name specified for toggle')
 		
 		self._name = conf['name']
@@ -12,7 +12,7 @@ class Toggle:
 		
 		self._hidden = 'hidden' in conf and conf['hidden']
 		
-		if not 'pin' in conf:
+		if 'pin' not in conf:
 			raise KeyError('No pin specified for toggle "{}"'.format(self._name))
 		
 		self._pin = Pin(int(conf['pin']))

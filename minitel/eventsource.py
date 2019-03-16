@@ -64,7 +64,7 @@ class EventSource:
 		while True:
 			raw_event = ""
 			for line in self.response_iter:
-				encoding =  self.response.encoding if self.response.encoding else 'utf-8'
+				encoding = self.response.encoding if self.response.encoding else 'utf-8'
 				line = line.decode(encoding, errors='ignore')
 				if line:
 					raw_event+= line+'\n'

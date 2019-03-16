@@ -12,15 +12,15 @@ class Player:
 	
 	def play(self, path):
 		self.stop()
-		if not '://' in path:
+		if '://' not in path:
 			path = path.lstrip('/')
 			path = path[len(MEDIA_PREFIX):] if path.startswith(MEDIA_PREFIX) else path
 			path = self._media_path + '/' + path
 			
 		startTime = 0
 		if '#' in path:
-			path, hashString = path.split('#', 1);
-			hashParams = parse_qs(hashString);
+			path, hashString = path.split('#', 1)
+			hashParams = parse_qs(hashString)
 			if 't' in hashParams:
 				startTime = int(hashParams['t'][0].split(',', 1)[0])
 			

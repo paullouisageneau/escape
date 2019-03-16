@@ -83,7 +83,7 @@ class Chat:
 			win.idlok(True)
 			input_win = curses.newwin(1, sx, sy-1, 0)
 			
-			input_thread = threading.Thread(target=input_loop, args=(stdscr,));
+			input_thread = threading.Thread(target=input_loop, args=(stdscr,))
 			input_thread.daemon = True
 			input_thread.start()
 			

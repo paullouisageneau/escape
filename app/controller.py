@@ -4,9 +4,9 @@ from requests.auth import HTTPBasicAuth
 from requests.exceptions import RequestException
 
 def Controller(conf):
-	if not 'type' in conf:
+	if 'type' not in conf:
 		raise ValueError('Missing controller type')
-	if not 'host' in conf:
+	if 'host' not in conf:
 		raise ValueError('Missing controller host')
 	
 	type = conf['type']
@@ -34,7 +34,7 @@ class IpCamController:
 	def command(self, action):
 		print('Sending "{}" to camera at {}'.format(action, self.host))
 		url = 'http://{}/cgi-bin/hi3510/'.format(self.host)
-       
+		
 		if action == 'init':
 			url+= 'param.cgi'
 			params = { 'cmd': 'setmotorattr', '-tiltspeed': 1, '-panspeed': 1 }

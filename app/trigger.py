@@ -9,7 +9,7 @@ class Trigger:
 	def __init__(self, conf, room):
 		self._room = room
 		
-		if not 'name' in conf:
+		if 'name' not in conf:
 			raise KeyError('No name specified for trigger')
 		
 		self._name = conf['name']

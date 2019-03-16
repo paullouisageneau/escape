@@ -42,7 +42,7 @@ def camera():
 
 @app.route('/api/camera/<int:index>', methods=['POST'])
 def camera_controller(index):
-	if not index in range(len(room.cameras)):
+	if index not in range(len(room.cameras)):
 		abort(404)
 	camera = room.cameras[index]
 	if not camera.controller:
@@ -116,7 +116,7 @@ def api_toggles():
 def api_toggle(index):
 	if index >= len(room.toggles):
 		abort(404)
-	toggle = room.toggles[index];
+	toggle = room.toggles[index]
 	if request.method == 'POST':
 		data = request.get_json()
 		toggle.value = bool(data['value'])
@@ -145,4 +145,7 @@ def api_events():
 	resp.headers['Cache-Control'] = 'no-cache'
 	resp.headers['X-Accel-Buffering'] = 'no'
 	return resp
+
+# Import main to expose it outside
+from .__main__ import main
 
