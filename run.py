@@ -5,4 +5,3 @@ import app
 
 # Run the app !
 sys.exit(app.main())
-

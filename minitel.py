@@ -4,4 +4,3 @@ import sys
 import minitel
 
 sys.exit(minitel.main())
-
