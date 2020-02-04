@@ -22,27 +22,27 @@ const vm = new Vue({
 			this.startTime = chrono.start;
 			this.stopTime = chrono.stop;
 		});
-		
+
 		// Initialize clues history
 		getJson('/api/clues', (array) => {
 			this.clues = array.map(c => c.text);
 		});
-		
+
 		// Initialize current clue index
 		getJson('/api/clues/current', (clue) => {
 			this.currentClueIndex = clue.index;
 		});
-		
+
 		// Initialize messages history
 		getJson('/api/messages', (array) => {
 			this.messages = array;
 		});
-		
+
 		// Initialize toggles
 		getJson('/api/toggles', (array) => {
 			// Initialize enabled with the indexes of the enabled toggles
 			this.enabled = array.map((t, i) => t.value ? i.toString() : null).filter(i => i)
-			
+
 			// Now watch enabled for changes and post them
 			this.$watch('enabled', function(array, oldArray) {
 				function doPost(i, value) {
@@ -54,16 +54,16 @@ const vm = new Vue({
 				oldArray.filter(i => !array.includes(i)).forEach(i => doPost(i, false));
 			});
 		});
-		
+
 		const events = new EventSource('/api/events');
-		
+
 		// Chrono update
 		events.addEventListener('chrono', (event) => {
 			const chrono = JSON.parse(event.data);
 			this.startTime = chrono.start;
 			this.stopTime = chrono.stop;
 		});
-		
+
 		// Clue update
 		events.addEventListener('clue', (event) => {
 			const clue = JSON.parse(event.data);
@@ -88,7 +88,7 @@ const vm = new Vue({
 				scroll.scrollTop = scroll.scrollHeight;
 			}, 0);
 		});
-		
+
 		// Setup update callback every second
 		setInterval(this.update, 1000);
 	},
@@ -122,14 +122,14 @@ const vm = new Vue({
 			if(this.startTime > 0) {
 				// refTime is the reference to compute elapsed time
 				const refTime = this.stopTime > 0 ? this.stopTime : time();
-				
+
 				// elapsed is the time since refTime
 				this.elapsed = Math.max(refTime - this.startTime, this.elapsed);
 			}
 			else {
 				this.elapsed = 0;
 			}
-			
+
 			this.chrono = formatTime(this.elapsed);
 		},
 		syncTime: function() {

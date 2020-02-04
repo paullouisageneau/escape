@@ -3,7 +3,11 @@
 	"style_url": "http://127.0.0.1:8080/media/angleterre/style.css",
 	"messages_enabled": true,
 	"messages_sender": "GM",
-	"chrono_offset": 3600,
+	"suggestions": [
+		"OK l'équipe, je suis arrivé.",
+		"Comment avance l'enquête ?"
+	],
+	"chrono_offset": 4200,
 	"chrono_reversed": true,
 	"reset_pin": 11,
 	"cameras": [

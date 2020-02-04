@@ -1,13 +1,4 @@
 <section id="messages">
-	<div class="form">
-		<div>
-			<p>Message:</p>
-			<input type="text" name="message" class="message" v-model="inputMessage">
-		</div>
-		<div>
-			<input type="button" class="button" value="Envoyer" v-on:click="sendMessage()">
-		</div>
-	</div>
 	<div class="history">
 		<p>Historique des messages:</p>
 		<div class="scroll">
@@ -22,4 +13,21 @@
 			</ol>
 		</div>
 	</div>
+	<div class="form">
+		<div>
+			<p>Message:</p>
+			<input type="text" name="message" class="message" v-model="inputMessage">
+		</div>
+		<div>
+			<input type="button" class="button" value="Envoyer" v-on:click="sendMessage()">
+		</div>
+	</div>
+	{% if room.suggestions %}
+	<div class="suggestions">
+		{% for text in room.suggestions %}
+		<button type="button" class="button" v-on:click='inputMessage="{{ text }}"'>{{ text }}</button>
+		{% endfor %}
+	</div>
+	{% endif %}
 </section>
+

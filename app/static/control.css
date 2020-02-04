@@ -205,7 +205,7 @@ input[type=text] {
 
 #messages > div {
 	flex-grow: 1;
-	min-width: 20em;
+	min-width: 30em;
 	margin-bottom: 0.5em;
 }
 
@@ -227,7 +227,18 @@ input[type=text] {
 
 #messages .history {
 	flex-grow: 2;
-	margin-left: 1em;
+	margin-right: 1em;
+}
+
+#messages .suggestions {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+#messages .suggestions .button {
+	flex-grow: 1;
+	min-width: 20em;
+	background-color: #909090;
 }
 
 #messages p {
@@ -239,7 +250,7 @@ input[type=text] {
 }
 
 #messages .scroll {
-	height: 20em;
+	height: 16em;
 	margin-top: 0.25em;
 	overflow-y: scroll;
 }

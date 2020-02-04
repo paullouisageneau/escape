@@ -49,6 +49,7 @@ class Room:
         self.current_clue = ""  # Current displayed clue
 
         self.messages = []  # List of messages
+        self.suggestions = [str(s) for s in conf.get('suggestions', [])]
 
         self._playlist_started = False
 
