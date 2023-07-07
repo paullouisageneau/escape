@@ -103,6 +103,20 @@ input:checked + .slider:before {
 	background-color: #800000;
 }
 
+.button.bigpurple {
+	background-color: #9370db;
+	min-height: 4em;
+	vertical-align: middle;
+}
+
+.button.bigpurple:hover {
+	background-color: #8060bb;
+}
+
+.button.bigpurple:active {
+	background-color: #8060bb;
+}
+
 header .button {
 	float: right;
 }

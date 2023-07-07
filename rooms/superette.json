@@ -35,10 +35,9 @@
 			"data": "/media/superette/klaxon.mp3"
 		},
 		{
-			"name": "Dialogue d'avertissement",
-			"event": "video",
-			"data": "/media/superette/alerte.mp4",
-			"notify": true
+			"name": "Publicité",
+			"event": "audio",
+			"data": "/media/superette/publicite.mp3"
 		},
 		{
 			"name": "Musique de victoire",
@@ -76,6 +75,7 @@
 		},
 		{
 			"name": "Tiroir balance",
+			"button": "bigpurple",
 			"pin": 27
 		},
 		{
@@ -92,7 +92,8 @@
 		},
 		{
 			"name": "Détecteurs de mouvement",
-			"pin": 11
+			"pin": 11,
+			"hidden": true
 		}
     ]
 }

@@ -44,7 +44,12 @@ class Trigger:
 			self._input_pin.listen(callback)
 		else:
 			self._input_pin = None
-		
+
+		if 'button' in conf:
+			self.button = conf['button']
+		else:
+			self.button = None
+
 		self._notify = 'notify' in conf and conf['notify']
 		self._togglable = 'togglable' in conf and conf['togglable']
 		self._count = 0
@@ -100,4 +105,4 @@ class Trigger:
 		return success
 
 	def to_dict(self):
-		return { "name": self.name }
+		return { "name": self.name, "button": self.button }
