@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
-import sys
-import app
+import runpy
 
 # Run the app !
-sys.exit(app.main())
+runpy.run_module('app')
